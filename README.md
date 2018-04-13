@@ -1,3 +1,3 @@
 # Stiek2Bellum
 
-Made after Stiek Bellum, after we improved ou skill and realized the original was not scalable at all
+Made after Stiek Bellum, after we improved our skill and realized the original was not scalable at all
