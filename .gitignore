@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+#code::blocks generated
+bin/
+obj/
+*.layout
+
+#*.depend
+#*.cbp
+
+*.cscope_file_list
