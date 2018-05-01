@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -33,14 +35,23 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
-			<Add option="-lallegro" />
+			<Add library="liballegro" />
+			<Add library="liballegro_image" />
 		</Linker>
+		<Unit filename="allegroImplem.cpp" />
+		<Unit filename="allegroImplem.h" />
+		<Unit filename="include/GameContainer.h" />
+		<Unit filename="include/GameObject.h" />
+		<Unit filename="include/Transform.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/GameContainer.cpp" />
+		<Unit filename="src/GameObject.cpp" />
+		<Unit filename="src/Transform.cpp" />
 		<Extensions>
 			<envvars />
 			<AutoVersioning>
 				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
-				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="132" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
 				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
 				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
 			</AutoVersioning>
