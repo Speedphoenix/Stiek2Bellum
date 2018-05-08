@@ -9,22 +9,24 @@ double SQ(double x)
     return x*x;
 }
 
-Transform::Transform()
-    :m_x(0), m_y(0), m_speed(0), m_orientation(0), m_dx(0), m_dy(0), m_moving(false)
-{
-    //ctor
-}
 
-Transform::Transform(double _x, double _y, bool _moving, double _speed, double _orientation)
-    :m_x(_x), m_y(_y), m_speed(_speed), m_orientation(_orientation), m_moving(_moving)
+Transform::Transform(double _x, double _y, double _w, double _h, bool _moving, double _speed, double _orientation)
+    :m_x(_x), m_y(_y), m_w(_w), m_h(_h), m_speed(_speed), m_orientation(_orientation), m_moving(_moving)
 {
     calcCompos();
 }
 
-Transform::Transform(double _x, double _y, double _dx, double _dy, bool _moving)
-    :m_x(_x), m_y(_y), m_dx(_dx), m_dy(_dy), m_moving(_moving)
+Transform::Transform(double _x, double _y, double _w, double _h, double _dx, double _dy, bool _moving)
+    :m_x(_x), m_y(_y), m_w(_w), m_h(_h), m_dx(_dx), m_dy(_dy), m_moving(_moving)
 {
     calcOrientation();
+}
+
+
+Transform::Transform(Transform *_parent, double _x, double _y, double _w, double _h)
+    :Transform(_x, _y, _w, _h)
+{
+    m_parent = _parent;
 }
 
 Transform::~Transform()
@@ -32,22 +34,42 @@ Transform::~Transform()
     //dtor
 }
 
-void Transform::translate(double factor, const GameContainer& container)
+void Transform::translate(double factor)
 {
-    container.width();
-
     m_x += m_dx*factor;
     m_y += m_dy*factor;
 
-    if (m_x<0)
-        m_x = 0;
-    else if (m_x>container.width())
-        m_x = container.width();
+    blockBorder();
+}
 
-    if (m_y<0)
-        m_y = 0;
-    else if (m_y>container.height())
-        m_y = container.height();
+
+
+bool Transform::isInside(const Transform& container) const
+{
+    if (absX() >= container.absX() &&
+        endAbsX() <= container.endAbsX() &&
+        absY() >= container.absY() &&
+        endAbsY() <= container.endAbsY())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Transform::touches(const Transform& container) const
+{
+    if ( ( (absX() > container.absX() && absX() < container.endAbsX()) ||
+            (endAbsX() > container.absX() && endAbsX() < container.endAbsX()) ) &&
+        ( (absY() > container.absY() && absY() < container.endAbsY()) ||
+            (endAbsY() > container.absY() && endAbsY() < container.endAbsY()) ) )
+    {
+        return true;
+    }
+    else
+        return container.isInside(*this);
 }
 
 void Transform::calcCompos()
@@ -63,15 +85,29 @@ void Transform::calcOrientation()
     m_orientation = acos(m_dx/m_speed);
 }
 
+void Transform::blockBorder()
+{
+    GameContainer& container = *GameContainer::instance();
+
+    if (absX() < 0)
+        setAbsX(0);
+    else if (endAbsX() > container.width())
+        setAbsX(container.width() - m_w);
+
+    if (absY() < 0)
+        setAbsY(0);
+    else if (endAbsY() > container.height())
+        setAbsY(container.height() - m_h);
+}
 
 double Transform::getSQDist(double x2, double y2) const
 {
-    return ( SQ(this->x() - x2) + SQ(this->y() - y2) );
+    return ( SQ(this->centerAbsX() - x2) + SQ(this->centerAbsY() - y2) );
 }
 
 double Transform::getSQDist(const Transform& other) const
 {
-    return getSQDist(other.x(), other.y());
+    return getSQDist(other.centerAbsX(), other.centerAbsY());
 }
 
 double Transform::getSQDist(const Transform& first, const Transform& second)
@@ -104,4 +140,16 @@ double Transform::getDist(double x1, double y1, double x2, double y2)
 {
     return getSQDist(x1, y1, x2, y2);
 }
+
+void Transform::setParent(Transform *val)
+{
+    double _x = absX();
+    double _y = absY();
+
+    m_parent = val;
+
+    setAbsX(_x);
+    setAbsY(_y);
+}
+
 

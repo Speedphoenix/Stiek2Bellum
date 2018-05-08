@@ -5,23 +5,22 @@
 #include <vector>
 
 #include "GameObject.h"
+#include "GameMap.h"
 
 class GameContainer
 {
     //statics
-
-    public:
+    protected:
         static GameContainer * m_instance;
+    public:
         static GameContainer * instance() { return m_instance; }
 
     //non-statics
     protected:
 
-
         std::list<GameObject *> m_objects;
 
-        //will be replaced by a good map in time
-        long m_width, m_height;
+        GameMap m_carte;
 
     public:
         GameContainer(long _width, long _height);
@@ -34,8 +33,8 @@ class GameContainer
 
         virtual void draw();
 
-        long width() const { return m_width; }
-        long height() const { return m_height; }
+        long width() const { return m_carte.width(); }
+        long height() const { return m_carte.height(); }
 };
 
 

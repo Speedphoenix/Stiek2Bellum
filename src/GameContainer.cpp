@@ -5,7 +5,7 @@ GameContainer * GameContainer::m_instance = nullptr;
 using namespace std;
 
 GameContainer::GameContainer(long _width, long _height)
-    :m_width(_width), m_height(_height)
+    :m_carte(_width, _height)
 {
     if (m_instance!=nullptr)
         throw "A game container already exists";

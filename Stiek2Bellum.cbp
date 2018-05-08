@@ -41,10 +41,12 @@
 		<Unit filename="allegroImplem.cpp" />
 		<Unit filename="allegroImplem.h" />
 		<Unit filename="include/GameContainer.h" />
+		<Unit filename="include/GameMap.h" />
 		<Unit filename="include/GameObject.h" />
 		<Unit filename="include/Transform.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/GameContainer.cpp" />
+		<Unit filename="src/GameMap.cpp" />
 		<Unit filename="src/GameObject.cpp" />
 		<Unit filename="src/Transform.cpp" />
 		<Extensions>
