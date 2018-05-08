@@ -1,6 +1,12 @@
 #ifndef GAMEMAP_H
 #define GAMEMAP_H
 
+const int tileSide = 75;
+
+inline int tileCoord(int pixels)
+{
+    return ((int) (pixels / tileSide));
+}
 
 class GameMap
 {

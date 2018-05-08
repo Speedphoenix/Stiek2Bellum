@@ -29,7 +29,7 @@ void closeAlleg()
 }
 
 
-void toggleFullscreen()
+void toggleFullscreen(ALLEGRO_EVENT_QUEUE* displayEvents)
 {
     bool prevFullScrn = false;
 
@@ -44,7 +44,6 @@ void toggleFullscreen()
     if (al_get_display_flags(currentDisplay) & ALLEGRO_FULLSCREEN_WINDOW)
     {
         prevFullScrn = true;
-        E(width) E(height)
     }
 
     worked = al_set_display_flag(currentDisplay, ALLEGRO_FULLSCREEN_WINDOW, !prevFullScrn);
@@ -59,7 +58,12 @@ void toggleFullscreen()
 
     if (!worked)
     {
-        E("changing display flags did not work")
+        ES("Changing display flags did not work")
+
+        if (displayEvents)
+        {
+            al_unregister_event_source(displayEvents, al_get_display_event_source(currentDisplay));
+        }
 
         al_destroy_display(currentDisplay);
 
@@ -78,6 +82,11 @@ void toggleFullscreen()
         }
 
         currentDisplay = al_create_display(width, height);
+
+        if (displayEvents)
+        {
+            al_register_event_source(displayEvents, al_get_display_event_source(currentDisplay));
+        }
     }
 }
 

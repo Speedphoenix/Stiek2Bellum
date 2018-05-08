@@ -21,6 +21,9 @@ class Transform
 
         Transform *m_parent = nullptr;
 
+
+    //methods
+    protected:
         void calcCompos();
         void calcOrientation();
         void blockBorder();

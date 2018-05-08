@@ -6,6 +6,7 @@
 
 #include "GameObject.h"
 #include "GameMap.h"
+#include "allegroImplem.h"
 
 class GameContainer
 {
@@ -15,12 +16,25 @@ class GameContainer
     public:
         static GameContainer * instance() { return m_instance; }
 
-    //non-statics
+    //non-static member variables
     protected:
+
+        ALLEGRO_EVENT_QUEUE *m_eventsDisplay;
+        ALLEGRO_EVENT_QUEUE *m_eventsKeyboard;
+        ALLEGRO_EVENT_QUEUE *m_eventsMouse;
 
         std::list<GameObject *> m_objects;
 
-        GameMap m_carte;
+        GameMap m_map;
+
+        bool m_finished;
+
+
+    //non-static methods
+    protected:
+        void eventCatch();
+        void playerUpdate();
+        void autoUpdate();
 
     public:
         GameContainer(long _width, long _height);
@@ -33,8 +47,14 @@ class GameContainer
 
         virtual void draw();
 
-        long width() const { return m_carte.width(); }
-        long height() const { return m_carte.height(); }
+        virtual bool stop() const { return m_finished; }
+
+        void addObject(GameObject* what) { if (what) m_objects.push_back(what); }
+
+        void setMap(const GameMap& val) { m_map = val; }
+
+        long width() const { return m_map.width(); }
+        long height() const { return m_map.height(); }
 };
 
 

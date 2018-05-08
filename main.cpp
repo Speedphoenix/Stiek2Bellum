@@ -5,12 +5,18 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    initAlleg(); // or ALLEGRO_FULLSCREEN_WINDOW
+    initAlleg(); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
 
-    while(1)
+    GameContainer theGame(300, 225);
+
+    bool finished = false;
+
+
+    while(!finished)
     {
+
+        finished = theGame.stop();
         al_rest(2.5);
-        //toggleFullscreen();
     }
 
     closeAlleg();
