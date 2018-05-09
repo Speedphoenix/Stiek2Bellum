@@ -4,7 +4,7 @@
 
 using namespace std;
 
-double SQ(double x)
+inline double SQ(double x)
 {
     return x*x;
 }
