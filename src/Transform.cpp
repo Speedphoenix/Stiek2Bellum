@@ -24,7 +24,7 @@ Transform::Transform(double _x, double _y, double _w, double _h, double _dx, dou
 
 
 Transform::Transform(Transform *_parent, double _x, double _y, double _w, double _h)
-    :Transform(_x, _y, _w, _h)
+    :Transform(_x, _y, _w, _h, false)
 {
     m_parent = _parent;
 }

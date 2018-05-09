@@ -34,13 +34,13 @@ GameContainer::~GameContainer()
 }
 
 
-void GameContainer::update()
+void GameContainer::update(double factor)
 {
     eventCatch();
 
     playerUpdate();
 
-    autoUpdate();
+    autoUpdate(factor);
 }
 
 
@@ -52,6 +52,11 @@ void GameContainer::draw()
     }
 }
 
+
+///MAKE A STRUCT/CLASS FOR ACTIONS (DIFFERENT EVENTS CAN TRIGGER THE SAME ACTION), AND USE THAT.
+///to make it easier to eventually have multiple players (online? AI? split screen?)
+//for events:
+//https://allegro.developpez.com/5/livre/?page=page_6
 void GameContainer::eventCatch()
 {
     ALLEGRO_EVENT event = {0};
@@ -107,7 +112,7 @@ void GameContainer::playerUpdate()
 
 }
 
-void GameContainer::autoUpdate()
+void GameContainer::autoUpdate(double factor)
 {
     list<list<GameObject*>::iterator> toErase;
 
@@ -115,8 +120,7 @@ void GameContainer::autoUpdate()
     while (it!=m_objects.end())
     {
         GameObject *current = *it;
-        current->update();
-
+        current->update(factor);
 
         if (current->toRemove())
         {

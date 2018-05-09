@@ -34,7 +34,7 @@ class GameContainer
     protected:
         void eventCatch();
         void playerUpdate();
-        void autoUpdate();
+        void autoUpdate(double factor);
 
     public:
         GameContainer(long _width, long _height);
@@ -43,7 +43,7 @@ class GameContainer
         //no copy ctor or assignment
         GameContainer(const GameContainer& that) = delete;
 
-        virtual void update();
+        virtual void update(double factor);
 
         virtual void draw();
 

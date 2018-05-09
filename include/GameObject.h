@@ -1,6 +1,11 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include <vector>
+#include <algorithm>
+
+#include "allegroImplem.h"
+
 #include "Transform.h"
 
 class GameObject
@@ -12,6 +17,7 @@ class GameObject
         Transform m_transform;
 
         GameObject *m_parent = nullptr;
+        std::vector<GameObject*> m_children;
 
     public:
         GameObject(const Transform& source);
@@ -21,10 +27,14 @@ class GameObject
 
         virtual void start() { }
         virtual void draw() { }
-        virtual void update() { }
+        virtual void update(double factor);
 
         virtual GameObject *parent() {return m_parent; }
         virtual void setParent(GameObject *val);
+        virtual void removeParent() { setParent(nullptr); } ///if the object cannot live without the parent kill it inside here
+
+        virtual void addChild(GameObject *child);
+        virtual bool removeChild(GameObject *what);
 
         virtual Transform& getTransform() { return m_transform; }
         virtual void setTransform(const Transform& val) { m_transform = val; }

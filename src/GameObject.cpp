@@ -5,7 +5,10 @@ using namespace std;
 GameObject::GameObject(const Transform& source)
     :m_transform(source)
 {
-
+    if (source.parent())
+    {
+        ES("A transform with a parent has been passed for an object's constructor")
+    }
 }
 
 
@@ -27,11 +30,54 @@ GameObject::~GameObject()
     //dtor
 }
 
+
+void GameObject::update(double factor)
+{
+    if (m_transform.moving())
+    {
+        m_transform.translate(factor);
+    }
+}
+
+
+/**
+    Do not use this function explicitly. It is already called inside NameOfParent.addChild(pointerOfChild)
+*/
 void GameObject::setParent(GameObject *val)
 {
     m_parent = val;
 
-    m_transform.setParent(&val->getTransform());
+    if (val)
+        m_transform.setParent(&val->getTransform());
+    else
+        m_transform.setParent(nullptr);
 }
 
+void GameObject::addChild(GameObject *child)
+{
+    if (child)
+    {
+        m_children.push_back(child);
+        child->setParent(this);
+    }
+}
+
+bool GameObject::removeChild(GameObject *what)
+{
+    if (what)
+    {
+        vector<GameObject*>::iterator it;
+        it = find(m_children.begin(), m_children.end(), what);
+
+        if (it!=m_children.end())
+        {
+            m_children.erase(it);
+            what->removeParent();
+
+            return true;
+        }
+    }
+
+    return false;
+}
 

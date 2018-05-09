@@ -55,7 +55,7 @@ class Transform
 
 
         Transform *parent() const { return m_parent; }
-        void setParent(Transform *val); //!< keeps the absolute position
+        void setParent(Transform *val); //!< while keeping the absolute position
 
         bool moving() const { return m_moving; }
         void setMoving(bool val = true) { m_moving = val; }
