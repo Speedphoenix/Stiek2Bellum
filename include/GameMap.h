@@ -19,9 +19,9 @@ class GameMap
         virtual ~GameMap();
 
         long width() const { return m_width; }
-        void SetWidth(long val) { m_width = val; }
+        void setWidth(long val) { m_width = val; }
         long height() const { return m_height; }
-        void SetHeight(long val) { m_height = val; }
+        void setHeight(long val) { m_height = val; }
 };
 
 #endif // GAMEMAP_H

@@ -18,7 +18,7 @@ class Unit : public GameObject
         virtual ~Unit();
 
         int owner() { return m_owner; }
-        void SetOwner(int val) { m_owner = val; }
+        void setOwner(int val) { m_owner = val; }
 };
 
 #endif // UNIT_H
