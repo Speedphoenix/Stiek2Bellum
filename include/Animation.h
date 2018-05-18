@@ -8,7 +8,8 @@
 //to scope the Directions (that have short names) without using an enum class
 namespace Direc {
 
-    enum Direction{
+    //make it unsigned to make sure when comparing, or when making an array (of size State::none)
+    enum Direction : unsigned{
         N,  // North, towards the top
         S,  // South, towards the bottom
         E,  // East, to the right
@@ -16,7 +17,9 @@ namespace Direc {
         NE, // North East
         NW, // North West
         SE, // South East
-        SW  // South West
+        SW, // South West
+
+        none //for when none of the directions are available
     };
 };
 
@@ -27,19 +30,30 @@ class Animation
     friend class Shadow;
 
     protected:
-        std::map<Direc::Direction, vector<ALLEGRO_BITMAP*>> m_frames;
+        std::map<Direc::Direction, std::vector<ALLEGRO_BITMAP*>> m_frames;
         Shadow* m_shadow;
+
+        Direc::Direction m_currDirection;
+
+
+        Direc::Direction getBestDirection(Direc::Direction depending = Direc::E);
 
     public:
         Animation();
         virtual ~Animation();
 
-        int nbFrames(Direc::Direction direction); ///check for the right direction that exists etc...
+        unsigned nbFrames();
 
-        int getFrame(Direc::Direction direction, int frameNumber); ///check for the right direction that exists etc...
+        ALLEGRO_BITMAP* getFrame(unsigned frameNumber);
+
+        void setDirection(Direc::Direction val);
 
         Shadow* shadow() { return m_shadow; }
         void setShadow(Shadow* val) { m_shadow = val; }
+
+
+        Direc::Direction currDirection() const { return m_currDirection; }
+        void setCurrDirection(Direc::Direction val) { m_currDirection = val; }
 };
 
 #endif // ANIMATION_H

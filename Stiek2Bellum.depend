@@ -22,12 +22,12 @@
 	"allegroImplem.h"
 	"Transform.h"
 
-1525863708 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Transform.cpp
+1526604331 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Transform.cpp
 	"Transform.h"
 	"GameContainer.h"
 
-1525860976 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Transform.h
-	<cmath>
+1526636241 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Transform.h
+	<TransformBase.h>
 
 1525727222 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/allegroImplem.cpp
 	"allegroImplem.h"
@@ -42,7 +42,7 @@
 1525812772 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/GameMap.cpp
 	"GameMap.h"
 
-1525815720 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/allegroImplem.h
+1526636472 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/allegroImplem.h
 	<allegro5/allegro5.h>
 	<allegro5/allegro_image.h>
 	<iostream>
@@ -57,10 +57,39 @@
 	<GameObject.h>
 	"GameMap.h"
 
-1526078622 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Animation.cpp
+1526165232 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Animation.cpp
 	"Animation.h"
 
-1526078628 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Animation.h
+1526598049 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Animation.h
 	<map>
+	<vector>
 	"allegroImplem.h"
+
+1526165410 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Animator.cpp
+	"Animator.h"
+
+1526603761 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Animator.h
+	"Animation.h"
+
+1526078592 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Shadow.cpp
+	"Shadow.h"
+
+1526078495 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/Shadow.h
+	<Animation.h>
+
+1526636880 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/TransformBase.h
+	<cmath>
+
+1526636124 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/TransformBase.cpp
+	"TransformBase.h"
+	"Transform.h"
+	"TransformCircle.h"
+	"GameContainer.h"
+
+1526636166 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/TransformCircle.cpp
+	"TransformCircle.h"
+	"GameContainer.h"
+
+1526681637 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/include/TransformCircle.h
+	<TransformBase.h>
 

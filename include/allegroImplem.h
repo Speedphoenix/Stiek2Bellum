@@ -10,6 +10,7 @@
 #define ES(x) {std::cerr << std::endl << x << std::endl;}
 
 #define XOR(a, b) ( (a) ? !(b) : (b) )
+#define ABS(a) ( (a<0) ? -1 * (a) : (a) )
 
 extern ALLEGRO_DISPLAY *currentDisplay;
 

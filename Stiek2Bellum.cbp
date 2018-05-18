@@ -45,6 +45,8 @@
 		<Unit filename="include/GameObject.h" />
 		<Unit filename="include/Shadow.h" />
 		<Unit filename="include/Transform.h" />
+		<Unit filename="include/TransformBase.h" />
+		<Unit filename="include/TransformCircle.h" />
 		<Unit filename="include/Unit.h" />
 		<Unit filename="include/allegroImplem.h" />
 		<Unit filename="main.cpp" />
@@ -55,6 +57,8 @@
 		<Unit filename="src/GameObject.cpp" />
 		<Unit filename="src/Shadow.cpp" />
 		<Unit filename="src/Transform.cpp" />
+		<Unit filename="src/TransformBase.cpp" />
+		<Unit filename="src/TransformCircle.cpp" />
 		<Unit filename="src/Unit.cpp" />
 		<Unit filename="src/allegroImplem.cpp" />
 		<Extensions>
