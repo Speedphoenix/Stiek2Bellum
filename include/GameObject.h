@@ -12,7 +12,6 @@ class GameObject
 {
     protected:
         bool m_toRemove;
-        bool m_dead;
 
         Transform m_transform;
 
@@ -39,11 +38,8 @@ class GameObject
         virtual Transform& getTransform() { return m_transform; }
         virtual void setTransform(const Transform& val) { m_transform = val; }
 
-        virtual void setToRemove() { m_dead = true; m_toRemove = true; }
+        virtual void setToRemove() { m_toRemove = true; }
         virtual bool toRemove() { return m_toRemove; }
-
-        virtual void setDead(bool _dead = true) { m_dead = _dead; }
-        virtual bool dead() { return m_dead; }
 };
 
 #endif // GAMEOBJECT_H

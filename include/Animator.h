@@ -62,7 +62,7 @@ class Animator
                                                         // (only is the transition animation exists)
 
 
-                //might wanna remove this, since there should already be a pointer in the animation class
+        //might wanna remove this, since there should already be a pointer in the animation class
         //std::map<State, Shadow*> m_shadows;
 
 
