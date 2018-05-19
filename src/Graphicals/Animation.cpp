@@ -3,8 +3,26 @@
 using namespace std;
 using namespace Direc;
 
+void Animation::maketest()
+{
+    ALLEGRO_BITMAP* btm;
+
+    //the default flag, never know
+    al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
+
+    btm = al_create_bitmap(75, 75);
+
+    al_set_target_bitmap(btm);
+    al_clear_to_color(al_map_rgb(10, 0, 100));
+    al_draw_filled_rectangle(20, 20, 55, 55, al_map_rgb(0, 50, 200));
+
+    m_frames.at(E).push_back(btm);
+}
+
+
+//only default, will need to use a real one later
 Animation::Animation()
-    :m_shadow(nullptr)
+    :m_shadow(nullptr), m_currDirection(E), m_lapse(0)
 {
     //ctor
 }
@@ -14,7 +32,10 @@ Animation::~Animation()
     //dtor
 }
 
+void Animation::getFromStream(std::istream& theStream)
+{
 
+}
 
 unsigned Animation::nbFrames()
 {

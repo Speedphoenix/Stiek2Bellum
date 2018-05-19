@@ -10,6 +10,8 @@ void initAlleg(int flags, int w, int h, const char* window_name)
         throw "Could not initialize Allegro 5";
     if (!al_init_image_addon())
         throw "Image addon init error";
+    if (!al_init_primitives_addon())
+        throw "Primitives init error";
     if (!al_install_keyboard())
         throw "Keyboard init error";
     if (!al_install_mouse())

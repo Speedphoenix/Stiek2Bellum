@@ -7,6 +7,7 @@ using namespace std;
 GameContainer::GameContainer(long _width, long _height)
     :m_map(_width, _height)
 {
+
     if (m_instance!=nullptr)
         throw "A game container already exists";
 
@@ -14,8 +15,13 @@ GameContainer::GameContainer(long _width, long _height)
 
     m_finished = false;
 
+    m_eventsDisplay = al_create_event_queue();
     al_register_event_source(m_eventsDisplay, al_get_display_event_source(currentDisplay));
+
+    m_eventsKeyboard = al_create_event_queue();
     al_register_event_source(m_eventsKeyboard, al_get_keyboard_event_source());
+
+    m_eventsMouse = al_create_event_queue();
     al_register_event_source(m_eventsMouse, al_get_mouse_event_source());
 }
 

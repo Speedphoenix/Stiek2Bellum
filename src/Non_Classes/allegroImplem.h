@@ -3,8 +3,10 @@
 
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 
 #include <iostream>
+#include <fstream>
 
 #define E(x) {std::cerr << std::endl << #x ": " << x << std::endl;}
 #define ES(x) {std::cerr << std::endl << x << std::endl;}

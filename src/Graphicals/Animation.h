@@ -29,18 +29,27 @@ class Animation
 {
     friend class Shadow;
 
+    ///FOR TESTING PURPOSES
+    public:
+        void maketest();
+
     protected:
         std::map<Direc::Direction, std::vector<ALLEGRO_BITMAP*>> m_frames;
         Shadow* m_shadow;
 
         Direc::Direction m_currDirection;
 
+        //the lapse of time to wait between each frame
+        //might wanna make this unique to each direction...
+        double m_lapse;
 
         Direc::Direction getBestDirection(Direc::Direction depending = Direc::E);
 
     public:
         Animation();
         virtual ~Animation();
+
+        void getFromStream(std::istream& theStream);
 
         unsigned nbFrames();
 
@@ -54,6 +63,16 @@ class Animation
 
         Direc::Direction currDirection() const { return m_currDirection; }
         void setCurrDirection(Direc::Direction val) { m_currDirection = val; }
+
+        //make this return the lapse for the current direction if you separate them
+        double lapse() const { return m_lapse; }
+        void setLapse(double val) { if (val>0) m_lapse = val;}
 };
+
+inline std::istream& operator>>(std::istream& theStream, Animation& recept)
+{
+    recept.getFromStream(theStream);
+    return theStream;
+}
 
 #endif // ANIMATION_H

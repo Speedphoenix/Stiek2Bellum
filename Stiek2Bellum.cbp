@@ -37,7 +37,9 @@
 		<Linker>
 			<Add library="liballegro" />
 			<Add library="liballegro_image" />
+			<Add library="liballegro_primitives" />
 		</Linker>
+		<Unit filename="Non_Classes/colors.h" />
 		<Unit filename="include/Animation.h" />
 		<Unit filename="include/Animator.h" />
 		<Unit filename="include/GameContainer.h" />

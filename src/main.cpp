@@ -5,7 +5,15 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    initAlleg(); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
+    try
+    {
+        initAlleg(); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
+    }
+    catch (const char* e)
+    {
+        cerr << endl << e << endl;
+    }
+
 
     GameContainer theGame(300, 225);
 
