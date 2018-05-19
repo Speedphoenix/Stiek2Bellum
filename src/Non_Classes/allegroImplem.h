@@ -20,11 +20,15 @@ const int defaultDispFlags = ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE;
 const int defaultDispWidth = 800;
 const int defaultDispHeight = 600;
 
+///initializes and installs allegro related add-ons n' others
+///also creates the display
 void initAlleg(int flags = 0, int w = 800, int h = 600, const char* window_name = "");
 
+///closes allegro and destroys necessary stuff
 void closeAlleg();
 
 //if an event queue is passed as a param, it will register the new display if one is created
+///will properly and cleanly toggle fullscreen mode on the current display
 void toggleFullscreen(ALLEGRO_EVENT_QUEUE* displayEvents = nullptr);
 
 #endif //ALLEGROIMPLEM_H_INCLUDED

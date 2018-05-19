@@ -5,15 +5,13 @@ GameContainer * GameContainer::m_instance = nullptr;
 using namespace std;
 
 GameContainer::GameContainer(long _width, long _height)
-    :m_map(_width, _height)
+    :m_map(_width, _height), m_finished(false)
 {
 
     if (m_instance!=nullptr)
         throw "A game container already exists";
 
     m_instance = this;
-
-    m_finished = false;
 
     m_eventsDisplay = al_create_event_queue();
     al_register_event_source(m_eventsDisplay, al_get_display_event_source(currentDisplay));
@@ -81,6 +79,9 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_DISPLAY_ORIENTATION:
 
         break;
+
+            default:
+        break;
         }
     }
 
@@ -92,6 +93,9 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_KEY_CHAR:
             case ALLEGRO_EVENT_KEY_UP:
 
+        break;
+
+            default:
         break;
         }
     }
@@ -107,6 +111,9 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
             case ALLEGRO_EVENT_MOUSE_WARPED:
 
+        break;
+
+            default:
         break;
         }
     }

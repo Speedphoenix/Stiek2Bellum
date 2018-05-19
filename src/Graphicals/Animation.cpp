@@ -1,4 +1,5 @@
 #include "Animation.h"
+#include "colors.h"
 
 using namespace std;
 using namespace Direc;
@@ -13,8 +14,8 @@ void Animation::maketest()
     btm = al_create_bitmap(75, 75);
 
     al_set_target_bitmap(btm);
-    al_clear_to_color(al_map_rgb(10, 0, 100));
-    al_draw_filled_rectangle(20, 20, 55, 55, al_map_rgb(0, 50, 200));
+    al_clear_to_color( col::olds::GRASS);
+    al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
     m_frames.at(E).push_back(btm);
 }
