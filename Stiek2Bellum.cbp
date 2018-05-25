@@ -54,18 +54,29 @@
 			<Add directory="src" />
 			<Add directory="src/GameStructure" />
 			<Add directory="src/GameObjects" />
-			<Add directory="src/Graphicals" />
 			<Add directory="src/Non_Classes" />
+			<Add directory="src/Behaviours" />
+			<Add directory="src/Behaviours/Graphicals" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
 			<Add library="liballegro_image" />
 			<Add library="liballegro_primitives" />
 		</Linker>
+		<Unit filename="src/Behaviours/Behaviour.cpp" />
+		<Unit filename="src/Behaviours/Behaviour.h" />
+		<Unit filename="src/Behaviours/Graphicals/Animation.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Animation.h" />
+		<Unit filename="src/Behaviours/Graphicals/Animator.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Animator.h" />
+		<Unit filename="src/Behaviours/Graphicals/Shadow.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Shadow.h" />
 		<Unit filename="src/GameObjects/GameObject.cpp" />
 		<Unit filename="src/GameObjects/GameObject.h" />
 		<Unit filename="src/GameObjects/Unit.cpp" />
 		<Unit filename="src/GameObjects/Unit.h" />
+		<Unit filename="src/GameStructure/Drawable.cpp" />
+		<Unit filename="src/GameStructure/Drawable.h" />
 		<Unit filename="src/GameStructure/GameContainer.cpp" />
 		<Unit filename="src/GameStructure/GameContainer.h" />
 		<Unit filename="src/GameStructure/GameMap.cpp" />
@@ -76,12 +87,6 @@
 		<Unit filename="src/GameStructure/TransformBase.h" />
 		<Unit filename="src/GameStructure/TransformCircle.cpp" />
 		<Unit filename="src/GameStructure/TransformCircle.h" />
-		<Unit filename="src/Graphicals/Animation.cpp" />
-		<Unit filename="src/Graphicals/Animation.h" />
-		<Unit filename="src/Graphicals/Animator.cpp" />
-		<Unit filename="src/Graphicals/Animator.h" />
-		<Unit filename="src/Graphicals/Shadow.cpp" />
-		<Unit filename="src/Graphicals/Shadow.h" />
 		<Unit filename="src/Non_Classes/allegroImplem.cpp" />
 		<Unit filename="src/Non_Classes/allegroImplem.h" />
 		<Unit filename="src/Non_Classes/colors.h" />

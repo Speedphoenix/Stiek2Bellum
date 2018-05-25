@@ -1,5 +1,9 @@
 #include "GameContainer.h"
 
+#include "GameObject.h"
+#include "Behaviour.h"
+#include "Drawable.h"
+
 GameContainer * GameContainer::m_instance = nullptr;
 
 using namespace std;
@@ -36,26 +40,6 @@ GameContainer::~GameContainer()
 
     m_instance = nullptr;
 }
-
-
-void GameContainer::update(double factor)
-{
-    eventCatch();
-
-    playerUpdate();
-
-    autoUpdate(factor);
-}
-
-
-void GameContainer::draw()
-{
-    for (auto & elem : m_objects)
-    {
-        elem->draw();
-    }
-}
-
 
 ///MAKE A STRUCT/CLASS FOR ACTIONS (DIFFERENT EVENTS CAN TRIGGER THE SAME ACTION), AND USE THAT.
 ///to make it easier to eventually have multiple players (online? AI? split screen?)
@@ -120,36 +104,141 @@ void GameContainer::eventCatch()
 }
 
 
+void GameContainer::update(double factor)
+{
+    eventCatch();
+
+    preUpdate();
+
+    playerUpdate();
+
+    autoUpdate(factor);
+
+    postUpdate();
+
+    autoRemove();
+
+    draw();
+}
+
+
+void GameContainer::draw()
+{
+    for (auto & elem : m_drawables)
+    {
+        elem->draw();
+    }
+}
+
+
 void GameContainer::playerUpdate()
 {
 
 }
 
+void GameContainer::preUpdate()
+{
+    for (const auto& it : m_objects)
+        it->preUpdate();
+
+    for (auto it : m_behaviours)
+        it->preUpdate();
+}
+
 void GameContainer::autoUpdate(double factor)
 {
-    list<list<GameObject*>::iterator> toErase;
+    for (const auto& it : m_objects)
+        it->update(factor);
 
-    auto it = m_objects.begin();
-    while (it!=m_objects.end())
+    for (auto it : m_behaviours)
+        it->update(factor);
+}
+
+void GameContainer::postUpdate()
+{
+    for (const auto& it : m_objects)
+        it->postUpdate();
+
+    for (auto it : m_behaviours)
+        it->postUpdate();
+}
+
+void GameContainer::autoRemove()
+{
+    //ALWAYS start by removing removing the objects (and delete them)
+    //thisq will also call the destructors to the other stuff
+    //and thus add them to the other remove lists
+    for (const auto& it : m_remObjects)
     {
-        GameObject *current = *it;
-        current->update(factor);
-
-        if (current->toRemove())
-        {
-            toErase.push_back(it);
-        }
-
-        it++;
+        delete *it;
+        m_objects.erase(it);
     }
 
-    auto it2 = toErase.begin(); //it2 is an iterator to an iterator...
-    while (it2!=toErase.end())
+    for (const auto& it : m_remBehaviours)
     {
-        delete *(*it2);
-        m_objects.erase(*it2);
+        m_behaviours.erase(it);
+    }
 
-        it2++;
+    for (const auto& it : m_remDrawables)
+    {
+        m_drawables.erase(it);
     }
 }
+
+
+//these will be called by their respective constructors
+std::list<GameObject*>::iterator GameContainer::addObject(GameObject* what)
+{
+    if (what)
+    {
+        m_objects.push_front(what);
+        return m_objects.begin();
+    }
+    else
+        throw "tried adding null as an object pointer";
+}
+
+std::list<Behaviour*>::iterator GameContainer::addBehaviour(Behaviour* what)
+{
+    if (what)
+    {
+        m_behaviours.push_front(what);
+        return m_behaviours.begin();
+    }
+    else
+        throw "tried adding null as a behaviour pointer";
+}
+
+std::list<Drawable*>::iterator GameContainer::addDrawable(Drawable* what)
+{
+    if (what)
+    {
+        m_drawables.push_front(what);
+        return m_drawables.begin();
+    }
+    else
+        throw "tried adding null as a drawable pointer";
+}
+
+
+
+///sets the iterator to be removed at the end of the turn
+void GameContainer::removeObject(std::list<GameObject*>::iterator what)
+{
+    m_remObjects.push_back(what);
+}
+
+///sets the iterator to be removed at the end of the turn
+void GameContainer::removeBehaviour(std::list<Behaviour*>::iterator what)
+{
+    m_remBehaviours.push_back(what);
+}
+
+///sets the iterator to be removed at the end of the turn
+void GameContainer::removeDrawable(std::list<Drawable*>::iterator what)
+{
+    m_remDrawables.push_back(what);
+}
+
+
 

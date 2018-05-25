@@ -1,15 +1,19 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include "allegroImplem.h"
+#include "Transform.h"
+
 #include <vector>
 #include <algorithm>
+#include <list>
 
-#include "allegroImplem.h"
-
-#include "Transform.h"
 
 class GameObject
 {
+    private:
+        std::list<GameObject *>::iterator m_containerIterator;
+
     protected:
         bool m_toRemove;
 
@@ -25,11 +29,10 @@ class GameObject
         virtual ~GameObject();
 
         //important functions
-        virtual void start() { }
-        virtual void draw() { }
-        virtual void preUpdate() { }
-        virtual void update(double factor);
-        virtual void ppostUpdate() { };
+        virtual void start() { }            //called at the start of the game (when all the gameobjects N' stuff are already instantiated)
+        virtual void preUpdate() { }        //called at the start of each game loop
+        virtual void update(double factor); //called during each game loop
+        virtual void postUpdate() { }       //called after update in each loop, before drawing
 
         virtual GameObject *parent() {return m_parent; }
         virtual void setParent(GameObject *val);
@@ -41,7 +44,7 @@ class GameObject
         virtual Transform& getTransform() { return m_transform; }
         virtual void setTransform(const Transform& val) { m_transform = val; }
 
-        virtual void setToRemove() { m_toRemove = true; }
+        virtual void setToRemove();
         virtual bool toRemove() { return m_toRemove; }
 };
 

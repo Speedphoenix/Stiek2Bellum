@@ -18,3 +18,8 @@ Unit::~Unit()
 }
 
 
+void Unit::draw()
+{
+    //m_animator.getImg();
+}
+

@@ -5,7 +5,11 @@
 #include "Animation.h"
 #include "TransformBase.h"
 
+#include <Behaviour.h>
+
 #include <map>
+
+
 
 //make it unsigned to make sure when comparing, or when making an array (of size State::none)
 enum State : unsigned{
@@ -76,12 +80,11 @@ struct Transition{
 
 
 
-class Animator
+class Animator : public Behaviour
 {
     //statics
     public:
         static State getBestState(const std::map<Transition, Animation*>& theMap, Anim::AnimType animType, State depending);
-
 
     //non-statics
     protected:

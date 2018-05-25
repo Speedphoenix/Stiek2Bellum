@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+#include "GameContainer.h"
+
 using namespace std;
 
 GameObject::GameObject(const Transform& source)
@@ -9,25 +11,31 @@ GameObject::GameObject(const Transform& source)
     {
         ES("A transform with a parent has been passed for an object's constructor")
     }
+
+    GameContainer::instance()->addObject(this);
 }
 
 
 GameObject::GameObject(double _x, double _y, double _w, double _h, double _speed)
     :m_toRemove(false), m_transform(_x, _y, _w, _h, false, _speed)
 {
-
+    GameContainer::instance()->addObject(this);
 }
 
 GameObject::GameObject(GameObject *_parent, double _x, double _y, double _w, double _h)
     :m_toRemove(false), m_transform(&_parent->getTransform(), _x, _y, _w, _h)
 {
     m_parent = _parent;
+    GameContainer::instance()->addObject(this);
 }
 
 
 GameObject::~GameObject()
 {
-    //dtor
+    //gameObjects aren't set to be removed from the gameContainer in their destructor but in the setToRemove() func
+
+    //the GameObjects are removed first and destroyed.
+    //That calls the destructor for all things instide, who will tell the GameContainer to remove them
 }
 
 
@@ -80,4 +88,12 @@ bool GameObject::removeChild(GameObject *what)
 
     return false;
 }
+
+void GameObject::setToRemove()
+{
+    m_toRemove = true;
+
+    GameContainer::instance()->removeObject(m_containerIterator);
+}
+
 
