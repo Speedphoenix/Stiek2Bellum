@@ -113,6 +113,22 @@ void TransformBase::setParent(TransformBase *val)
     setAbsY(_y);
 }
 
+void TransformBase::blockBorder()
+{
+    GameContainer& container = *GameContainer::instance();
+
+    if (absX() < 0)
+        setAbsX(0);
+    else if (absX() > container.width())
+        setAbsX(container.width());
+
+    if (absY() < 0)
+        setAbsY(0);
+    else if (absY() > container.height())
+        setAbsY(container.height());
+}
+
+
 //two rectangles
 bool TransformBase::isInside(const Transform& contained, const Transform& container)
 {
@@ -209,5 +225,27 @@ bool TransformBase::touches(const Transform& first, const TransformCircle& secon
 }
 
 
+bool TransformBase::isInside(const Transform& container)
+{
+    return (absX() >= container.absX() && absX() <= container.endAbsX() &&
+            absY() >= container.absY() && absY() <= container.endAbsY() );
+}
+
+bool TransformBase::isInside(const TransformCircle& container)
+{
+    return (getSQDist(container) <= SQ(container.radius()));
+}
+
+bool TransformBase::touches(const Transform& other)
+{
+    //since it's just a point
+    return isInside(other);
+}
+
+bool TransformBase::touches(const TransformCircle& other)
+{
+    //since it's just a point
+    return isInside(other);
+}
 
 

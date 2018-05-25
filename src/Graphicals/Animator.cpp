@@ -1,18 +1,24 @@
 #include "Animator.h"
 
+#include "math.h"
+
 using namespace std;
 
-Animator::Animator(State startState, Direc::Direction startDirection)
-    :m_currFrame(0), m_currAnimation(startState)
+Animator::Animator(State startState, double startDirection)
+    :m_currFrame(0), m_currState(startState, Anim::Idle, false), m_askedDir(startDirection)
 {
-    //ctor
+    m_timer = al_create_timer(defaultLapse);
+
+    m_queue = al_create_event_queue();
+
+    //THE TIMER IS NOT STARTED YET
+    al_register_event_source(m_queue, al_get_timer_event_source(m_timer));
 }
 
 Animator::~Animator()
 {
     //dtor
 }
-
 
 //Animator::Animator(const Animator& other)
 //{
@@ -28,10 +34,138 @@ Animator::~Animator()
 //    return *this;
 //}
 
+//change these two functions if you really want to add a transition between Active and Idle
+void Animator::makeActive(bool playOnce)
+{
+    //if it changed
+    if (m_currState.animType!=Anim::Active && m_currState.animType!=Anim::Transition)
+    {
+        m_currState.animType = Anim::Active;
+        m_currFrame = 0;
+
+        //there might be an Idle, but not an Active, or the other way 'round
+        State inter = getBestState(m_animations, Anim::Active, m_currState.to);
+        m_currState.from = inter;
+        m_currState.to = inter;
+    }
+
+    m_currState.playOnce = playOnce;
+}
+
+void Animator::makeIdle()
+{
+    //if it changed
+    if (m_currState.animType!=Anim::Idle && m_currState.animType!=Anim::Transition)
+    {
+        m_currState.animType = Anim::Idle;
+        m_currFrame = 0;
+
+        //there might be an Idle, but not an Active, or the other way 'round
+        State inter = getBestState(m_animations, Anim::Idle, m_currState.to);
+        m_currState.from = inter;
+        m_currState.to = inter;
+    }
+}
+
+void Animator::setState(State what, bool shouldChangeDirec)
+{
+    if (what==m_currState.to)
+        return;
+
+    //we're starting a transition. The from State should be the old state (even if it was a transition itself)
+    m_currState.from = m_currState.to;
+    m_currState.to = getBestState(m_animations, Anim::Idle, what);
+    m_currState.animType = Anim::Transition;
+    m_currState.playOnce = true;
+
+    //if the transition animation doesn't exist
+    if (!m_animations.count(m_currState))
+    {
+        m_currState.from = m_currState.to;
+
+        m_currState.animType = Anim::Idle;
+        m_currState.playOnce = false;
+    }
+
+    m_currFrame = 0;
+
+    if (shouldChangeDirec)
+        m_animations.at(m_currState)->setDirection(m_askedDir);
+
+    double newLapse = m_animations.at(m_currState)->lapse();
+    //set the right lapse for the new animation
+    if (al_get_timer_speed(m_timer) != newLapse)
+        al_set_timer_speed(m_timer, newLapse);
+}
+
+void Animator::setState(State what, double direction)
+{
+    setState(what, false);
+    setDirection(direction);
+}
+
+void Animator::setState(State what, const TransformBase& direction)
+{
+    setState(what, false);
+    setDirection(direction);
+}
+
+void Animator::setDirection(double direction)
+{
+    if (direction >= 2*M_PI || direction < 0)
+        m_askedDir = 0;
+    else
+        m_askedDir = direction;
+
+    m_animations.at(m_currState)->setDirection(m_askedDir);
+}
+
+void Animator::setDirection(const TransformBase& direction)
+{
+    setDirection(direction.orientation());
+}
+
+
+void Animator::start()
+{
+    al_start_timer(m_timer);
+}
+
+void Animator::stop()
+{
+    al_stop_timer(m_timer);
+}
+
+void Animator::update()
+{
+    ALLEGRO_EVENT *retEvent = nullptr;
+
+    //check timer here
+    while (al_get_next_event(m_queue, retEvent))
+    {
+        m_currFrame++;
+
+        if (m_currFrame >= m_animations.at(m_currState)->nbFrames())
+        {
+            m_currFrame = 0;
+        }
+    }
+}
+
+ALLEGRO_BITMAP* Animator::getImg()
+{
+    return m_animations.at(m_currState)->getFrame(m_currFrame);
+}
+
+
+//below this is to choose the right state depending on available ones
 
 
 //to not rewrite it everytime....
-#define CHECK(x) if (theMap.count(x)) return x;
+#define CHECK(x)                    \
+keyIdx.from = x;                    \
+keyIdx.to = x;                      \
+if (theMap.count(keyIdx)) return x;
 
 //check dans l'ordre
 #define CHECKORDER(_1, _2, _3, _4, _5, _6)  \
@@ -44,12 +178,15 @@ else CHECK(_6)                              \
 else return none;
 
 //returns the best direction
-State Animator::getBestState(std::map<State, Animation*>& theMap, State depending)
+State Animator::getBestState(const std::map<Transition, Animation*>& theMap, Anim::AnimType animType, State depending)
 {
     if (theMap.empty())
         return none;
 
-    CHECK(depending) //usually stops here
+    Transition keyIdx;
+    keyIdx.animType = animType;
+
+    CHECK(depending) //should usually stop here
 
     switch (depending)
     {
@@ -83,7 +220,7 @@ State Animator::getBestState(std::map<State, Animation*>& theMap, State dependin
 
         default:
         case none:
-        return getBestState(theMap, Walking);
+        return getBestState(theMap, animType, Walking);
     break;
     }
 }

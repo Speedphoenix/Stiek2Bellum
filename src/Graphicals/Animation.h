@@ -5,19 +5,21 @@
 #include <vector>
 #include "allegroImplem.h"
 
+const double defaultLapse = 0.1; //seconds
+
 //to scope the Directions (that have short names) without using an enum class
 namespace Direc {
 
     //make it unsigned to make sure when comparing, or when making an array (of size State::none)
     enum Direction : unsigned{
-        N,  // North, towards the top
-        S,  // South, towards the bottom
         E,  // East, to the right
-        W,  // West, to the left
         NE, // North East
+        N,  // North, towards the top
         NW, // North West
-        SE, // South East
+        W,  // West, to the left
         SW, // South West
+        S,  // South, towards the bottom
+        SE, // South East
 
         none //for when none of the directions are available
     };
@@ -67,6 +69,7 @@ class Animation
 
         ///set the direction. Will chose the closest available if there are no frames for val direction
         void setDirection(Direc::Direction val);
+        void setDirection(double orientation);
 
         Shadow* shadow() { return m_shadow; }
         void setShadow(Shadow* val) { m_shadow = val; }

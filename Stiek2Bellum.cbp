@@ -22,7 +22,24 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-O3" />
+					<Add option="-Wnon-virtual-dtor" />
+					<Add option="-Wshadow" />
+					<Add option="-Winit-self" />
+					<Add option="-Wredundant-decls" />
+					<Add option="-Wcast-align" />
+					<Add option="-Wundef" />
+					<Add option="-Wfloat-equal" />
+					<Add option="-Winline" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-Wmissing-declarations" />
+					<Add option="-Wswitch-enum" />
+					<Add option="-Wswitch-default" />
+					<Add option="-Weffc++" />
+					<Add option="-Wzero-as-null-pointer-constant" />
+					<Add option="-Wmain" />
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
@@ -32,37 +49,43 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++14" />
 			<Add option="-fexceptions" />
+			<Add directory="src" />
+			<Add directory="src/GameStructure" />
+			<Add directory="src/GameObjects" />
+			<Add directory="src/Graphicals" />
+			<Add directory="src/Non_Classes" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
 			<Add library="liballegro_image" />
 			<Add library="liballegro_primitives" />
 		</Linker>
-		<Unit filename="Non_Classes/colors.h" />
-		<Unit filename="include/Animation.h" />
-		<Unit filename="include/Animator.h" />
-		<Unit filename="include/GameContainer.h" />
-		<Unit filename="include/GameMap.h" />
-		<Unit filename="include/GameObject.h" />
-		<Unit filename="include/Shadow.h" />
-		<Unit filename="include/Transform.h" />
-		<Unit filename="include/TransformBase.h" />
-		<Unit filename="include/TransformCircle.h" />
-		<Unit filename="include/Unit.h" />
-		<Unit filename="include/allegroImplem.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="src/Animation.cpp" />
-		<Unit filename="src/Animator.cpp" />
-		<Unit filename="src/GameContainer.cpp" />
-		<Unit filename="src/GameMap.cpp" />
-		<Unit filename="src/GameObject.cpp" />
-		<Unit filename="src/Shadow.cpp" />
-		<Unit filename="src/Transform.cpp" />
-		<Unit filename="src/TransformBase.cpp" />
-		<Unit filename="src/TransformCircle.cpp" />
-		<Unit filename="src/Unit.cpp" />
-		<Unit filename="src/allegroImplem.cpp" />
+		<Unit filename="src/GameObjects/GameObject.cpp" />
+		<Unit filename="src/GameObjects/GameObject.h" />
+		<Unit filename="src/GameObjects/Unit.cpp" />
+		<Unit filename="src/GameObjects/Unit.h" />
+		<Unit filename="src/GameStructure/GameContainer.cpp" />
+		<Unit filename="src/GameStructure/GameContainer.h" />
+		<Unit filename="src/GameStructure/GameMap.cpp" />
+		<Unit filename="src/GameStructure/GameMap.h" />
+		<Unit filename="src/GameStructure/Transform.cpp" />
+		<Unit filename="src/GameStructure/Transform.h" />
+		<Unit filename="src/GameStructure/TransformBase.cpp" />
+		<Unit filename="src/GameStructure/TransformBase.h" />
+		<Unit filename="src/GameStructure/TransformCircle.cpp" />
+		<Unit filename="src/GameStructure/TransformCircle.h" />
+		<Unit filename="src/Graphicals/Animation.cpp" />
+		<Unit filename="src/Graphicals/Animation.h" />
+		<Unit filename="src/Graphicals/Animator.cpp" />
+		<Unit filename="src/Graphicals/Animator.h" />
+		<Unit filename="src/Graphicals/Shadow.cpp" />
+		<Unit filename="src/Graphicals/Shadow.h" />
+		<Unit filename="src/Non_Classes/allegroImplem.cpp" />
+		<Unit filename="src/Non_Classes/allegroImplem.h" />
+		<Unit filename="src/Non_Classes/colors.h" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />
 			<AutoVersioning>

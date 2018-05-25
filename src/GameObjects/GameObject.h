@@ -24,9 +24,12 @@ class GameObject
         GameObject(GameObject *_parent, double _x = 0, double _y = 0, double _w = 0, double _h = 0);
         virtual ~GameObject();
 
+        //important functions
         virtual void start() { }
         virtual void draw() { }
+        virtual void preUpdate() { }
         virtual void update(double factor);
+        virtual void ppostUpdate() { };
 
         virtual GameObject *parent() {return m_parent; }
         virtual void setParent(GameObject *val);

@@ -1,8 +1,9 @@
 #include "Animation.h"
 #include "colors.h"
 
+#include "math.h"
+
 using namespace std;
-using namespace Direc;
 
 void Animation::maketest()
 {
@@ -17,13 +18,13 @@ void Animation::maketest()
     al_clear_to_color( col::olds::GRASS);
     al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
-    m_frames.at(E).push_back(btm);
+    m_frames.at(Direc::E).push_back(btm);
 }
 
 
 //only default, will need to use a real one later
 Animation::Animation()
-    :m_shadow(nullptr), m_currDirection(E), m_lapse(0)
+    :m_shadow(nullptr), m_currDirection(Direc::E), m_lapse(defaultLapse)
 {
     //ctor
 }
@@ -48,26 +49,42 @@ unsigned Animation::nbFrames()
 
 ALLEGRO_BITMAP* Animation::getFrame(unsigned frameNumber)
 {
-    if (m_frames.count(m_currDirection))
-    {
-        vector<ALLEGRO_BITMAP*>& inter = m_frames.at(m_currDirection);
 
-        if (frameNumber < inter.size())
-            return inter.at(m_currDirection);
-        else if (inter.size()!=0)
-            return inter.at(inter.size() - 1);  //replace this by inter.at(0); to take the first frame instead
-        else
-            return nullptr;
-    }
+    vector<ALLEGRO_BITMAP*>& inter = m_frames.at(m_currDirection);
+
+    if (frameNumber < inter.size())
+        return inter.at(m_currDirection);
+    else if (inter.size()!=0)
+        return inter.at(inter.size() - 1);  //replace this by inter.at(0); to take the first frame instead
     else
         return nullptr;
 }
 
-void Animation::setDirection(Direction val)
+void Animation::setDirection(Direc::Direction val)
 {
     m_currDirection = getBestDirection(val);
 }
 
+void Animation::setDirection(double orientation)
+{
+    //M_2_PI is 2/PI, defined in math.h
+    //offset the orientation by 1/2 to have good intervals
+    int lookAt = (int) ((orientation * 2 * M_2_PI) + 1/2); // (orientation * 8 / (2*PI)) + 1/2
+
+    //the interval 8-8.5 belongs in 0
+    //also to take care of bugs...
+    if (lookAt >= 8 || lookAt < 0)
+        lookAt = 0;
+
+
+    setDirection((Direc::Direction) lookAt); // cast into the enum
+}
+
+
+//below this is to choose a direction depending on the available ones
+
+
+using namespace Direc;
 
 //to not rewrite it everytime....
 #define CHECK(x) if (m_frames.count(x)) return x;

@@ -52,7 +52,8 @@ class TransformBase
     protected:
         virtual void calcCompos();
         virtual void calcOrientation();
-        virtual void blockBorder() = 0; //! You can make this an empty function if you don't plan to make the thing to move
+        //stops from going out-of bounds
+        virtual void blockBorder();
 
     public:
         TransformBase(double _x = 0, double _y = 0, bool _moving = false, double _speed = 0, double _orientation = 0);
@@ -64,10 +65,10 @@ class TransformBase
 
         virtual void translate(double factor);
 
-        virtual bool isInside(const Transform& container) const = 0;
-        virtual bool isInside(const TransformCircle& container) const = 0;
-        virtual bool touches(const Transform& other) const = 0;
-        virtual bool touches(const TransformCircle& other) const = 0;
+        virtual bool isInside(const Transform& container);
+        virtual bool isInside(const TransformCircle& container);
+        virtual bool touches(const Transform& other);
+        virtual bool touches(const TransformCircle& other);
 
         virtual double getSQDist(double x2, double y2) const;
         virtual double getSQDist(const TransformBase& other) const;
@@ -97,10 +98,11 @@ class TransformBase
         virtual void setAbsX(double val) { m_x = val - (m_parent?m_parent->centerAbsX():0); }
         virtual void setAbsY(double val) { m_y = val - (m_parent?m_parent->centerAbsY():0); }
 
-        virtual double centerX() const = 0;
-        virtual double centerY() const = 0;
-        virtual void setCenterX(double val) = 0;
-        virtual void setCenterY(double val) = 0;
+        // MAKE SURE TO OVERRIDE THESE IF THE TRANSFORM ISN'T PUNCTUAL
+        virtual double centerX() const { return x(); }
+        virtual double centerY() const { return y(); }
+        virtual void setCenterX(double val) { setX(val); }
+        virtual void setCenterY(double val) { setY(val); }
 
         virtual double centerAbsX() const { return centerX() + (m_parent?m_parent->centerAbsX():0); }
         virtual double centerAbsY() const { return centerY() + (m_parent?m_parent->centerAbsY():0); }
