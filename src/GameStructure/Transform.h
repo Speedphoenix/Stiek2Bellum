@@ -39,10 +39,13 @@ class Transform : public TransformBase
 
         virtual double endX() const { return m_x + m_w; }
         virtual double endY() const { return m_y + m_h; }
+        virtual void setEndX(double val) { m_x = val - m_w; }
+        virtual void setEndY(double val) { m_y = val - m_h; }
 
         virtual double endAbsX() const { return m_x + m_w + (m_parent?m_parent->centerAbsX():0); }
         virtual double endAbsY() const { return m_y + m_h + (m_parent?m_parent->centerAbsY():0); }
-
+        virtual void setEndAbsX(double val) { setEndAbsX(val - (m_parent?m_parent->centerAbsX():0)); }
+        virtual void setEndAbsY(double val) { setEndAbsY(val - (m_parent?m_parent->centerAbsY():0)); }
 
         double width() const { return m_w; }
         void setWidth(double val) { m_w = val; }

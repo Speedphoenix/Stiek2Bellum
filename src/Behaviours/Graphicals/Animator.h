@@ -113,9 +113,9 @@ class Animator : public Behaviour
 //        Animator& operator=(const Animator& other);
 
 
-        virtual void start();   //can be used to un-pause too
+        virtual void launch();   //can be used to un-pause too
         virtual void stop();    //can be used to pause too
-        virtual void update();
+        virtual void update(double factor);
         virtual ALLEGRO_BITMAP* getImg();
 
         ///direction should be in radian

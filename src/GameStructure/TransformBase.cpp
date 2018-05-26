@@ -119,13 +119,13 @@ void TransformBase::blockBorder()
 
     if (absX() < 0)
         setAbsX(0);
-    else if (absX() > container.width())
-        setAbsX(container.width());
+    else if (absX() > container.mapWidth())
+        setAbsX(container.mapWidth());
 
     if (absY() < 0)
         setAbsY(0);
-    else if (absY() > container.height())
-        setAbsY(container.height());
+    else if (absY() > container.mapHeight())
+        setAbsY(container.mapHeight());
 }
 
 

@@ -75,6 +75,8 @@
 		<Unit filename="src/GameObjects/GameObject.h" />
 		<Unit filename="src/GameObjects/Unit.cpp" />
 		<Unit filename="src/GameObjects/Unit.h" />
+		<Unit filename="src/GameStructure/Camera.cpp" />
+		<Unit filename="src/GameStructure/Camera.h" />
 		<Unit filename="src/GameStructure/Drawable.cpp" />
 		<Unit filename="src/GameStructure/Drawable.h" />
 		<Unit filename="src/GameStructure/GameContainer.cpp" />

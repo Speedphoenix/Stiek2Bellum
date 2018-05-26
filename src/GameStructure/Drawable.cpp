@@ -4,12 +4,22 @@
 
 Drawable::Drawable()
 {
-    GameContainer::instance()->addDrawable(this);
+    GameContainer* instance = GameContainer::instance();
+
+    if (!instance)
+        throw "No instance of GameContainer";
+
+    instance->addDrawable(this);
 }
 
 Drawable::~Drawable()
 {
-    GameContainer::instance()->removeDrawable(m_containerIterator);
+    GameContainer* instance = GameContainer::instance();
+
+    if (instance)
+    {
+        instance->removeDrawable(m_containerIterator);
+    }
 }
 
 

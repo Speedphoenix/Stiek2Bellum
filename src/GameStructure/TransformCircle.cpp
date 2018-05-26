@@ -33,12 +33,12 @@ void TransformCircle::blockBorder()
 
     if (absX() < 0)
         setAbsX(0);
-    else if ((absX() + 2*m_radius) > container.width())
-        setAbsX(container.width() - 2*m_radius);
+    else if ((absX() + 2*m_radius) > container.mapWidth())
+        setAbsX(container.mapWidth() - 2*m_radius);
 
     if (absY() < 0)
         setAbsY(0);
-    else if ((absY() + 2*m_radius) > container.height())
-        setAbsY(container.height() - 2*m_radius);
+    else if ((absY() + 2*m_radius) > container.mapHeight())
+        setAbsY(container.mapHeight() - 2*m_radius);
 }
 

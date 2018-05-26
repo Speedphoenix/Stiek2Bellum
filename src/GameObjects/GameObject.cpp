@@ -12,21 +12,39 @@ GameObject::GameObject(const Transform& source)
         ES("A transform with a parent has been passed for an object's constructor")
     }
 
-    GameContainer::instance()->addObject(this);
+    GameContainer* instance = GameContainer::instance();
+
+    if (!instance)
+        throw "No instance of GameContainer";
+
+    instance->addObject(this);
+
+    this->start();
 }
 
 
 GameObject::GameObject(double _x, double _y, double _w, double _h, double _speed)
     :m_toRemove(false), m_transform(_x, _y, _w, _h, false, _speed)
 {
-    GameContainer::instance()->addObject(this);
+    GameContainer* instance = GameContainer::instance();
+
+    if (!instance)
+        throw "No instance of GameContainer";
+
+    instance->addObject(this);
 }
 
 GameObject::GameObject(GameObject *_parent, double _x, double _y, double _w, double _h)
     :m_toRemove(false), m_transform(&_parent->getTransform(), _x, _y, _w, _h)
 {
     m_parent = _parent;
-    GameContainer::instance()->addObject(this);
+
+    GameContainer* instance = GameContainer::instance();
+
+    if (!instance)
+        throw "No instance of GameContainer";
+
+    instance->addObject(this);
 }
 
 
@@ -93,7 +111,12 @@ void GameObject::setToRemove()
 {
     m_toRemove = true;
 
-    GameContainer::instance()->removeObject(m_containerIterator);
+    GameContainer* instance = GameContainer::instance();
+
+    if (instance)
+    {
+        instance->removeObject(m_containerIterator);
+    }
 }
 
 

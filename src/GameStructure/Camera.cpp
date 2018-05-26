@@ -1,0 +1,160 @@
+#include "Camera.h"
+
+#include "GameContainer.h"
+
+Camera * Camera::m_currentCamera = nullptr;
+
+Camera::Camera()
+    :m_zoomFactor(1)
+{
+    if (!m_currentCamera)
+        m_currentCamera = this;
+
+    resizeView();
+}
+
+Camera::~Camera()
+{
+    //dtor
+}
+
+void Camera::update()
+{
+    if (m_follow)
+    {
+        setCameraCenterPos(*m_follow);
+    }
+}
+
+//sets the width etc of takenView depending on the displayedView and the zoomFactor. Calls blockBorders() at the end
+void Camera::calcTakenView()
+{
+    m_takenView.setWidth(m_displayedDims.width() * m_zoomFactor);
+    m_takenView.setHeight(m_displayedDims.height() * m_zoomFactor);
+
+    blockBorders();
+}
+
+//blocks if the screen gets too big for the map too
+void Camera::blockBorders()
+{
+    GameContainer* instance = GameContainer::instance();
+    bool tooBigx = false, tooBigy = false;
+
+    //if the screen is too big for the map
+    if (m_displayedDims.width() * m_zoomFactor > instance->mapWidth())
+        tooBigx = true;
+    if (m_displayedDims.height() * m_zoomFactor > instance->mapHeight())
+        tooBigy = true;
+
+    if (tooBigx || tooBigy)
+    {
+        bool neededfactorx =  instance->mapWidth() / m_displayedDims.width();
+        bool neededfactory = instance->mapHeight() / m_displayedDims.height();
+
+        //take the highest
+        m_zoomFactor = ((neededfactorx > neededfactory)? neededfactorx : neededfactory);
+
+        m_takenView.setWidth(m_displayedDims.width() * m_zoomFactor);
+        m_takenView.setHeight(m_displayedDims.height() * m_zoomFactor);
+
+        //forcibly change the size of the window?
+        if (m_zoomFactor < maxZoom)
+            ES("The window is too big for this map")
+    }
+
+    if (m_takenView.absX() < 0)
+        m_takenView.setAbsX(0);
+    else if (m_takenView.endAbsX() > instance->mapWidth())
+        m_takenView.setEndAbsX(instance->mapWidth());
+
+
+    if (m_takenView.absY() < 0)
+        m_takenView.setAbsY(0);
+    else if (m_takenView.endAbsY() > instance->mapHeight())
+        m_takenView.setEndAbsY(instance->mapHeight());
+}
+
+//blocks the zoom depending on max/minZoom and calls calcTakenView()
+void Camera::blockZoom()
+{
+    if (m_zoomFactor > maxZoom)
+        m_zoomFactor = maxZoom;
+    else if (m_zoomFactor < minZoom)
+        m_zoomFactor = minZoom;
+
+    calcTakenView();
+}
+
+//translate the camera (taken view) by dx and dy
+void Camera::moveCamera(double dx, double dy)
+{
+    m_takenView.addXY(dx, dy);
+
+    blockBorders();
+}
+
+void Camera::setCameraPos(double valx, double valy)
+{
+    m_takenView.setAbsPos(valx, valy);
+
+    blockBorders();
+}
+
+void Camera::setCameraPos(const TransformBase& where)
+{
+    setCameraPos(where.absX(), where.absY());
+}
+
+void Camera::setCameraCenterPos(double valx, double valy)
+{
+    m_takenView.setCenterAbsPos(valx, valy);
+
+    blockBorders();
+}
+
+void Camera::setCameraCenterPos(const TransformBase& where)
+{
+    setCameraCenterPos(where.centerAbsX(), where.centerAbsY());
+}
+
+//resizes the displayed view depending on the current display (from allegroImplem)
+void Camera::resizeView()
+{
+    int askedWidth = al_get_display_width(currentDisplay);
+    int askedHeight = al_get_display_height(currentDisplay);
+
+    m_displayedDims.setDim(askedWidth, askedHeight);
+
+    calcTakenView();
+}
+
+void Camera::resizeView(const ALLEGRO_EVENT& event)
+{
+    if (event.type != ALLEGRO_EVENT_DISPLAY_RESIZE)
+        return;
+
+    int askedWidth = event.display.width;
+    int askedHeight = event.display.height;
+
+    m_displayedDims.setDim(askedWidth, askedHeight);
+
+    calcTakenView();
+}
+
+//may wanna make this a percentage increase instead of adding...
+//directly add will make a faster zooming effect whe already zoomed...
+void Camera::addZoom(double val)
+{
+    m_zoomFactor += val;
+
+    blockZoom();
+}
+
+void Camera::setZoom(double val)
+{
+    m_zoomFactor = val;
+
+    blockZoom();
+}
+

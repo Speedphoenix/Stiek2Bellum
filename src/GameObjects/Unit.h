@@ -2,11 +2,11 @@
 #define UNIT_H
 
 #include <GameObject.h>
-
 #include <Drawable.h>
 
-class Animator;
+#include "Animator.h"
 
+extern const int tileSide;
 const int NEUTRAL = 0;
 
 class Unit : public GameObject, Drawable

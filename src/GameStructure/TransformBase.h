@@ -93,10 +93,15 @@ class TransformBase
         virtual void setY(double val) { m_y = val; }
         virtual void setPos(double _x, double _y) { m_x = _x; m_y = _y; }
 
+        virtual void addX(double val) { m_x += val; }
+        virtual void addY(double val) { m_y += val; }
+        virtual void addXY(double valx, double valy) { m_x += valx; m_y += valy; }
+
         virtual double absX() const { return m_x + (m_parent?m_parent->centerAbsX():0); }
         virtual double absY() const { return m_y + (m_parent?m_parent->centerAbsY():0); }
         virtual void setAbsX(double val) { m_x = val - (m_parent?m_parent->centerAbsX():0); }
         virtual void setAbsY(double val) { m_y = val - (m_parent?m_parent->centerAbsY():0); }
+        virtual void setAbsPos(double valx, double valy) { setAbsX(valx); setAbsY(valy); }
 
         // MAKE SURE TO OVERRIDE THESE IF THE TRANSFORM ISN'T PUNCTUAL
         virtual double centerX() const { return x(); }
@@ -108,6 +113,7 @@ class TransformBase
         virtual double centerAbsY() const { return centerY() + (m_parent?m_parent->centerAbsY():0); }
         virtual void setCenterAbsX(double val) { setCenterX(val - (m_parent?m_parent->centerAbsX():0)); }
         virtual void setCenterAbsY(double val) { setCenterY(val - (m_parent?m_parent->centerAbsY():0)); }
+        virtual void setCenterAbsPos(double valx, double valy) { setCenterAbsX(valx); setCenterAbsY(valy); }
 
         double dx() const { return m_dx; }
         void setDx(double val) { m_dx = val; calcOrientation(); }

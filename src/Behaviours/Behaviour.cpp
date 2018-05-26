@@ -3,11 +3,23 @@
 
 Behaviour::Behaviour()
 {
-    GameContainer::instance()->addBehaviour(this);
+    GameContainer* instance = GameContainer::instance();
+
+    if (!instance)
+        throw "No instance of GameContainer";
+
+    instance->addBehaviour(this);
+
+    this->start();
 }
 
 Behaviour::~Behaviour()
 {
-    GameContainer::instance()->removeBehaviour(m_containerIterator);
+    GameContainer* instance = GameContainer::instance();
+
+    if (instance)
+    {
+        instance->removeBehaviour(m_containerIterator);
+    }
 }
 

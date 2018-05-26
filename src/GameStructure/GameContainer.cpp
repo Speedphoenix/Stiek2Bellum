@@ -41,6 +41,17 @@ GameContainer::~GameContainer()
     m_instance = nullptr;
 }
 
+//void resizeCamera()
+//{
+//
+//}
+//
+//void resizeCamera(ALLEGRO_DISPLAY* display)
+//{
+//
+//}
+
+
 ///MAKE A STRUCT/CLASS FOR ACTIONS (DIFFERENT EVENTS CAN TRIGGER THE SAME ACTION), AND USE THAT.
 ///to make it easier to eventually have multiple players (online? AI? split screen?)
 //for events:
@@ -173,16 +184,19 @@ void GameContainer::autoRemove()
         delete *it;
         m_objects.erase(it);
     }
+    m_remObjects.clear();
 
     for (const auto& it : m_remBehaviours)
     {
         m_behaviours.erase(it);
     }
+    m_remBehaviours.clear();
 
     for (const auto& it : m_remDrawables)
     {
         m_drawables.erase(it);
     }
+    m_remDrawables.clear();
 }
 
 

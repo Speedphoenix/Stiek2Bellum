@@ -1,11 +1,13 @@
 #ifndef GAMECONTAINER_H
 #define GAMECONTAINER_H
 
+#include "GameMap.h"
+#include "Transform.h"
+
+#include "allegroImplem.h"
 #include <list>
 #include <vector>
 
-#include "GameMap.h"
-#include "allegroImplem.h"
 
 class Drawable;
 class GameObject;
@@ -38,12 +40,17 @@ class GameContainer
         ALLEGRO_EVENT_QUEUE *m_eventsMouse;
 
         GameMap m_map;
+        Transform m_camera;
 
         bool m_finished;
 
 
     //non-static methods
     protected:
+//        void resizeCamera();
+//        void resizeCamera(ALLEGRO_DISPLAY* display);
+
+        //call every turn
         void eventCatch();
         void playerUpdate();
         void preUpdate();
@@ -59,7 +66,6 @@ class GameContainer
         GameContainer(const GameContainer& that) = delete;
 
         virtual void update(double factor);
-
         virtual void draw();
 
         ///need to RENAME THIS ONE
@@ -67,8 +73,8 @@ class GameContainer
 
         void setMap(const GameMap& val) { m_map = val; }
 
-        long width() const { return m_map.width(); }
-        long height() const { return m_map.height(); }
+        long mapWidth() const { return m_map.width(); }
+        long mapHeight() const { return m_map.height(); }
 
         //these will be called by their respective constructors
         std::list<GameObject*>::iterator addObject(GameObject* what);

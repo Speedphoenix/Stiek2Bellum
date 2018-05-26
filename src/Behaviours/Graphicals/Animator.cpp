@@ -126,7 +126,7 @@ void Animator::setDirection(const TransformBase& direction)
 }
 
 
-void Animator::start()
+void Animator::launch()
 {
     al_start_timer(m_timer);
 }
@@ -136,7 +136,7 @@ void Animator::stop()
     al_stop_timer(m_timer);
 }
 
-void Animator::update()
+void Animator::update(double factor)
 {
     ALLEGRO_EVENT *retEvent = nullptr;
 
