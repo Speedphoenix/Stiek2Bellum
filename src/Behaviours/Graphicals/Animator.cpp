@@ -2,6 +2,7 @@
 
 #include "TransformBase.h"
 #include "allegroImplem.h"
+#include "colors.h"
 #include "debugNerrors.h"
 
 #include <math.h>

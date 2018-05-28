@@ -40,6 +40,7 @@ void Unit::draw()
         double relx = 0, rely = 0;
         m_transform.getRelativeCoords(camera, relx, rely);
 
+
         m_animator.draw(relx, rely);
     }
     //m_animator.getImg();

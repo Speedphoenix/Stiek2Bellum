@@ -171,11 +171,12 @@ void GameContainer::update(double factor)
 
 void GameContainer::draw()
 {
+    al_set_target_backbuffer(currentDisplay);
     al_clear_to_color(col::white);
 
     for (auto & elem : m_drawables)
     {
-        //elem->draw();
+        elem->draw();
     }
 
     al_flip_display();

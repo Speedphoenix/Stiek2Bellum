@@ -2,6 +2,7 @@
 
 #include "colors.h"
 #include "allegroImplem.h"
+#include "debugNerrors.h"
 
 #include <math.h>
 
@@ -18,10 +19,12 @@ void Animation::maketest()
     btm = al_create_bitmap(75, 75);
 
     al_set_target_bitmap(btm);
-    al_clear_to_color( col::olds::GRASS);
+    al_clear_to_color(col::olds::GRASS);
     al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
     m_frames[Direc::E].push_back(btm);
+
+    ES("we made it?")
 }
 
 

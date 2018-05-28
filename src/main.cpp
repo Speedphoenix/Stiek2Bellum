@@ -1,7 +1,7 @@
 #include "GameContainer.h"
 
 #include "allegroImplem.h"
-
+#include "colors.h"
 #include "debugNerrors.h"
 
 using namespace std;
@@ -17,7 +17,6 @@ int main(int argc, char* argv[])
         cerr << endl << e << endl;
     }
 
-
     GameContainer theGame(60, 45);
 
 
@@ -31,8 +30,8 @@ int main(int argc, char* argv[])
     {
         theGame.update(1);
 
-        finished = theGame.shouldStop();
         al_rest(0.02);
+        finished = theGame.shouldStop();
     }
 
     closeAlleg();

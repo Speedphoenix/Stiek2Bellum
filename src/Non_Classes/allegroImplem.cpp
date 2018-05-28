@@ -1,5 +1,5 @@
 #include "allegroImplem.h"
-
+#include "colors.h"
 #include "debugNerrors.h"
 
 ALLEGRO_DISPLAY *currentDisplay;
@@ -18,6 +18,9 @@ void initAlleg(int flags, int w, int h, const char* window_name)
         throw "Keyboard init error";
     if (!al_install_mouse())
         throw "Mouse init error";
+
+    //to have many default colors...
+    col::initColors();
 
     al_set_new_display_flags(defaultDispFlags | flags); //ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE, or ALLEGRO_FULLSCREEN_WINDOW
     currentDisplay = al_create_display(w, h); //800, 600 by default?
