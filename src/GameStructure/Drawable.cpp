@@ -2,6 +2,8 @@
 
 #include "GameContainer.h"
 
+#include "debugNerrors.h"
+
 Drawable::Drawable()
 {
     GameContainer* instance = GameContainer::instance();

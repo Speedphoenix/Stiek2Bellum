@@ -1,5 +1,14 @@
 #include "Unit.h"
 
+#include "Camera.h"
+#include "debugNerrors.h"
+
+///FOR TESTING PURPOSES
+void Unit::maketest()
+{
+    m_animator.maketest();
+}
+
 Unit::Unit(const Transform& source, int _owner)
     :GameObject(source), m_owner(_owner), m_dead(false)
 {
@@ -17,9 +26,22 @@ Unit::~Unit()
     //dtor
 }
 
+void Unit::start()
+{
+    m_animator.launch();
+}
 
 void Unit::draw()
 {
+    const Transform& camera = Camera::getCurrentView();
+
+    if (m_transform.touches(camera))
+    {
+        double relx = 0, rely = 0;
+        m_transform.getRelativeCoords(camera, relx, rely);
+
+        m_animator.draw(relx, rely);
+    }
     //m_animator.getImg();
 }
 

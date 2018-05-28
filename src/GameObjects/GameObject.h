@@ -1,11 +1,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "allegroImplem.h"
 #include "Transform.h"
 
 #include <vector>
-#include <algorithm>
 #include <list>
 
 
@@ -29,10 +27,10 @@ class GameObject
         virtual ~GameObject();
 
         //important functions
-        virtual void start() { }            //called at the start of the game (when all the gameobjects N' stuff are already instantiated)
-        virtual void preUpdate() { }        //called at the start of each game loop
-        virtual void update(double factor); //called during each game loop
-        virtual void postUpdate() { }       //called after update in each loop, before drawing
+        virtual void start() { }        //called at the start of the game (when all the gameobjects N' stuff are already instantiated)
+        virtual void preUpdate() { }    //called at the start of each game loop
+        virtual void update();          //called during each game loop
+        virtual void postUpdate() { }   //called after update in each loop, before drawing
 
         virtual GameObject *parent() {return m_parent; }
         virtual void setParent(GameObject *val);

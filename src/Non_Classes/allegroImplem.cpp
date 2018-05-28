@@ -1,5 +1,7 @@
 #include "allegroImplem.h"
 
+#include "debugNerrors.h"
+
 ALLEGRO_DISPLAY *currentDisplay;
 
 void initAlleg(int flags, int w, int h, const char* window_name)

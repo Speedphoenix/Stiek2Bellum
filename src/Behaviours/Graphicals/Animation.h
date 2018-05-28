@@ -3,7 +3,6 @@
 
 #include <map>
 #include <vector>
-#include "allegroImplem.h"
 
 const double defaultLapse = 0.1; //seconds
 
@@ -26,6 +25,7 @@ namespace Direc {
 }
 
 class Shadow;
+struct ALLEGRO_BITMAP;
 
 class Animation
 {

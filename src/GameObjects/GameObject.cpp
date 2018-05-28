@@ -2,6 +2,10 @@
 
 #include "GameContainer.h"
 
+#include "debugNerrors.h"
+
+#include <algorithm>
+
 using namespace std;
 
 GameObject::GameObject(const Transform& source)
@@ -18,8 +22,6 @@ GameObject::GameObject(const Transform& source)
         throw "No instance of GameContainer";
 
     instance->addObject(this);
-
-    this->start();
 }
 
 
@@ -57,8 +59,10 @@ GameObject::~GameObject()
 }
 
 
-void GameObject::update(double factor)
+void GameObject::update()
 {
+    double factor = GameContainer::deltaTime();
+
     if (m_transform.moving())
     {
         m_transform.translate(factor);

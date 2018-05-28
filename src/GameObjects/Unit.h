@@ -11,6 +11,10 @@ const int NEUTRAL = 0;
 
 class Unit : public GameObject, Drawable
 {
+    ///FOR TESTING PURPOSES
+    public:
+        void maketest();
+
     protected:
         //will change the type to a proper enum or pointer in time
         int m_owner;
@@ -24,8 +28,9 @@ class Unit : public GameObject, Drawable
         Unit(double _x, double _y, int _owner = NEUTRAL, double _w = tileSide, double _h = tileSide);
         virtual ~Unit();
 
-        //override update functions etc from GaeObject
+        //override update functions etc from GameObject
 
+        virtual void start();
         virtual void draw();
 
 

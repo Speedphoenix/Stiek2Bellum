@@ -5,20 +5,14 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 
-#include <iostream>
-#include <fstream>
+#include "config.h"
 
-#define E(x) {std::cerr << std::endl << #x ": " << x << std::endl;}
-#define ES(x) {std::cerr << std::endl << x << std::endl;}
 
-#define XOR(a, b) ( (a) ? !(b) : (b) )
-#define ABS(a) ( (a<0) ? -1 * (a) : (a) )
+const int defaultDispFlags = ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE;
+
 
 extern ALLEGRO_DISPLAY *currentDisplay;
 
-const int defaultDispFlags = ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE;
-const int defaultDispWidth = 800;
-const int defaultDispHeight = 600;
 
 ///initializes and installs allegro related add-ons n' others
 ///also creates the display

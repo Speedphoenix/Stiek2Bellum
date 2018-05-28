@@ -1,8 +1,26 @@
 #include "Animator.h"
 
-#include "math.h"
+#include "TransformBase.h"
+#include "allegroImplem.h"
+#include "debugNerrors.h"
+
+#include <math.h>
+
 
 using namespace std;
+
+///FOR TESTING PURPOSES
+void Animator::maketest()
+{
+    Animation* newAnim = new Animation();
+    newAnim->maketest();
+
+    m_currState = Transition(Walking, Anim::Idle, false);
+
+    m_animations[m_currState] = newAnim;
+}
+
+
 
 Animator::Animator(State startState, double startDirection)
     :m_currFrame(0), m_currState(startState, Anim::Idle, false), m_askedDir(startDirection)
@@ -126,6 +144,11 @@ void Animator::setDirection(const TransformBase& direction)
 }
 
 
+void Animator::draw(double destx, double desty)
+{
+    al_draw_bitmap(this->getImg(), destx, desty, 0);
+}
+
 void Animator::launch()
 {
     al_start_timer(m_timer);
@@ -136,12 +159,11 @@ void Animator::stop()
     al_stop_timer(m_timer);
 }
 
-void Animator::update(double factor)
+void Animator::update()
 {
-    ALLEGRO_EVENT *retEvent = nullptr;
+    ALLEGRO_EVENT retEvent;
 
-    //check timer here
-    while (al_get_next_event(m_queue, retEvent))
+    while (al_get_next_event(m_queue, &retEvent))
     {
         m_currFrame++;
 
@@ -156,6 +178,15 @@ ALLEGRO_BITMAP* Animator::getImg()
 {
     return m_animations.at(m_currState)->getFrame(m_currFrame);
 }
+
+void Animator::setCurrFrame(unsigned val)
+{
+    if (val >= m_animations.at(m_currState)->nbFrames())
+        m_currFrame = 0;
+    else
+        m_currFrame = val;
+}
+
 
 
 //below this is to choose the right state depending on available ones

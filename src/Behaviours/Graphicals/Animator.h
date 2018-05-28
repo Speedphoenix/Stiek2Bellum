@@ -1,25 +1,26 @@
 #ifndef ANIMATOR_H
 #define ANIMATOR_H
 
-#include "allegroImplem.h"
-#include "Animation.h"
-#include "TransformBase.h"
-
 #include <Behaviour.h>
+
+#include "Animation.h"
 
 #include <map>
 
-
+class TransformBase;
+struct ALLEGRO_BITMAP;
+struct ALLEGRO_EVENT_QUEUE;
+struct ALLEGRO_TIMER;
 
 //make it unsigned to make sure when comparing, or when making an array (of size State::none)
 enum State : unsigned{
-    Walking,    //default Idle too
-    Crouching,  //Idle too
-    TipToes,    //Idle too
-    Attacking,  //Idle with sword in hand too
-    Swimming,   //Idle too
-    Dying,      //Idle dead too
-    Burning,    //Idle burnt too
+    Walking,
+    Crouching,
+    TipToes,
+    Attacking,
+    Swimming,
+    Dying,
+    Burning,
 
     none
 };
@@ -82,6 +83,10 @@ struct Transition{
 
 class Animator : public Behaviour
 {
+    ///FOR TESTING PURPOSES
+    public:
+        void maketest();
+
     //statics
     public:
         static State getBestState(const std::map<Transition, Animation*>& theMap, Anim::AnimType animType, State depending);
@@ -95,6 +100,8 @@ class Animator : public Behaviour
         unsigned m_currFrame;
 
         Transition m_currState;
+
+        ///ADD A STATE FOR ASKED STATE (even if it doesn't exist, to go from Idle <-> Active)
 
         //should replace all of these by one big map<Transition, Animation *>
         std::map<Transition, Animation*> m_animations;
@@ -113,9 +120,12 @@ class Animator : public Behaviour
 //        Animator& operator=(const Animator& other);
 
 
+        //just draws at x, y on the current target bitmap
+        virtual void draw(double destx, double desty);
+
         virtual void launch();   //can be used to un-pause too
         virtual void stop();    //can be used to pause too
-        virtual void update(double factor);
+        virtual void update();
         virtual ALLEGRO_BITMAP* getImg();
 
         ///direction should be in radian
@@ -130,7 +140,7 @@ class Animator : public Behaviour
         virtual void makeIdle();
 
         unsigned currFrame() const { return m_currFrame; }
-        void setCurrFrame(unsigned val) { m_currFrame = val; }
+        void setCurrFrame(unsigned val);
         State currAnimation() const { return m_currState.to; }
 };
 

@@ -2,24 +2,32 @@
 #define GAMECONTAINER_H
 
 #include "GameMap.h"
-#include "Transform.h"
+#include "Camera.h"
 
-#include "allegroImplem.h"
 #include <list>
-#include <vector>
 
 
 class Drawable;
 class GameObject;
 class Behaviour;
+struct ALLEGRO_EVENT_QUEUE;
+
 
 class GameContainer
 {
+    ///FOR TESTING PURPOSES
+    public:
+        void maketest();
+
+
     //statics
     protected:
         static GameContainer * m_instance;
     public:
         static GameContainer * instance() { return m_instance; }
+
+        ///the time elapsed since the last game loop. Use this as a factor to move...
+        static double deltaTime() { return m_instance->m_deltaTime; }
 
     //non-static member variables
     private:
@@ -33,6 +41,9 @@ class GameContainer
         std::list<std::list<Behaviour*>::iterator> m_remBehaviours;
         std::list<std::list<Drawable*>::iterator> m_remDrawables;
 
+
+        double m_deltaTime;
+
     protected:
 
         ALLEGRO_EVENT_QUEUE *m_eventsDisplay;
@@ -40,7 +51,7 @@ class GameContainer
         ALLEGRO_EVENT_QUEUE *m_eventsMouse;
 
         GameMap m_map;
-        Transform m_camera;
+        Camera m_camera;
 
         bool m_finished;
 
@@ -54,7 +65,7 @@ class GameContainer
         void eventCatch();
         void playerUpdate();
         void preUpdate();
-        void autoUpdate(double factor);
+        void autoUpdate();
         void postUpdate();
         void autoRemove();
 
@@ -65,16 +76,20 @@ class GameContainer
         //no copy ctor or assignment
         GameContainer(const GameContainer& that) = delete;
 
+        virtual void start();
         virtual void update(double factor);
         virtual void draw();
 
-        ///need to RENAME THIS ONE
-        virtual bool stop() const { return m_finished; }
+        ///NEED TO RENAME THIS ONE. It currently
+        virtual bool shouldStop() const { return m_finished; }
 
         void setMap(const GameMap& val) { m_map = val; }
 
         long mapWidth() const { return m_map.width(); }
         long mapHeight() const { return m_map.height(); }
+
+        long mapTileWidth() const { return m_map.tileWidth(); }
+        long mapTileHeight() const { return m_map.tileHeight(); }
 
         //these will be called by their respective constructors
         std::list<GameObject*>::iterator addObject(GameObject* what);

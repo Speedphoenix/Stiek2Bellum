@@ -1,7 +1,7 @@
 #ifndef COLORS_H_INCLUDED
 #define COLORS_H_INCLUDED
 
-#include "allegroImplem.h"
+#include <allegro5/color.h>
 
 namespace col
 {

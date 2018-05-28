@@ -1,11 +1,13 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "allegroImplem.h"
 #include "Transform.h"
+#include "config.h"
 
 const double maxZoom = 2.0;//for the moment
 const double minZoom = 0.5;
+
+union ALLEGRO_EVENT;
 
 class Camera
 {
@@ -15,6 +17,7 @@ class Camera
     public:
         static Camera * currentCamera() { return m_currentCamera; }
         static void setCurrentCamera(Camera* what) { m_currentCamera = what; }
+        static const Transform& getCurrentView() { return m_currentCamera->m_takenView; }
 
 
     //non-statics
@@ -31,7 +34,7 @@ class Camera
         void blockBorders();
         void blockZoom();
 
-        TransformBase * m_follow = nullptr;
+        const TransformBase * m_follow = nullptr;
 
     public:
         Camera();
@@ -54,10 +57,10 @@ class Camera
         ///WARNING: increasing the zoom value will zoom OUT, decreasing will zoom IN
         void addZoom(double val);
         void setZoom(double val);
-        double getZoom() { return m_zoomFactor; }
+        double getZoom() const { return m_zoomFactor; }
 
         void setFollowingTransform(TransformBase* what) { m_follow = what; }
-        TransformBase* getFollowingTransform() { return m_follow; }
+        const TransformBase* getFollowingTransform() const { return m_follow; }
 };
 
 #endif // CAMERA_H

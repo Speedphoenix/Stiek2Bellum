@@ -16,7 +16,7 @@ class Behaviour
         virtual void start() { }
 
         virtual void preUpdate() { }
-        virtual void update(double factor) = 0;
+        virtual void update() = 0;
         virtual void postUpdate() { }
 };
 

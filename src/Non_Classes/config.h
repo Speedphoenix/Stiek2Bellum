@@ -1,0 +1,40 @@
+#ifndef CONFIG_H_INCLUDED
+#define CONFIG_H_INCLUDED
+
+//this file contains constants and others to configure the game
+
+
+/********************************************************************
+                                LIBALLEG
+********************************************************************/
+
+const int defaultDispWidth = 800;
+const int defaultDispHeight = 600;
+
+
+/********************************************************************
+                                MAP
+********************************************************************/
+///the size of a (square) tile
+const int tileSide = 75;
+
+///converts coordinates in number of tiles
+inline int tileCoord(int pixels)
+{
+    return ((int) (pixels / tileSide));
+}
+
+
+/********************************************************************
+                            BASIC OPERATORS
+********************************************************************/
+
+
+#define XOR(a, b) ( (a) ? !(b) : (b) )
+#define ABS(a) ( (a<0) ? -1 * (a) : (a) )
+
+
+
+
+#endif // CONFIG_H_INCLUDED
+

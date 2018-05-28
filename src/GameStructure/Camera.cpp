@@ -1,6 +1,9 @@
 #include "Camera.h"
 
 #include "GameContainer.h"
+#include "allegroImplem.h"
+
+#include "debugNerrors.h"
 
 Camera * Camera::m_currentCamera = nullptr;
 
@@ -40,6 +43,11 @@ void Camera::blockBorders()
 {
     GameContainer* instance = GameContainer::instance();
     bool tooBigx = false, tooBigy = false;
+
+    //the first call to this function is in the initialization of the GameContainer
+    if (!instance)
+        return;
+
 
     //if the screen is too big for the map
     if (m_displayedDims.width() * m_zoomFactor > instance->mapWidth())

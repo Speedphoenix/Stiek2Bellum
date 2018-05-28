@@ -1,5 +1,8 @@
-#include "allegroImplem.h"
 #include "GameContainer.h"
+
+#include "allegroImplem.h"
+
+#include "debugNerrors.h"
 
 using namespace std;
 
@@ -15,16 +18,21 @@ int main(int argc, char* argv[])
     }
 
 
-    GameContainer theGame(300, 225);
+    GameContainer theGame(60, 45);
+
+
+    theGame.maketest();
+    theGame.start();
 
     bool finished = false;
 
 
     while(!finished)
     {
+        theGame.update(1);
 
-        finished = theGame.stop();
-        al_rest(2.5);
+        finished = theGame.shouldStop();
+        al_rest(0.02);
     }
 
     closeAlleg();

@@ -1,17 +1,34 @@
 #include "GameContainer.h"
+GameContainer * GameContainer::m_instance = nullptr;
 
 #include "GameObject.h"
 #include "Behaviour.h"
 #include "Drawable.h"
+#include "Unit.h"
 
-GameContainer * GameContainer::m_instance = nullptr;
+#include "allegroImplem.h"
+#include "colors.h"
+
+#include "debugNerrors.h"
+
 
 using namespace std;
 
-GameContainer::GameContainer(long _width, long _height)
-    :m_map(_width, _height), m_finished(false)
+///FOR TESTING PURPOSES
+void GameContainer::maketest()
 {
+    //this will automatically add the unit to this GameContainer
+    Unit* newUnit = new Unit(10.0, 10.0);
 
+    newUnit->maketest();
+
+    //map is already a test from its constructor
+    //default camera should work just fine
+}
+
+GameContainer::GameContainer(long _width, long _height)
+    :m_deltaTime(0), m_map(_width, _height), m_finished(false)
+{
     if (m_instance!=nullptr)
         throw "A game container already exists";
 
@@ -52,6 +69,16 @@ GameContainer::~GameContainer()
 //}
 
 
+void GameContainer::start()
+{
+    for (const auto& it : m_objects)
+        it->start();
+
+    for (auto it : m_behaviours)
+        it->start();
+}
+
+
 ///MAKE A STRUCT/CLASS FOR ACTIONS (DIFFERENT EVENTS CAN TRIGGER THE SAME ACTION), AND USE THAT.
 ///to make it easier to eventually have multiple players (online? AI? split screen?)
 //for events:
@@ -60,8 +87,10 @@ void GameContainer::eventCatch()
 {
     ALLEGRO_EVENT event = {0};
 
-    while (al_get_next_event(m_eventsDisplay, &event))
+    //not directly using al_get_next event in case we need to just peek?
+    while (!al_is_event_queue_empty(m_eventsDisplay))
     {
+        al_get_next_event(m_eventsDisplay, &event);
         switch (event.type)
         {
             case ALLEGRO_EVENT_DISPLAY_EXPOSE:
@@ -80,14 +109,17 @@ void GameContainer::eventCatch()
         }
     }
 
-    while (al_get_next_event(m_eventsKeyboard, &event))
+    while (!al_is_event_queue_empty(m_eventsKeyboard))
     {
+        al_get_next_event(m_eventsKeyboard, &event);
         switch (event.type)
         {
             case ALLEGRO_EVENT_KEY_DOWN:
             case ALLEGRO_EVENT_KEY_CHAR:
             case ALLEGRO_EVENT_KEY_UP:
 
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+                m_finished = true;
         break;
 
             default:
@@ -95,8 +127,9 @@ void GameContainer::eventCatch()
         }
     }
 
-    while (al_get_next_event(m_eventsMouse, &event))
+    while (!al_is_event_queue_empty(m_eventsMouse))
     {
+        al_get_next_event(m_eventsMouse, &event);
         switch (event.type)
         {
             case ALLEGRO_EVENT_MOUSE_AXES:
@@ -117,34 +150,41 @@ void GameContainer::eventCatch()
 
 void GameContainer::update(double factor)
 {
+    m_deltaTime = factor;
+
     eventCatch();
 
     preUpdate();
 
     playerUpdate();
 
-    autoUpdate(factor);
+    autoUpdate();
 
     postUpdate();
 
     autoRemove();
-
+//ES(7)
     draw();
+//ES(8)
 }
 
 
 void GameContainer::draw()
 {
+    al_clear_to_color(col::white);
+
     for (auto & elem : m_drawables)
     {
-        elem->draw();
+        //elem->draw();
     }
+
+    al_flip_display();
 }
 
 
 void GameContainer::playerUpdate()
 {
-
+    //may move the camera here...
 }
 
 void GameContainer::preUpdate()
@@ -156,13 +196,15 @@ void GameContainer::preUpdate()
         it->preUpdate();
 }
 
-void GameContainer::autoUpdate(double factor)
+void GameContainer::autoUpdate()
 {
     for (const auto& it : m_objects)
-        it->update(factor);
+        it->update();
 
     for (auto it : m_behaviours)
-        it->update(factor);
+        it->update();
+
+    m_camera.update();
 }
 
 void GameContainer::postUpdate()

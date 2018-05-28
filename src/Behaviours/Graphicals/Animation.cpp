@@ -1,10 +1,13 @@
 #include "Animation.h"
-#include "colors.h"
 
-#include "math.h"
+#include "colors.h"
+#include "allegroImplem.h"
+
+#include <math.h>
 
 using namespace std;
 
+///FOR TESTING PURPOSES
 void Animation::maketest()
 {
     ALLEGRO_BITMAP* btm;
@@ -18,7 +21,7 @@ void Animation::maketest()
     al_clear_to_color( col::olds::GRASS);
     al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
-    m_frames.at(Direc::E).push_back(btm);
+    m_frames[Direc::E].push_back(btm);
 }
 
 

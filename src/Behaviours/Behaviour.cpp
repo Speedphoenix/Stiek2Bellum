@@ -9,8 +9,6 @@ Behaviour::Behaviour()
         throw "No instance of GameContainer";
 
     instance->addBehaviour(this);
-
-    this->start();
 }
 
 Behaviour::~Behaviour()

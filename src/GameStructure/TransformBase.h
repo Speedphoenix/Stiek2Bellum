@@ -1,8 +1,6 @@
 #ifndef TRANSFORMBASE_H
 #define TRANSFORMBASE_H
 
-#include <cmath>
-
 inline double SQ(double x)
 {
     return x*x;
@@ -62,6 +60,8 @@ class TransformBase
 
         virtual ~TransformBase();
 
+
+        virtual void getRelativeCoords(const TransformBase& baseOrigin, double& relX, double& relY);
 
         virtual void translate(double factor);
 

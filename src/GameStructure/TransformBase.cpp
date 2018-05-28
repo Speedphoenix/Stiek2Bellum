@@ -2,8 +2,9 @@
 #include "Transform.h"
 #include "TransformCircle.h"
 
-
 #include "GameContainer.h"
+
+#include <cmath>
 
 using namespace std;
 
@@ -33,6 +34,11 @@ TransformBase::~TransformBase()
     //dtor
 }
 
+void TransformBase::getRelativeCoords(const TransformBase& baseOrigin, double& relX, double& relY)
+{
+    relX = this->absX() - baseOrigin.absX();
+    relY = this->absY() - baseOrigin.absY();
+}
 
 
 void TransformBase::translate(double factor)
