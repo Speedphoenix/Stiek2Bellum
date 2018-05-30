@@ -13,7 +13,7 @@ struct ALLEGRO_BITMAP;
 struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
 
-//make it unsigned to make sure when comparing, or when making an array (of size State::none)
+// unsigned to make sure when comparing, or when making an array (of size State::none)
 enum State : unsigned{
     Walking,
     Crouching,
@@ -27,11 +27,12 @@ enum State : unsigned{
 };
 
 namespace Anim {
+    ///The type of an animation
     enum AnimType : int{
         Idle,
         Active,
         Transition  // these will be played once during the transition from one state to another
-                    // (only if the transition animation exists)
+                    // (only if the transition animation is available)
     };
 }
 
@@ -43,6 +44,7 @@ struct Transition{
     State to;
     //bool toIdle;
 
+    //idle, transition, active. might wanna make this unique to from state and to state...
     Anim::AnimType animType;
 
     bool playOnce;
@@ -99,7 +101,7 @@ class Animator : public Behaviour
         ALLEGRO_TIMER* m_timer;
         ALLEGRO_EVENT_QUEUE* m_queue;
 
-        //curre t frame
+        //current frame number
         unsigned m_currFrame;
 
         //current state/transition
@@ -125,12 +127,17 @@ class Animator : public Behaviour
 //        Animator& operator=(const Animator& other);
 
 
-        //just draws at x, y on the current target bitmap
+        /// draws at destx, desty on the current target bitmap
         virtual void draw(double destx, double desty);
 
+        /// starts the animation
         virtual void launch();   //can be used to un-pause too
+        ///stops thee animation
         virtual void stop();    //can be used to pause too
+        ///will update stuff like the frame counter if need be
         virtual void update();
+
+        ///returns the current image. Use the draw function instead
         virtual ALLEGRO_BITMAP* getImg();
 
         ///direction should be in radian

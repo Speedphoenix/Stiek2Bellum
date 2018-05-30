@@ -23,11 +23,13 @@ class Behaviour
         Behaviour(GameObject* attachTo);
         virtual ~Behaviour();
 
+        // called at the start of the game
         virtual void start() { }
 
-        virtual void preUpdate() { }
-        virtual void update() = 0;
-        virtual void postUpdate() { }
+        //these 3 funcs are called during a single game loop
+        virtual void preUpdate() { }    //this one first (and before the player's actions)
+        virtual void update() = 0;      //this one in the middle, usually the main one
+        virtual void postUpdate() { }   //this one last
 
         GameObject* attachedObject() { return m_attachedObject; }
         //make a proper setter if the need arises
