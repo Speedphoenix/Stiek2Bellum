@@ -95,11 +95,14 @@ class Animator : public Behaviour
     //non-statics
     protected:
 
+        //timer and event queue to increment frame number at the right intervals
         ALLEGRO_TIMER* m_timer;
         ALLEGRO_EVENT_QUEUE* m_queue;
 
+        //curre t frame
         unsigned m_currFrame;
 
+        //current state/transition
         Transition m_currState;
 
         ///ADD A STATE FOR ASKED STATE (even if it doesn't exist, to go from Idle <-> Active)
@@ -107,6 +110,7 @@ class Animator : public Behaviour
         //should replace all of these by one big map<Transition, Animation *>
         std::map<Transition, Animation*> m_animations;
 
+        //the asked direction (because the actual shown dir can be different based on availability
         double m_askedDir;
 
         //might wanna remove this, since there should already be a pointer in the animation class

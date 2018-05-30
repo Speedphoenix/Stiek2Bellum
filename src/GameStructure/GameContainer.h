@@ -58,16 +58,14 @@ class GameContainer
 
     //non-static methods
     protected:
-//        void resizeCamera();
-//        void resizeCamera(ALLEGRO_DISPLAY* display);
-
         //call every turn
-        void eventCatch();
-        void playerUpdate();
-        void preUpdate();
-        void autoUpdate();
-        void postUpdate();
-        void autoRemove();
+        //the individual updates are called for each object, behaviour...
+        void eventCatch();      //!< takes in all events that happened since the last game loop
+        void preUpdate();       //!< comes first
+        void playerUpdate();    //!< does everything related to player/ia input
+        void autoUpdate();      //!< the main update
+        void postUpdate();      //!< comes last
+        void autoRemove();      //!< remove anything that needs to be removed during this game loop
 
     public:
         GameContainer(long _width, long _height);
@@ -77,11 +75,16 @@ class GameContainer
         GameContainer(const GameContainer&) = delete;
         GameContainer& operator=(const GameContainer&) = delete;
 
+        ///called at the start of the game
         virtual void start();
+
+        ///called at every game loop, calls every other update function and draw()
         virtual void update(double factor);
+
+        ///draws the drawables
         virtual void draw();
 
-        ///NEED TO RENAME THIS ONE. It currently
+        ///returns if the game should stop (is finished) - might wanna rename this ons
         virtual bool shouldStop() const { return m_finished; }
 
         void setMap(const GameMap& val) { m_map = val; }

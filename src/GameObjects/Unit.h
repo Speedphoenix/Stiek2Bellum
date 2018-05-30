@@ -19,8 +19,10 @@ class Unit : public GameObject, Drawable
         Animator m_animator;
 
         //will change the type to a proper enum or pointer in time
+        //the player it is affiliated
         int m_owner;
 
+        //a Unit being dead does not mean it will be removed (bu cadavers usually don't do much)
         bool m_dead;
 
     public:
@@ -30,7 +32,11 @@ class Unit : public GameObject, Drawable
 
         //override update functions etc from GameObject
 
+        //overriden from the GameObject abstract class
         virtual void start();
+        //virtual void update(); //make sure to call GameObject::update()?
+
+        //overriden from the drawable interface
         virtual void draw();
 
 

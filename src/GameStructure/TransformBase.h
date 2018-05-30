@@ -1,11 +1,13 @@
 #ifndef TRANSFORMBASE_H
 #define TRANSFORMBASE_H
 
+///Squares the value
 inline double SQ(double x)
 {
     return x*x;
 }
 
+///Squares the value
 inline int SQ(int x)
 {
     return x*x;
@@ -15,16 +17,18 @@ class GameContainer;
 class Transform;
 class TransformCircle;
 
-/// a virtual class to make transforms (circular or rect)
+/// a class to inherit from to make transforms (circular or rect)
 class TransformBase
 {
     //statics
     public:
+        //returns whether the contained transform is inside the container
         static bool isInside(const Transform& contained, const Transform& container);               //two rects
         static bool isInside(const TransformCircle& contained, const TransformCircle& container);   //two circles
         static bool isInside(const Transform& contained, const TransformCircle& container);         //rect in circle
         static bool isInside(const TransformCircle& contained, const Transform& container);         //circle in rect
 
+        //returns whether the first transform touches the second (if one contains the other it returns true)
         static bool touches(const Transform& first, const Transform& second);               //two rects
         static bool touches(const TransformCircle& first, const TransformCircle& second);   //two circles
         static bool touches(const Transform& first, const TransformCircle& second);         //one rect and one circle
@@ -33,13 +37,13 @@ class TransformBase
 
     //non-statics
     protected:
-        double m_x; //!< x coordinates
-        double m_y; //!< y coordinates
+        double m_x;             //!< x coordinates
+        double m_y;             //!< y coordinates
 
-        double m_speed; //!< the speed
-        double m_orientation; //!< orientation
-        double m_dx; //!< speed along x
-        double m_dy; //!< speed along y
+        double m_speed;         //!< the speed
+        double m_orientation;   //!< orientation in radians
+        double m_dx;            //!< speed along x
+        double m_dy;            //!< speed along y
 
         bool m_moving;
 
@@ -48,8 +52,11 @@ class TransformBase
 
     //methods
     protected:
+        //computes dx and dy based on the speed and the orientation
         virtual void calcCompos();
+        //computes the speed and orientation based on dx and dy
         virtual void calcOrientation();
+
         //stops from going out-of bounds
         virtual void blockBorder();
 
@@ -60,9 +67,10 @@ class TransformBase
 
         virtual ~TransformBase();
 
-
+        ///sets relX and relY to be the coordinates relative to baseOrigin's position
         virtual void getRelativeCoords(const TransformBase& baseOrigin, double& relX, double& relY);
 
+        ///if the transform is moving, makes it move depending on dx and dy
         virtual void translate(double factor);
 
         virtual bool isInside(const Transform& container);
@@ -70,21 +78,25 @@ class TransformBase
         virtual bool touches(const Transform& other);
         virtual bool touches(const TransformCircle& other);
 
+        //the squared distance between this and the params
         virtual double getSQDist(double x2, double y2) const;
         virtual double getSQDist(const TransformBase& other) const;
+        //the squared distance between the first params and the second params
         static double getSQDist(const TransformBase& first, const TransformBase& second);
         static double getSQDist(double x1, double y1, double x2, double y2);
 
+        //the distance between this and the params
         virtual double getDist(double x2, double y2) const;
         virtual double getDist(const TransformBase& other) const;
+        //the distance between the first params and the second params
         static double getDist(const TransformBase& first, const TransformBase& second);
         static double getDist(double x1, double y1, double x2, double y2);
 
 
-        TransformBase *parent() const { return m_parent; }
+        TransformBase* parent() const { return m_parent; }
         void setParent(TransformBase *val); //!< while keeping the same absolute position
 
-        bool moving() const { return m_moving; }
+        bool isMoving() const { return m_moving; }
         void setMoving(bool val = true) { m_moving = val; }
 
         virtual double x() const { return m_x; }
@@ -97,6 +109,7 @@ class TransformBase
         virtual void addY(double val) { m_y += val; }
         virtual void addXY(double valx, double valy) { m_x += valx; m_y += valy; }
 
+        //Abs means absolute, regardless of the position of  the parent transform
         virtual double absX() const { return m_x + (m_parent?m_parent->centerAbsX():0); }
         virtual double absY() const { return m_y + (m_parent?m_parent->centerAbsY():0); }
         virtual void setAbsX(double val) { m_x = val - (m_parent?m_parent->centerAbsX():0); }
@@ -124,6 +137,7 @@ class TransformBase
         double speed() const { return m_speed; }
         void setSpeed(double val) { m_speed = val; calcCompos(); }
 
+        //in radians
         double orientation() const { return m_orientation; }
         void setOrientation(double val) { m_orientation = val; calcCompos(); }
 };

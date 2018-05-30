@@ -10,6 +10,7 @@ class TransformCircle;
 ///a rectangular transform
 class Transform : public TransformBase
 {
+    //technically not necessary
     friend class TransformBase;
 
     protected:
@@ -18,6 +19,7 @@ class Transform : public TransformBase
 
     //methods
     protected:
+        //stops from going out-of bounds
         virtual void blockBorder();
 
     public:
@@ -37,6 +39,7 @@ class Transform : public TransformBase
         virtual void setCenterX(double val) { m_x = val - m_w/2; }
         virtual void setCenterY(double val) { m_y = val - m_h/2; }
 
+        //bottom right corner of the transform
         virtual double endX() const { return m_x + m_w; }
         virtual double endY() const { return m_y + m_h; }
         virtual void setEndX(double val) { m_x = val - m_w; }

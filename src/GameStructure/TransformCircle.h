@@ -6,6 +6,7 @@
 class GameContainer;
 class Transform;
 
+///a circular transform
 class TransformCircle : public TransformBase
 {
     friend class TransformBase;
@@ -15,6 +16,7 @@ class TransformCircle : public TransformBase
 
     //funcs
     protected:
+        //stops from going out-of bounds
         virtual void blockBorder();
 
     public:

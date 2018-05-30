@@ -3,7 +3,7 @@
 
 #include <list>
 
-///drawable interface
+///drawable interface. Inherit from this if you want to make something that is visible on screen
 class Drawable
 {
     private:

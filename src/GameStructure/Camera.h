@@ -9,6 +9,7 @@ const double minZoom = 0.5;
 
 union ALLEGRO_EVENT;
 
+///the camera with its poksition and dimensions
 class Camera
 {
     //statics
@@ -30,10 +31,11 @@ class Camera
 
     //non-static methods
     protected:
-        void calcTakenView();      //sets the width etc of takenView depending on the displayedView and the zoomFactor
-        void blockBorders();
-        void blockZoom();
+        void calcTakenView();   //!< sets the width etc of takenView depending on the displayedView and the zoomFactor
+        void blockBorders();    //!< stops from going out-of bounds
+        void blockZoom();       //!< stops from zooming out-of bounds
 
+        // if the camera should follow a transform
         const TransformBase * m_follow = nullptr;
 
     public:
