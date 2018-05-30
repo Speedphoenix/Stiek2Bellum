@@ -1,11 +1,14 @@
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
 
-//this file contains constants and others to configure the game
+/**
+    This file contains
+    constants and others stuff to configure the game
+*/
 
 
 /********************************************************************
-                                LIBALLEG
+                                ALLEG
 ********************************************************************/
 
 const int defaultDispWidth = 800;
@@ -29,10 +32,10 @@ inline int tileCoord(int pixels)
                             BASIC OPERATORS
 ********************************************************************/
 
-
 #define XOR(a, b) ( (a) ? !(b) : (b) )
-#define ABS(a) ( (a<0) ? -1 * (a) : (a) )
-
+#define ABS(a) ( ((a) < 0) ? -1 * (a) : (a) )
+#define MIN(a, b) ( ((a) < (b)) ? (a) : (b) )
+#define MAX(a, b) ( ((a) > (b)) ? (a) : (b) )
 
 
 

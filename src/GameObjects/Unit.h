@@ -16,12 +16,12 @@ class Unit : public GameObject, Drawable
         void maketest();
 
     protected:
+        Animator m_animator;
+
         //will change the type to a proper enum or pointer in time
         int m_owner;
 
         bool m_dead;
-
-        Animator m_animator;
 
     public:
         Unit(const Transform& source, int _owner = NEUTRAL);

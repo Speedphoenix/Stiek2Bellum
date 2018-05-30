@@ -12,12 +12,14 @@ using namespace std;
 TransformBase::TransformBase(double _x, double _y, bool _moving, double _speed, double _orientation)
     :m_x(_x), m_y(_y), m_speed(_speed), m_orientation(_orientation), m_moving(_moving)
 {
+    //dx and dy are calculated in here based on the orientation and the speed
     calcCompos();
 }
 
 TransformBase::TransformBase(double _x, double _y, double _dx, double _dy, bool _moving)
     :m_x(_x), m_y(_y), m_dx(_dx), m_dy(_dy), m_moving(_moving)
 {
+    //the orientation and the speed are calculated in here based on dx and dy
     calcOrientation();
 }
 

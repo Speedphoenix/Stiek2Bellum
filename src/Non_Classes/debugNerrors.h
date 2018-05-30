@@ -1,6 +1,11 @@
 #ifndef DEBUGNERRORS_H_INCLUDED
 #define DEBUGNERRORS_H_INCLUDED
 
+/**
+    This file contains
+    Macros and others about debuging and errors...
+*/
+
 
 #include <iostream>
 

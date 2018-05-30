@@ -23,8 +23,6 @@ void Animation::maketest()
     al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
     m_frames[Direc::E].push_back(btm);
-
-    ES("we made it?")
 }
 
 
@@ -51,6 +49,12 @@ unsigned Animation::nbFrames()
         return m_frames.at(m_currDirection).size();
     else
         return 0;
+}
+
+//we can later make it so that instead of separate bitmaps, we take part of one bigger bitmap, for performance
+void Animation::draw(double destx, double desty, unsigned frameNumber)
+{
+    al_draw_bitmap(this->getFrame(frameNumber), destx, desty, 0);
 }
 
 ALLEGRO_BITMAP* Animation::getFrame(unsigned frameNumber)

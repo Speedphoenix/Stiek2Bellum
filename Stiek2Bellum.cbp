@@ -91,6 +91,7 @@
 		<Unit filename="src/GameStructure/TransformCircle.h" />
 		<Unit filename="src/Non_Classes/allegroImplem.cpp" />
 		<Unit filename="src/Non_Classes/allegroImplem.h" />
+		<Unit filename="src/Non_Classes/colors.cpp" />
 		<Unit filename="src/Non_Classes/colors.h" />
 		<Unit filename="src/Non_Classes/config.h" />
 		<Unit filename="src/Non_Classes/debugNerrors.h" />

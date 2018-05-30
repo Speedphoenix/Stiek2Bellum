@@ -74,7 +74,8 @@ class GameContainer
         virtual ~GameContainer();
 
         //no copy ctor or assignment
-        GameContainer(const GameContainer& that) = delete;
+        GameContainer(const GameContainer&) = delete;
+        GameContainer& operator=(const GameContainer&) = delete;
 
         virtual void start();
         virtual void update(double factor);

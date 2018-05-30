@@ -1,6 +1,12 @@
 #ifndef COLORS_H_INCLUDED
 #define COLORS_H_INCLUDED
 
+/**
+    This file contains
+    Color "constants" to be used anywhere
+    Make sure to call initColors() after initializing the liballeg
+*/
+
 #include <allegro5/allegro_color.h>
 
 namespace col
@@ -28,6 +34,8 @@ namespace olds
     extern ALLEGRO_COLOR TREEL;       //!< #4E9165
     extern ALLEGRO_COLOR TREEP;       //!< #3A633A
     extern ALLEGRO_COLOR PEASANT;     //!< #225DFF
+
+    void initOlds();
 }
 
 //gives a value to all the colors.

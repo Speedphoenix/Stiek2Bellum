@@ -1,7 +1,9 @@
 #include "Behaviour.h"
 #include "GameContainer.h"
+#include "GameObject.h"
 
-Behaviour::Behaviour()
+Behaviour::Behaviour(GameObject* attachTo)
+    :m_attachedObject(attachTo)
 {
     GameContainer* instance = GameContainer::instance();
 

@@ -27,7 +27,7 @@ void GameContainer::maketest()
 }
 
 GameContainer::GameContainer(long _width, long _height)
-    :m_deltaTime(0), m_map(_width, _height), m_finished(false)
+    :m_deltaTime(0), m_map(_width, _height), m_camera(), m_finished(false)
 {
     if (m_instance!=nullptr)
         throw "A game container already exists";

@@ -7,6 +7,7 @@
 
 #include <map>
 
+class GameObject;
 class TransformBase;
 struct ALLEGRO_BITMAP;
 struct ALLEGRO_EVENT_QUEUE;
@@ -113,7 +114,7 @@ class Animator : public Behaviour
 
 
     public:
-        Animator(State startState = Walking, double startDirection = 0);
+        Animator(GameObject* attachTo, State startState = Walking, double startDirection = 0);
         virtual ~Animator();
 
 //        Animator(const Animator& other);

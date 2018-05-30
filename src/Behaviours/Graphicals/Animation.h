@@ -61,6 +61,10 @@ class Animation
         ///the number of frames of the animation for the current direction
         unsigned nbFrames();
 
+
+        //just draws at x, y on the current target bitmap
+        virtual void draw(double destx, double desty, unsigned frameNumber);
+
         ///the current sprite to render
         ALLEGRO_BITMAP* getFrame(unsigned frameNumber);
 

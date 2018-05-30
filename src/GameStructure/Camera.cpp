@@ -8,7 +8,7 @@
 Camera * Camera::m_currentCamera = nullptr;
 
 Camera::Camera()
-    :m_zoomFactor(1)
+    :m_displayedDims(), m_takenView(), m_zoomFactor(1)
 {
     if (!m_currentCamera)
         m_currentCamera = this;
@@ -57,8 +57,8 @@ void Camera::blockBorders()
 
     if (tooBigx || tooBigy)
     {
-        bool neededfactorx =  instance->mapWidth() / m_displayedDims.width();
-        bool neededfactory = instance->mapHeight() / m_displayedDims.height();
+        double neededfactorx =  instance->mapWidth() / m_displayedDims.width();
+        double neededfactory = instance->mapHeight() / m_displayedDims.height();
 
         //take the highest
         m_zoomFactor = ((neededfactorx > neededfactory)? neededfactorx : neededfactory);
