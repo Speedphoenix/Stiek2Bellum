@@ -102,6 +102,9 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:
             case ALLEGRO_EVENT_DISPLAY_ORIENTATION:
 
+            //al_resize_display(currentDisplay, event.display.width, event.display.height);
+            E(event.display.height)
+            E(event.display.width)
         break;
 
             default:
@@ -139,6 +142,7 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
             case ALLEGRO_EVENT_MOUSE_WARPED:
 
+            E(event.mouse.x) E(event.mouse.y)
         break;
 
             default:
@@ -163,16 +167,22 @@ void GameContainer::update(double factor)
     postUpdate();
 
     autoRemove();
-//ES(7)
+
     draw();
-//ES(8)
 }
 
 
 void GameContainer::draw()
 {
     al_set_target_backbuffer(currentDisplay);
+
     al_clear_to_color(col::white);
+
+    al_draw_filled_rectangle(650, 550, 850, 750, col::olds::UI_ACC);
+
+
+    E(al_get_display_width(currentDisplay))
+    E(al_get_display_height(currentDisplay))
 
     for (auto & elem : m_drawables)
     {

@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 
-const double defaultLapse = 0.1; //seconds
+const double defaultLapse = 0.4; //seconds
 
 //to scope the Directions (that have short names) without using an enum class
 namespace Direc {
@@ -34,7 +34,7 @@ class Animation
 
     ///FOR TESTING PURPOSES
     public:
-        void maketest();
+        void maketest(int type = 0);
 
     protected:
         //all the frames of all animations

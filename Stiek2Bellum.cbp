@@ -88,6 +88,8 @@
 		<Unit filename="src/GameStructure/GameContainer.h" />
 		<Unit filename="src/GameStructure/GameMap.cpp" />
 		<Unit filename="src/GameStructure/GameMap.h" />
+		<Unit filename="src/GameStructure/SpritesContainer.cpp" />
+		<Unit filename="src/GameStructure/SpritesContainer.h" />
 		<Unit filename="src/GameStructure/Transform.cpp" />
 		<Unit filename="src/GameStructure/Transform.h" />
 		<Unit filename="src/GameStructure/TransformBase.cpp" />

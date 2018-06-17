@@ -22,7 +22,10 @@ void initAlleg(int flags, int w, int h, const char* window_name)
     //to have many default colors...
     col::initColors();
 
-    al_set_new_display_flags(defaultDispFlags | flags); //ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE, or ALLEGRO_FULLSCREEN_WINDOW
+    if (!flags)
+        flags = defaultDispFlags;
+
+    al_set_new_display_flags(flags); //ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE, or ALLEGRO_FULLSCREEN_WINDOW
     currentDisplay = al_create_display(w, h); //800, 600 by default?
     if (!currentDisplay)
         throw "Could not create display";

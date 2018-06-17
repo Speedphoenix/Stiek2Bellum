@@ -4,7 +4,14 @@
 /**
     This file contains
     Macros and others about debuging and errors...
+
+    Also contains constants n' stuff for testing purposes
 */
+
+#include "config.h"
+
+#define TEST_SPRITESHEET RES_DIR "monsterv2.png"
+#define TEST_SHEETNAME "monsterv2"
 
 
 #include <iostream>

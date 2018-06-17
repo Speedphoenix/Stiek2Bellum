@@ -15,12 +15,33 @@ using namespace std;
 ///FOR TESTING PURPOSES
 void Animator::maketest()
 {
-    Animation* newAnim = new Animation();
-    newAnim->maketest();
+    //this method doesn't really care about optimization
+    Transition newAnimKey;
+
+    Animation* newAnim;
+
+    newAnimKey = Transition(Walking, Anim::Idle, false);
+    newAnim = new Animation();
+    newAnim->maketest(0); //idle
+    m_animations[newAnimKey] = newAnim;
+
+    newAnimKey = Transition(Walking, Anim::Active, false);
+    newAnim = new Animation();
+    newAnim->maketest(1); //active
+    m_animations[newAnimKey] = newAnim;
+
+    newAnimKey = Transition(Attacking, Anim::Idle, false);
+    newAnim = new Animation();
+    newAnim->maketest(2); //active
+    m_animations[newAnimKey] = newAnim;
+
+    newAnimKey = Transition(Attacking, Anim::Active, false);
+    newAnim = new Animation();
+    newAnim->maketest(3); //active
+    m_animations[newAnimKey] = newAnim;
+
 
     m_currState = Transition(Walking, Anim::Idle, false);
-
-    m_animations[m_currState] = newAnim;
 }
 
 
@@ -178,6 +199,7 @@ void Animator::stop()
 void Animator::update()
 {
     ALLEGRO_EVENT retEvent;
+
 
     while (al_get_next_event(m_queue, &retEvent))
     {

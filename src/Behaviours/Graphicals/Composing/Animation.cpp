@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+#include "SpritesContainer.h"
+
 #include "colors.h"
 #include "allegroImplem.h"
 #include "debugNerrors.h"
@@ -10,20 +12,68 @@
 using namespace std;
 
 ///FOR TESTING PURPOSES
-void Animation::maketest()
+void Animation::maketest(int type)
 {
+    SpritesContainer* sprites = SpritesContainer::instance();
+
     ALLEGRO_BITMAP* btm;
+    ALLEGRO_BITMAP* parent = sprites->at(TEST_SHEETNAME);
 
-    //the default flag, never know
-    al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
+    vector<Frame*>& inDirec = m_frames[Direc::E];
 
-    btm = al_create_bitmap(75, 75);
+    switch (type)
+    {
+        case 0: //idle
+        {
+            inDirec.push_back(new Frame(parent, 0, 0, 75, 75));
+//            inDirec.push_back(new Frame(parent, 4*75, 0, 75, 75));
+//            inDirec.push_back(new Frame(parent, 0, 0, 75, 75));
+            inDirec.push_back(new Frame(parent, 5*75, 75, 75, 75));
+        }
+    break;
 
-    al_set_target_bitmap(btm);
-    al_clear_to_color(col::olds::GRASS);
-    al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
+        case 1: //active
+        {
+            for (int i=0;i<6;i++)
+            {
+                inDirec.push_back(new Frame(parent, i*75, 0, 75, 75));
+            }
+        }
 
-    m_frames[Direc::E].push_back(new Frame(btm));
+    break;
+
+        case 2: //attack idle
+        {
+            inDirec.push_back(new Frame(parent, 75, 75, 5*75, 75));
+        }
+
+    break;
+
+        case 3: //attack active
+        {
+            for (int i=0;i<6;i++)
+            {
+                inDirec.push_back(new Frame(parent, i*75, 75, 75, 75));
+            }
+        }
+
+    break;
+
+        default:
+        //the default flag, never know
+        al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
+
+        btm = al_create_bitmap(75, 75);
+
+        al_set_target_bitmap(btm);
+        al_clear_to_color(col::olds::GRASS);
+        al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
+
+        inDirec.push_back(new Frame(btm));
+    break;
+    }
+
+    m_currDirection = Direc::E;
 }
 
 
@@ -60,11 +110,10 @@ void Animation::draw(double destx, double desty, unsigned frameNumber)
 
 Frame* Animation::getFrame(unsigned frameNumber)
 {
-
     vector<Frame*>& inter = m_frames.at(m_currDirection);
 
     if (frameNumber < inter.size())
-        return inter.at(m_currDirection);
+        return inter.at(frameNumber);
     else if (inter.size()!=0)
         return inter.at(inter.size() - 1);  //replace this by inter.at(0); to take the first frame instead
     else

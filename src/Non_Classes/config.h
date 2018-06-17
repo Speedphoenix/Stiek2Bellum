@@ -4,6 +4,8 @@
 /**
     This file contains
     constants and others stuff to configure the game
+
+    Things and constants for testing purposes are in debugNerrors.h
 */
 
 
@@ -18,6 +20,7 @@ const int defaultDispHeight = 600;
 /********************************************************************
                                 MAP
 ********************************************************************/
+
 ///the size of a (square) tile
 const int tileSide = 75;
 
@@ -26,6 +29,12 @@ inline int tileCoord(int pixels)
 {
     return ((int) (pixels / tileSide));
 }
+
+/********************************************************************
+                            GRAPHICALS
+********************************************************************/
+
+#define RES_DIR "res/"
 
 
 /********************************************************************

@@ -1,4 +1,5 @@
 #include "GameContainer.h"
+#include "SpritesContainer.h"
 
 #include "allegroImplem.h"
 #include "colors.h"
@@ -10,7 +11,7 @@ int main(int argc, char* argv[])
 {
     try
     {
-        initAlleg(); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
+        initAlleg(ALLEGRO_WINDOWED, 1200, 800); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
     }
     catch (const char* e)
     {
@@ -18,11 +19,11 @@ int main(int argc, char* argv[])
     }
 
     GameContainer theGame(60, 45);
+    SpritesContainer sprites;
 
-
+    sprites.maketest();
     theGame.maketest();
     theGame.start();
-
 
     while(!theGame.shouldStop())
     {
