@@ -57,6 +57,7 @@
 			<Add directory="src/Non_Classes" />
 			<Add directory="src/Behaviours" />
 			<Add directory="src/Behaviours/Graphicals" />
+			<Add directory="src/Behaviours/Graphicals/Composing" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
@@ -65,12 +66,16 @@
 		</Linker>
 		<Unit filename="src/Behaviours/Behaviour.cpp" />
 		<Unit filename="src/Behaviours/Behaviour.h" />
-		<Unit filename="src/Behaviours/Graphicals/Animation.cpp" />
-		<Unit filename="src/Behaviours/Graphicals/Animation.h" />
 		<Unit filename="src/Behaviours/Graphicals/Animator.cpp" />
 		<Unit filename="src/Behaviours/Graphicals/Animator.h" />
-		<Unit filename="src/Behaviours/Graphicals/Shadow.cpp" />
-		<Unit filename="src/Behaviours/Graphicals/Shadow.h" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Animation.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Animation.h" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Frame.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Frame.h" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Shadow.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/Shadow.h" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/State.cpp" />
+		<Unit filename="src/Behaviours/Graphicals/Composing/State.h" />
 		<Unit filename="src/GameObjects/GameObject.cpp" />
 		<Unit filename="src/GameObjects/GameObject.h" />
 		<Unit filename="src/GameObjects/Unit.cpp" />

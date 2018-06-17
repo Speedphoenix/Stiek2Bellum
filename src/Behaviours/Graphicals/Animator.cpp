@@ -1,5 +1,7 @@
 #include "Animator.h"
 
+#include "Frame.h"
+
 #include "TransformBase.h"
 #include "allegroImplem.h"
 #include "colors.h"
@@ -23,8 +25,8 @@ void Animator::maketest()
 
 
 
-Animator::Animator(GameObject* attachTo, State startState, double startDirection)
-    :Behaviour(attachTo), m_currFrame(0), m_currState(startState, Anim::Idle, false), m_askedDir(startDirection)
+Animator::Animator(GameObject* attachTo, GeneralState startState, double startDirection)
+    :Behaviour(attachTo), m_currFrame(0), m_currState(startState, Anim::Idle, false), m_askedState(startState, Anim::Idle), m_askedDir(startDirection)
 {
     m_timer = al_create_timer(defaultLapse);
 
@@ -56,31 +58,39 @@ Animator::~Animator()
 //change these two functions if you really want to add a transition between Active and Idle
 void Animator::makeActive(bool playOnce)
 {
-    //if it changed
-    if (m_currState.animType!=Anim::Active && m_currState.animType!=Anim::Transition)
+    //if it has to change
+    if (m_currState.to.animType!=Anim::Active)
     {
-        m_currState.animType = Anim::Active;
+        //change the asked state
+        m_askedState.animType = Anim::Active;
+
+        m_currState.setType(Anim::Active, playOnce);
         m_currFrame = 0;
 
         //there might be an Idle, but not an Active, or the other way 'round
-        State inter = getBestState(m_animations, Anim::Active, m_currState.to);
+        State inter = getBestState(m_animations, Anim::Active, m_askedState);
         m_currState.from = inter;
         m_currState.to = inter;
     }
-
-    m_currState.playOnce = playOnce;
+    else
+    {
+        m_currState.playOnce = playOnce;
+    }
 }
 
 void Animator::makeIdle()
 {
     //if it changed
-    if (m_currState.animType!=Anim::Idle && m_currState.animType!=Anim::Transition)
+    if (m_currState.to.animType!=Anim::Idle)
     {
-        m_currState.animType = Anim::Idle;
+        //change the asked state
+        m_askedState.animType = Anim::Idle;
+
+        m_currState.setType(Anim::Idle, false);
         m_currFrame = 0;
 
         //there might be an Idle, but not an Active, or the other way 'round
-        State inter = getBestState(m_animations, Anim::Idle, m_currState.to);
+        State inter = getBestState(m_animations, Anim::Idle, m_askedState);
         m_currState.from = inter;
         m_currState.to = inter;
     }
@@ -88,22 +98,24 @@ void Animator::makeIdle()
 
 void Animator::setState(State what, bool shouldChangeDirec)
 {
-    if (what==m_currState.to)
+    if (what==m_askedState)
         return;
 
+    //this will be the from state
+    m_currState.setState(m_askedState);
+
+    m_askedState = what;
+    m_askedState.blockTransitionType(); //to make sure it doesn't have transision as animType
+
     //we're starting a transition. The from State should be the old state (even if it was a transition itself)
-    m_currState.from = m_currState.to;
-    m_currState.to = getBestState(m_animations, Anim::Idle, what);
-    m_currState.animType = Anim::Transition;
-    m_currState.playOnce = true;
+    m_currState.setChange(getBestState(m_animations, m_askedState.animType, m_askedState), false);
 
     //if the transition animation doesn't exist
     if (!m_animations.count(m_currState))
     {
-        m_currState.from = m_currState.to;
+        m_currState.finishTransition();
 
         m_currState.animType = Anim::Idle;
-        m_currState.playOnce = false;
     }
 
     m_currFrame = 0;
@@ -174,13 +186,38 @@ void Animator::update()
         if (m_currFrame >= m_animations.at(m_currState)->nbFrames())
         {
             m_currFrame = 0;
+
+            //if we finished a playOnce animation
+            if (m_currState.playOnce)
+            {
+                if (m_currState.animType == Anim::Transition)
+                {
+                    m_currState.finishTransition();
+                }
+                else
+                {
+                    if (m_askedState.animType == Anim::Idle)
+                    {
+                        ///return here to the backToState....
+                        m_currState.playOnce = false;
+                        m_currState.toPlayOnce = false;
+                    }
+                    else
+                    {
+                        State inter = m_askedState;
+                        inter.animType = Anim::Idle;
+
+                        setState(inter, false);
+                    }
+                }
+            }
         }
     }
 }
 
 ALLEGRO_BITMAP* Animator::getImg()
 {
-    return m_animations.at(m_currState)->getFrame(m_currFrame);
+    return m_animations.at(m_currState)->getFrame(m_currFrame)->sprite();
 }
 
 void Animator::setCurrFrame(unsigned val)
@@ -198,8 +235,8 @@ void Animator::setCurrFrame(unsigned val)
 
 //to not rewrite it everytime....
 #define CHECK(x)                    \
-keyIdx.from = x;                    \
-keyIdx.to = x;                      \
+keyIdx.from = State(x, animType);   \
+keyIdx.to = State(x, animType);     \
 if (theMap.count(keyIdx)) return x;
 
 //check dans l'ordre
@@ -221,9 +258,9 @@ State Animator::getBestState(const std::map<Transition, Animation*>& theMap, Ani
     Transition keyIdx;
     keyIdx.animType = animType;
 
-    CHECK(depending) //should usually stop here
+    CHECK(depending.genState) //should usually stop here
 
-    switch (depending)
+    switch (depending.genState)
     {
         case Walking:
         CHECKORDER(Crouching, TipToes, Attacking, Burning, Dying, Swimming)

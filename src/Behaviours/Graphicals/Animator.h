@@ -4,84 +4,16 @@
 #include <Behaviour.h>
 
 #include "Animation.h"
+#include "State.h"
 
 #include <map>
 
 class GameObject;
 class TransformBase;
+class Frame;
 struct ALLEGRO_BITMAP;
 struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
-
-// unsigned to make sure when comparing, or when making an array (of size State::none)
-enum State : unsigned{
-    Walking,
-    Crouching,
-    TipToes,
-    Attacking,
-    Swimming,
-    Dying,
-    Burning,
-
-    none
-};
-
-namespace Anim {
-    ///The type of an animation
-    enum AnimType : int{
-        Idle,
-        Active,
-        Transition  // these will be played once during the transition from one state to another
-                    // (only if the transition animation is available)
-    };
-}
-
-//might wanna rename this struct...
-struct Transition{
-    State from;
-    //bool fromIdle;
-
-    State to;
-    //bool toIdle;
-
-    //idle, transition, active. might wanna make this unique to from state and to state...
-    Anim::AnimType animType;
-
-    bool playOnce;
-
-    Transition()
-        :from(Walking), to(Walking), animType(Anim::Idle), playOnce(false) { }
-
-    Transition(State _from, State _to, Anim::AnimType _animType = Anim::Idle, bool _playOnce = false)
-        :from(_from), to(_to), animType(_animType), playOnce(_playOnce) { }
-
-    Transition(State _state, Anim::AnimType _animType = Anim::Idle, bool _playOnce = false)
-        :from(_state), to(_state), animType(_animType), playOnce(_playOnce) { }
-
-    //not really necessary
-    bool operator==(const Transition& other) const {
-        return (other.from == this->from && other.to == this->to && this->animType==other.animType);
-    }
-
-    //to be used as a key in a map
-    bool operator<(const Transition& other) const {
-        if (this->animType < other.animType)
-            return true;
-        else if (this->animType > other.animType)
-            return false;
-        else if (this->from < other.from)   //check from state
-            return true;
-        else if (this->from > other.from)
-            return false;
-        else if (this->to < other.to)       //check to state
-            return true;
-        else if (this->to > other.to)
-            return false;
-        else                            //this means the two transitions are the same
-            return false;
-    }
-};
-
 
 
 class Animator : public Behaviour
@@ -92,6 +24,7 @@ class Animator : public Behaviour
 
     //statics
     public:
+        ///REDO THIS (and make it non static? idk)
         static State getBestState(const std::map<Transition, Animation*>& theMap, Anim::AnimType animType, State depending);
 
     //non-statics
@@ -105,9 +38,10 @@ class Animator : public Behaviour
         unsigned m_currFrame;
 
         //current state/transition
+        //if the animation isn't a transition, to and from states are the same
         Transition m_currState;
 
-        ///ADD A STATE FOR ASKED STATE (even if it doesn't exist, to go from Idle <-> Active)
+        State m_askedState;
 
         //should replace all of these by one big map<Transition, Animation *>
         std::map<Transition, Animation*> m_animations;
@@ -115,12 +49,9 @@ class Animator : public Behaviour
         //the asked direction (because the actual shown dir can be different based on availability
         double m_askedDir;
 
-        //might wanna remove this, since there should already be a pointer in the animation class
-        //std::map<State, Shadow*> m_shadows;
-
 
     public:
-        Animator(GameObject* attachTo, State startState = Walking, double startDirection = 0);
+        Animator(GameObject* attachTo, GeneralState startState = Walking, double startDirection = 0);
         virtual ~Animator();
 
 //        Animator(const Animator& other);
@@ -140,7 +71,7 @@ class Animator : public Behaviour
         ///returns the current image. Use the draw function instead
         virtual ALLEGRO_BITMAP* getImg();
 
-        ///direction should be in radian
+        ///direction should be in radians
         virtual void setDirection(double direction);
         virtual void setDirection(const TransformBase& direction);
 

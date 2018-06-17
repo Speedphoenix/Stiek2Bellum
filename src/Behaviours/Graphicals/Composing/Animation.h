@@ -25,6 +25,7 @@ namespace Direc {
 }
 
 class Shadow;
+class Frame;
 struct ALLEGRO_BITMAP;
 
 class Animation
@@ -37,7 +38,8 @@ class Animation
 
     protected:
         //all the frames of all animations
-        std::map<Direc::Direction, std::vector<ALLEGRO_BITMAP*>> m_frames;
+        std::map<Direc::Direction, std::vector<Frame*>> m_frames;
+
         //pointer to the shadow of this animation, if there is one
         Shadow* m_shadow;
 
@@ -66,7 +68,7 @@ class Animation
         virtual void draw(double destx, double desty, unsigned frameNumber);
 
         ///the current sprite to render
-        ALLEGRO_BITMAP* getFrame(unsigned frameNumber);
+        Frame* getFrame(unsigned frameNumber);
 
 
         Direc::Direction currDirection() const { return m_currDirection; }

@@ -23,15 +23,12 @@ int main(int argc, char* argv[])
     theGame.maketest();
     theGame.start();
 
-    bool finished = false;
 
-
-    while(!finished)
+    while(!theGame.shouldStop())
     {
         theGame.update(1);
 
         al_rest(0.02);
-        finished = theGame.shouldStop();
     }
 
     closeAlleg();

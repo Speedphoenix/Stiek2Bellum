@@ -5,6 +5,7 @@
 #include "debugNerrors.h"
 
 #include <math.h>
+#include "Frame.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ void Animation::maketest()
     al_clear_to_color(col::olds::GRASS);
     al_draw_filled_rectangle(20, 20, 55, 55, col::olds::UI_ACC);
 
-    m_frames[Direc::E].push_back(btm);
+    m_frames[Direc::E].push_back(new Frame(btm));
 }
 
 
@@ -54,13 +55,13 @@ unsigned Animation::nbFrames()
 //we can later make it so that instead of separate bitmaps, we take part of one bigger bitmap, for performance
 void Animation::draw(double destx, double desty, unsigned frameNumber)
 {
-    al_draw_bitmap(this->getFrame(frameNumber), destx, desty, 0);
+    this->getFrame(frameNumber)->draw(destx, desty);
 }
 
-ALLEGRO_BITMAP* Animation::getFrame(unsigned frameNumber)
+Frame* Animation::getFrame(unsigned frameNumber)
 {
 
-    vector<ALLEGRO_BITMAP*>& inter = m_frames.at(m_currDirection);
+    vector<Frame*>& inter = m_frames.at(m_currDirection);
 
     if (frameNumber < inter.size())
         return inter.at(m_currDirection);

@@ -63,7 +63,7 @@ void GameObject::update()
 {
     double factor = GameContainer::deltaTime();
 
-    if (m_transform.moving())
+    if (m_transform.isMoving())
     {
         m_transform.translate(factor);
     }
