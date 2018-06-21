@@ -2,6 +2,7 @@
 
 #include "SpritesContainer.h"
 
+#include "config.h"
 #include "colors.h"
 #include "allegroImplem.h"
 #include "debugNerrors.h"
@@ -29,6 +30,8 @@ void Animation::maketest(int type)
 //            inDirec.push_back(new Frame(parent, 4*75, 0, 75, 75));
 //            inDirec.push_back(new Frame(parent, 0, 0, 75, 75));
             inDirec.push_back(new Frame(parent, 5*75, 75, 75, 75));
+
+            m_lapse = defaultIdleLapse;
         }
     break;
 
@@ -38,6 +41,8 @@ void Animation::maketest(int type)
             {
                 inDirec.push_back(new Frame(parent, i*75, 0, 75, 75));
             }
+
+            m_lapse = defaultActiveLapse;
         }
 
     break;
@@ -45,6 +50,8 @@ void Animation::maketest(int type)
         case 2: //attack idle
         {
             inDirec.push_back(new Frame(parent, 75, 75, 5*75, 75));
+
+            m_lapse = defaultIdleLapse;
         }
 
     break;
@@ -55,6 +62,8 @@ void Animation::maketest(int type)
             {
                 inDirec.push_back(new Frame(parent, i*75, 75, 75, 75));
             }
+
+            m_lapse = defaultActiveLapse;
         }
 
     break;
@@ -79,7 +88,7 @@ void Animation::maketest(int type)
 
 //only default, will need to use a real one later
 Animation::Animation()
-    :m_shadow(nullptr), m_currDirection(Direc::E), m_lapse(defaultLapse)
+    :m_shadow(nullptr), m_currDirection(Direc::E), m_lapse(defaultIdleLapse)
 {
     //ctor
 }

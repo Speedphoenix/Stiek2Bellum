@@ -40,7 +40,6 @@ void Animator::maketest()
     newAnim->maketest(3); //active
     m_animations[newAnimKey] = newAnim;
 
-
     m_currState = Transition(Walking, Anim::Idle, false);
 }
 
@@ -49,7 +48,7 @@ void Animator::maketest()
 Animator::Animator(GameObject* attachTo, GeneralState startState, double startDirection)
     :Behaviour(attachTo), m_currFrame(0), m_currState(startState, Anim::Idle, false), m_askedState(startState, Anim::Idle), m_askedDir(startDirection)
 {
-    m_timer = al_create_timer(defaultLapse);
+    m_timer = al_create_timer(defaultIdleLapse);
 
     m_queue = al_create_event_queue();
 
@@ -76,6 +75,17 @@ Animator::~Animator()
 //    return *this;
 //}
 
+void Animator::setNewLapse()
+{
+    double newLapse = m_animations.at(m_currState)->lapse();
+
+    //set the right lapse for the new animation
+    //this comparison of floating point is safe since it was only set
+    //from a definite value, no operations were made on it.
+    if (al_get_timer_speed(m_timer) != newLapse)
+        al_set_timer_speed(m_timer, newLapse);
+}
+
 //change these two functions if you really want to add a transition between Active and Idle
 void Animator::makeActive(bool playOnce)
 {
@@ -85,13 +95,12 @@ void Animator::makeActive(bool playOnce)
         //change the asked state
         m_askedState.animType = Anim::Active;
 
-        m_currState.setType(Anim::Active, playOnce);
+        State inter(getBestState(m_animations, Anim::Active, m_askedState).genState, Anim::Active);
+
+        m_currState.setState(inter, playOnce);
         m_currFrame = 0;
 
-        //there might be an Idle, but not an Active, or the other way 'round
-        State inter = getBestState(m_animations, Anim::Active, m_askedState);
-        m_currState.from = inter;
-        m_currState.to = inter;
+        setNewLapse();
     }
     else
     {
@@ -114,6 +123,8 @@ void Animator::makeIdle()
         State inter = getBestState(m_animations, Anim::Idle, m_askedState);
         m_currState.from = inter;
         m_currState.to = inter;
+
+        setNewLapse();
     }
 }
 
@@ -144,13 +155,7 @@ void Animator::setState(State what, bool shouldChangeDirec)
     if (shouldChangeDirec)
         m_animations.at(m_currState)->setDirection(m_askedDir);
 
-    double newLapse = m_animations.at(m_currState)->lapse();
-
-    //set the right lapse for the new animation
-    //this comparison of floating point is safe since it was only set
-    //from a definite value, no operations were made on it.
-    if (al_get_timer_speed(m_timer) != newLapse)
-        al_set_timer_speed(m_timer, newLapse);
+    setNewLapse();
 }
 
 void Animator::setState(State what, double direction)

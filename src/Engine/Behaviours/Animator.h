@@ -49,6 +49,9 @@ class Animator : public Behaviour
         //the asked direction (because the actual shown dir can be different based on availability
         double m_askedDir;
 
+    //methods
+    protected:
+        virtual void setNewLapse();
 
     public:
         Animator(GameObject* attachTo, GeneralState startState = Walking, double startDirection = 0);

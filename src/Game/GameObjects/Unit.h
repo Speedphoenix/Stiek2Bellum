@@ -4,6 +4,9 @@
 #include <GameObject.h>
 #include <Drawable.h>
 
+//even if it's already included in GameObject...
+#include "TransformBase.h"
+
 #include "Animator.h"
 
 extern const int tileSide;
@@ -17,6 +20,10 @@ class Unit : public GameObject, Drawable
 
     protected:
         Animator m_animator;
+
+        TransformBase m_destination;
+
+        double m_speed;
 
         //will change the type to a proper enum or pointer in time
         //the player it is affiliated
@@ -34,7 +41,7 @@ class Unit : public GameObject, Drawable
 
         //overriden from the GameObject abstract class
         virtual void start();
-        //virtual void update(); //make sure to call GameObject::update()?
+        virtual void update(); //make sure to call GameObject::update()
 
         //overriden from the drawable interface
         virtual void draw();
@@ -46,6 +53,7 @@ class Unit : public GameObject, Drawable
         //override this setter to set m_dead false at the same time
         virtual void setToRemove() { setDead(true); m_toRemove = true; }
 
+        virtual void setDest(int _x, int _y) { m_destination.setAbsPos(_x, _y); }
 
         virtual void setDead(bool _dead = true) { m_dead = _dead; }
         virtual bool dead() { return m_dead; }

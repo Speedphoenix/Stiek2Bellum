@@ -37,13 +37,13 @@ void Transform::blockBorder()
 
     if (absX() < 0)
         setAbsX(0);
-    else if (endAbsX() > container.mapWidth())
-        setAbsX(container.mapWidth() - m_w);
+    else if (endAbsX() > container.maximumX())
+        setAbsX(container.maximumX() - m_w);
 
     if (absY() < 0)
         setAbsY(0);
-    else if (endAbsY() > container.mapHeight())
-        setAbsY(container.mapHeight() - m_h);
+    else if (endAbsY() > container.maximumY())
+        setAbsY(container.maximumY() - m_h);
 }
 
 

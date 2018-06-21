@@ -4,8 +4,6 @@
 #include <map>
 #include <vector>
 
-const double defaultLapse = 0.4; //seconds
-
 //to scope the Directions (that have short names) without using an enum class
 namespace Direc {
 

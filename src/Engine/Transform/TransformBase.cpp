@@ -4,6 +4,9 @@
 
 #include "GameContainer.h"
 
+#include "config.h"
+#include "debugNerrors.h"
+
 #include <cmath>
 
 using namespace std;
@@ -31,10 +34,26 @@ TransformBase::TransformBase(TransformBase *_parent, double _x, double _y)
 }
 
 
+TransformBase::TransformBase(const TransformBase& source, bool sameParent)
+    :m_x(source.centerX()), m_y(source.centerY()), m_speed(source.m_speed), m_orientation(source.m_orientation),
+        m_dx(source.m_dx), m_dy(source.m_dy), m_moving(source.m_moving), m_parent(nullptr)
+{
+    if (sameParent)
+        setParent(source.m_parent);
+}
+
+
 TransformBase::~TransformBase()
 {
     //dtor
 }
+
+bool TransformBase::hasSamePos(const TransformBase& other)
+{
+    return ((ABS(this->centerAbsX() - other.centerAbsX()) < negligibleDistance) &&
+            (ABS(this->centerAbsY() - other.centerAbsY()) < negligibleDistance) );
+}
+
 
 void TransformBase::getRelativeCoords(const TransformBase& baseOrigin, double& relX, double& relY)
 {
@@ -52,6 +71,90 @@ void TransformBase::translate(double factor)
     m_y += m_dy*factor;
 
     blockBorder();
+}
+
+void TransformBase::headTowards(const TransformBase& where, double speedLimit)
+{
+    headTowards(where.centerAbsX(), where.centerAbsY(), speedLimit);
+}
+
+//make this work if translate() receives a factor > 1 too
+void TransformBase::headTowards(double _x, double _y, double speedLimit)
+{
+    double newdx = _x - centerAbsX();
+    double newdy = _y - centerAbsY();
+
+    bool needRecalc = false;
+
+    //no use calculating anything
+    if ((ABS(newdx) < negligibleDistance) && (ABS(newdy) < negligibleDistance))
+    {
+        m_dx = 0.0;
+        m_dy = 0.0;
+
+        m_speed = 0;
+
+        m_moving = false;
+
+        return;
+    }
+
+    //to see if the orientation is different
+    if (XOR(newdx == 0, m_dx == 0))
+    {
+        needRecalc = true;
+    }
+    else if (XOR(newdy == 0, m_dy == 0))
+    {
+        needRecalc = true;
+    }
+    else if ((newdx == 0 && m_dx == 0) || (newdy == 0 && m_dy == 0))
+    {
+        needRecalc = false;
+    }
+    else
+    {
+        if ((newdx / newdy) == (m_dx / m_dy))
+            needRecalc = false;
+        else
+            needRecalc = true;
+    }
+
+    if (needRecalc)
+    {
+
+        m_dx = newdx;       //could do these lines with setDiff(newdx, newdy);
+        m_dy = newdy;       //but left them for clarity
+
+        calcOrientation();
+
+        if (m_speed > speedLimit)
+        {
+            setSpeed(speedLimit);
+        }
+    }
+    else
+    {
+        double newSQspeed = (SQ(newdx) + SQ(newdy));
+
+        //if we need to tone down the speed
+        if (newSQspeed > SQ(speedLimit) )
+        {
+            double factor = speedLimit/sqrt(newSQspeed);
+
+            m_dx = newdx * factor;
+            m_dy = newdy * factor;
+
+            m_speed = speedLimit;
+        }
+        else
+        {
+            m_dx = newdx;
+            m_dy = newdy;
+
+            m_speed = sqrt(newSQspeed);
+        }
+    }
 }
 
 
@@ -107,7 +210,7 @@ double TransformBase::getDist(const TransformBase& first, const TransformBase& s
 
 double TransformBase::getDist(double x1, double y1, double x2, double y2)
 {
-    return getSQDist(x1, y1, x2, y2);
+    return sqrt(getSQDist(x1, y1, x2, y2));
 }
 
 void TransformBase::setParent(TransformBase *val)
@@ -127,13 +230,13 @@ void TransformBase::blockBorder()
 
     if (absX() < 0)
         setAbsX(0);
-    else if (absX() > container.mapWidth())
-        setAbsX(container.mapWidth());
+    else if (absX() > container.maximumX())
+        setAbsX(container.maximumX());
 
     if (absY() < 0)
         setAbsY(0);
-    else if (absY() > container.mapHeight())
-        setAbsY(container.mapHeight());
+    else if (absY() > container.maximumY())
+        setAbsY(container.maximumY());
 }
 
 
@@ -254,6 +357,26 @@ bool TransformBase::touches(const TransformCircle& other)
 {
     //since it's just a point
     return isInside(other);
+}
+
+
+void TransformBase::setSpeed(double val)
+{
+    double oldSpeed = m_speed;
+
+    m_speed = val;
+
+    if (oldSpeed == 0)
+    {
+        calcCompos();
+    }
+    else //no need to redo sin() and cos() calls
+    {
+        double factor = val/oldSpeed;
+
+        m_dx *= factor;
+        m_dy *= factor;
+    }
 }
 
 

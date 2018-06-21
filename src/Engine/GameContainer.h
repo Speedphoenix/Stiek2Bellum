@@ -1,25 +1,19 @@
 #ifndef GAMECONTAINER_H
 #define GAMECONTAINER_H
 
-#include "GameMap.h"
-#include "Camera.h"
-
 #include <list>
-
 
 class Drawable;
 class GameObject;
 class Behaviour;
 struct ALLEGRO_EVENT_QUEUE;
 
+struct KeyboardEvent;
+struct MouseEvent;
+struct TouchEvent;
 
 class GameContainer
 {
-    ///FOR TESTING PURPOSES
-    public:
-        void maketest();
-
-
     //statics
     protected:
         static GameContainer * m_instance;
@@ -41,34 +35,37 @@ class GameContainer
         std::list<std::list<Behaviour*>::iterator> m_remBehaviours;
         std::list<std::list<Drawable*>::iterator> m_remDrawables;
 
+        ALLEGRO_EVENT_QUEUE *m_eventsDisplay;
+        ALLEGRO_EVENT_QUEUE *m_eventsKeyboard;
+        ALLEGRO_EVENT_QUEUE *m_eventsMouse;
+        ALLEGRO_EVENT_QUEUE *m_eventsTouch;
 
         double m_deltaTime;
 
     protected:
-
-        ALLEGRO_EVENT_QUEUE *m_eventsDisplay;
-        ALLEGRO_EVENT_QUEUE *m_eventsKeyboard;
-        ALLEGRO_EVENT_QUEUE *m_eventsMouse;
-
-        GameMap m_map;
-        Camera m_camera;
 
         bool m_finished;
 
 
     //non-static methods
     protected:
+
+        virtual void onKeyboardEvent(const KeyboardEvent& event) { }
+        virtual void onMouseEvent(const MouseEvent& event) { }
+        virtual void onTouchEvent(const TouchEvent& event) { }
+
+
         //call every turn
         //the individual updates are called for each object, behaviour...
         void eventCatch();      //!< takes in all events that happened since the last game loop
         void preUpdate();       //!< comes first
-        void playerUpdate();    //!< does everything related to player/ia input
+        virtual void playerUpdate();    //!< does everything related to player/ia input
         void autoUpdate();      //!< the main update
         void postUpdate();      //!< comes last
         void autoRemove();      //!< remove anything that needs to be removed during this game loop
 
     public:
-        GameContainer(long _width, long _height);
+        GameContainer();
         virtual ~GameContainer();
 
         //no copy ctor or assignment
@@ -87,13 +84,11 @@ class GameContainer
         ///returns if the game should stop (is finished) - might wanna rename this ons
         virtual bool shouldStop() const { return m_finished; }
 
-        void setMap(const GameMap& val) { m_map = val; }
 
-        long mapWidth() const { return m_map.width(); }
-        long mapHeight() const { return m_map.height(); }
+        //the border of the map...
+        virtual double maximumX() { return 0.0; }
+        virtual double maximumY() { return 0.0; }
 
-        long mapTileWidth() const { return m_map.tileWidth(); }
-        long mapTileHeight() const { return m_map.tileHeight(); }
 
         //these will be called by their respective constructors
         std::list<GameObject*>::iterator addObject(GameObject* what);

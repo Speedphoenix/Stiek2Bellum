@@ -4,9 +4,6 @@
 #include "Transform.h"
 #include "config.h"
 
-const double maxZoom = 2.0;//for the moment
-const double minZoom = 0.5;
-
 union ALLEGRO_EVENT;
 
 ///the camera with its poksition and dimensions
@@ -24,7 +21,7 @@ class Camera
     //non-statics
     protected:
         Transform m_displayedDims;  //!< the dimensions of the display
-        Transform m_takenView;      //!< the transform of what is seen on screen. what is taken from the game
+        Transform m_takenView;      //!< the transform of what is shown on screen. what is taken from the game (and later resized etc)
 
         //zoom equation: dims of zone taken = dim of 'screen' * zoomFactor
         double m_zoomFactor; // equal to takenView/displayedDims
@@ -41,7 +38,6 @@ class Camera
     public:
         Camera();
         virtual ~Camera();
-
 
         virtual void update();
 

@@ -1,5 +1,7 @@
 #include "State.h"
 
+#include "debugNerrors.h"
+
 void Transition::finishTransition()
 {
     //just in case

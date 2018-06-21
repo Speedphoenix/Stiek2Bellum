@@ -64,6 +64,7 @@ class TransformBase
         TransformBase(double _x = 0, double _y = 0, bool _moving = false, double _speed = 0, double _orientation = 0);
         TransformBase(double _x, double _y, double _dx, double _dy, bool _moving = false);
         TransformBase(TransformBase *_parent, double _x = 0, double _y = 0);
+        TransformBase(const TransformBase& source, bool sameParent = false);
 
         virtual ~TransformBase();
 
@@ -73,10 +74,15 @@ class TransformBase
         ///if the transform is moving, makes it move depending on dx and dy
         virtual void translate(double factor);
 
+        virtual void headTowards(const TransformBase& where, double speedLimit);
+        virtual void headTowards(double x, double y, double speedLimit);
+
         virtual bool isInside(const Transform& container);
         virtual bool isInside(const TransformCircle& container);
         virtual bool touches(const Transform& other);
         virtual bool touches(const TransformCircle& other);
+
+        virtual bool hasSamePos(const TransformBase& other);
 
         //the squared distance between this and the params
         virtual double getSQDist(double x2, double y2) const;
@@ -135,7 +141,8 @@ class TransformBase
         void setDiff(double _dx, double _dy) { m_dx = _dx; m_dy = _dy; calcOrientation(); }
 
         double speed() const { return m_speed; }
-        void setSpeed(double val) { m_speed = val; calcCompos(); }
+        void setSpeed(double val);
+        void limitSpeed(double val) { if (m_speed>val) setSpeed(val); }
 
         //in radians
         double orientation() const { return m_orientation; }

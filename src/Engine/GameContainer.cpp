@@ -4,7 +4,8 @@ GameContainer * GameContainer::m_instance = nullptr;
 #include "GameObject.h"
 #include "Behaviour.h"
 #include "Drawable.h"
-#include "Unit.h"
+#include "Events.h"
+#include "Camera.h"
 
 #include "allegroImplem.h"
 #include "colors.h"
@@ -14,20 +15,9 @@ GameContainer * GameContainer::m_instance = nullptr;
 
 using namespace std;
 
-///FOR TESTING PURPOSES
-void GameContainer::maketest()
-{
-    //this will automatically add the unit to this GameContainer
-    Unit* newUnit = new Unit(10.0, 10.0);
 
-    newUnit->maketest();
-
-    //map is already a test from its constructor
-    //default camera should work just fine
-}
-
-GameContainer::GameContainer(long _width, long _height)
-    :m_deltaTime(0), m_map(_width, _height), m_camera(), m_finished(false)
+GameContainer::GameContainer()
+    :m_deltaTime(0), m_finished(false)
 {
     if (m_instance!=nullptr)
         throw "A game container already exists";
@@ -42,6 +32,12 @@ GameContainer::GameContainer(long _width, long _height)
 
     m_eventsMouse = al_create_event_queue();
     al_register_event_source(m_eventsMouse, al_get_mouse_event_source());
+
+    m_eventsTouch = al_create_event_queue();
+    if (al_is_touch_input_installed())
+    {
+        al_register_event_source(m_eventsTouch, al_get_touch_input_event_source());
+    }
 }
 
 GameContainer::~GameContainer()
@@ -57,16 +53,6 @@ GameContainer::~GameContainer()
 
     m_instance = nullptr;
 }
-
-//void resizeCamera()
-//{
-//
-//}
-//
-//void resizeCamera(ALLEGRO_DISPLAY* display)
-//{
-//
-//}
 
 
 void GameContainer::start()
@@ -102,9 +88,6 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_DISPLAY_SWITCH_OUT:
             case ALLEGRO_EVENT_DISPLAY_ORIENTATION:
 
-            //al_resize_display(currentDisplay, event.display.width, event.display.height);
-            E(event.display.height)
-            E(event.display.width)
         break;
 
             default:
@@ -121,8 +104,8 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_KEY_CHAR:
             case ALLEGRO_EVENT_KEY_UP:
 
-            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-                m_finished = true;
+            onKeyboardEvent(event);
+
         break;
 
             default:
@@ -142,7 +125,27 @@ void GameContainer::eventCatch()
             case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
             case ALLEGRO_EVENT_MOUSE_WARPED:
 
-            E(event.mouse.x) E(event.mouse.y)
+            onMouseEvent(event);
+
+        break;
+
+            default:
+        break;
+        }
+    }
+
+    while (!al_is_event_queue_empty(m_eventsTouch))
+    {
+        al_get_next_event(m_eventsTouch, &event);
+        switch (event.type)
+        {
+            case ALLEGRO_EVENT_TOUCH_BEGIN:
+            case ALLEGRO_EVENT_TOUCH_END:
+            case ALLEGRO_EVENT_TOUCH_MOVE:
+            case ALLEGRO_EVENT_TOUCH_CANCEL:
+
+            onTouchEvent(event);
+
         break;
 
             default:
@@ -175,14 +178,7 @@ void GameContainer::update(double factor)
 void GameContainer::draw()
 {
     al_set_target_backbuffer(currentDisplay);
-
     al_clear_to_color(col::white);
-
-    al_draw_filled_rectangle(650, 550, 850, 750, col::olds::UI_ACC);
-
-
-    E(al_get_display_width(currentDisplay))
-    E(al_get_display_height(currentDisplay))
 
     for (auto & elem : m_drawables)
     {
@@ -195,7 +191,7 @@ void GameContainer::draw()
 
 void GameContainer::playerUpdate()
 {
-    //may move the camera here...
+
 }
 
 void GameContainer::preUpdate()
@@ -215,7 +211,8 @@ void GameContainer::autoUpdate()
     for (auto it : m_behaviours)
         it->update();
 
-    m_camera.update();
+    if (Camera::currentCamera())
+        Camera::currentCamera()->update();
 }
 
 void GameContainer::postUpdate()

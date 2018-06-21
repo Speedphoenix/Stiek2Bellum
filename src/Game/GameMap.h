@@ -5,6 +5,13 @@
 
 class GameMap
 {
+    //statics
+    protected:
+        static GameMap * m_currentInstance;
+    public:
+        static GameMap * currentInstance() { return m_currentInstance; }
+        static void setCurrentInstance(GameMap* what) { if (what) m_currentInstance = what; }
+
     protected:
         long m_width;   //!< in tiles, not pixels
         long m_height;  //!< in tiles, not pixels

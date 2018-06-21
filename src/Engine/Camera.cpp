@@ -50,15 +50,15 @@ void Camera::blockBorders()
 
 
     //if the screen is too big for the map
-    if (m_displayedDims.width() * m_zoomFactor > instance->mapWidth())
+    if (m_displayedDims.width() * m_zoomFactor > instance->maximumX())
         tooBigx = true;
-    if (m_displayedDims.height() * m_zoomFactor > instance->mapHeight())
+    if (m_displayedDims.height() * m_zoomFactor > instance->maximumY())
         tooBigy = true;
 
     if (tooBigx || tooBigy)
     {
-        double neededfactorx =  instance->mapWidth() / m_displayedDims.width();
-        double neededfactory = instance->mapHeight() / m_displayedDims.height();
+        double neededfactorx =  instance->maximumX() / m_displayedDims.width();
+        double neededfactory = instance->maximumY() / m_displayedDims.height();
 
         //take the highest
         m_zoomFactor = ((neededfactorx > neededfactory)? neededfactorx : neededfactory);
@@ -67,29 +67,29 @@ void Camera::blockBorders()
         m_takenView.setHeight(m_displayedDims.height() * m_zoomFactor);
 
         //forcibly change the size of the window?
-        if (m_zoomFactor < maxZoom)
+        if (m_zoomFactor < maxCameraZoom)
             ES("The window is too big for this map")
     }
 
     if (m_takenView.absX() < 0)
         m_takenView.setAbsX(0);
-    else if (m_takenView.endAbsX() > instance->mapWidth())
-        m_takenView.setEndAbsX(instance->mapWidth());
+    else if (m_takenView.endAbsX() > instance->maximumX())
+        m_takenView.setEndAbsX(instance->maximumX());
 
 
     if (m_takenView.absY() < 0)
         m_takenView.setAbsY(0);
-    else if (m_takenView.endAbsY() > instance->mapHeight())
-        m_takenView.setEndAbsY(instance->mapHeight());
+    else if (m_takenView.endAbsY() > instance->maximumY())
+        m_takenView.setEndAbsY(instance->maximumY());
 }
 
-//blocks the zoom depending on max/minZoom and calls calcTakenView()
+//blocks the zoom depending on max/minCameraZoom and calls calcTakenView()
 void Camera::blockZoom()
 {
-    if (m_zoomFactor > maxZoom)
-        m_zoomFactor = maxZoom;
-    else if (m_zoomFactor < minZoom)
-        m_zoomFactor = minZoom;
+    if (m_zoomFactor > maxCameraZoom)
+        m_zoomFactor = maxCameraZoom;
+    else if (m_zoomFactor < minCameraZoom)
+        m_zoomFactor = minCameraZoom;
 
     calcTakenView();
 }
