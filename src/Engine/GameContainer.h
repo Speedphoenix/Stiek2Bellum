@@ -5,6 +5,7 @@
 
 class Drawable;
 class GameObject;
+class GlobalObject;
 class Behaviour;
 struct ALLEGRO_EVENT_QUEUE;
 
@@ -19,6 +20,8 @@ class GameContainer
         static GameContainer * m_instance;
     public:
         static GameContainer * instance() { return m_instance; }
+
+        static GlobalObject * getGlobalObject() { return m_instance->m_globalObject; }
 
         ///the time elapsed since the last game loop. Use this as a factor to move...
         static double deltaTime() { return m_instance->m_deltaTime; }
@@ -43,6 +46,8 @@ class GameContainer
         double m_deltaTime;
 
     protected:
+
+        GlobalObject* m_globalObject;
 
         bool m_finished;
 
@@ -81,7 +86,7 @@ class GameContainer
         ///draws the drawables
         virtual void draw();
 
-        ///returns if the game should stop (is finished) - might wanna rename this ons
+        ///returns if the game should stop (is finished) - might wanna rename this one
         virtual bool shouldStop() const { return m_finished; }
 
 

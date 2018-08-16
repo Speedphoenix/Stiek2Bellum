@@ -34,12 +34,11 @@ TransformBase::TransformBase(TransformBase *_parent, double _x, double _y)
 }
 
 
-TransformBase::TransformBase(const TransformBase& source, bool sameParent)
-    :m_x(source.centerX()), m_y(source.centerY()), m_speed(source.m_speed), m_orientation(source.m_orientation),
-        m_dx(source.m_dx), m_dy(source.m_dy), m_moving(source.m_moving), m_parent(nullptr)
+TransformBase::TransformBase(const TransformBase& source, TransformBase* newParent)
+    :m_x(source.x()), m_y(source.y()), m_speed(source.m_speed), m_orientation(source.m_orientation),
+        m_dx(source.m_dx), m_dy(source.m_dy), m_moving(source.m_moving), m_parent(newParent)
 {
-    if (sameParent)
-        setParent(source.m_parent);
+
 }
 
 

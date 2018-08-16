@@ -4,8 +4,11 @@
 #include <GameObject.h>
 #include <Drawable.h>
 
+#include "Collider.h"
+
 //even if it's already included in GameObject...
 #include "TransformBase.h"
+
 
 #include "Animator.h"
 
@@ -21,9 +24,13 @@ class Unit : public GameObject, Drawable
     protected:
         Animator m_animator;
 
+        Collider m_collider;
+
         TransformBase m_destination;
 
+
         double m_speed;
+        double m_maxSpeed;
 
         //will change the type to a proper enum or pointer in time
         //the player it is affiliated
@@ -51,7 +58,7 @@ class Unit : public GameObject, Drawable
         void setOwner(int val) { m_owner = val; }
 
         //override this setter to set m_dead false at the same time
-        virtual void setToRemove() { setDead(true); m_toRemove = true; }
+        virtual void setToRemove() { setDead(true); GameObject::setToRemove(); }
 
         virtual void setDest(int _x, int _y) { m_destination.setAbsPos(_x, _y); }
 

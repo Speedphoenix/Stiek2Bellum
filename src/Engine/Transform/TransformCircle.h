@@ -23,9 +23,11 @@ class TransformCircle : public TransformBase
         TransformCircle(double _x = 0, double _y = 0, double _radius = 0, bool _moving = false, double _speed = 0, double _orientation = 0);
         TransformCircle(double _x, double _y, double _radius, double _dx, double _dy, bool _moving = false);
         TransformCircle(TransformBase *_parent, double _x = 0, double _y = 0, double _radius = 0);
+        TransformCircle(const TransformCircle& source, TransformBase* newParent = nullptr);
 
         virtual ~TransformCircle();
 
+        virtual Transform getBox();
 
         virtual bool isInside(const TransformCircle& container) const { return TransformBase::isInside(*this, container); }
         virtual bool isInside(const Transform& container) const { return TransformBase::isInside(*this, container); }

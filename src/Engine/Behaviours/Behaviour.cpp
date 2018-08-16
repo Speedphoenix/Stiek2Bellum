@@ -10,7 +10,7 @@ Behaviour::Behaviour(GameObject* attachTo)
     if (!instance)
         throw "No instance of GameContainer";
 
-    instance->addBehaviour(this);
+    m_containerIterator = instance->addBehaviour(this);
 }
 
 Behaviour::~Behaviour()

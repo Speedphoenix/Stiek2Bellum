@@ -11,7 +11,7 @@ Drawable::Drawable()
     if (!instance)
         throw "No instance of GameContainer";
 
-    instance->addDrawable(this);
+    m_containerIterator = instance->addDrawable(this);
 }
 
 Drawable::~Drawable()

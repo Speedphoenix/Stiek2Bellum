@@ -24,6 +24,12 @@ Transform::Transform(TransformBase *_parent, double _x, double _y, double _w, do
 
 }
 
+Transform::Transform(const Transform& source, TransformBase* newParent)
+    :TransformBase(source), m_w(source.width()), m_h(source.height())
+{
+    this->setParent(newParent);
+}
+
 Transform::~Transform()
 {
     //dtor
@@ -45,6 +51,4 @@ void Transform::blockBorder()
     else if (endAbsY() > container.maximumY())
         setAbsY(container.maximumY() - m_h);
 }
-
-
 

@@ -15,6 +15,9 @@
 					<Add option="-g" />
 					<Add directory="include" />
 					<Add directory="src/Game" />
+					<Add directory="src/Engine" />
+					<Add directory="src/Engine/Behaviours/Collider" />
+					<Add directory="./" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -43,6 +46,9 @@
 					<Add option="-Wextra" />
 					<Add directory="include" />
 					<Add directory="src/Game" />
+					<Add directory="src/Engine" />
+					<Add directory="src/Engine/Behaviours/Collider" />
+					<Add directory="./" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -57,9 +63,11 @@
 			<Add directory="src/Engine/Transform" />
 			<Add directory="src/Engine/Non_Classes" />
 			<Add directory="src/Engine/Behaviours" />
-			<Add directory="src/Engine/Behaviours/Composing" />
+			<Add directory="src/Engine/Behaviours/Animator/Composing" />
 			<Add directory="src/Configurable" />
 			<Add directory="src/Engine" />
+			<Add directory="src/Engine/Behaviours/Animator" />
+			<Add directory="src/Engine/Behaviours/Collider" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
@@ -70,18 +78,22 @@
 		<Unit filename="src/Configurable/colors.h" />
 		<Unit filename="src/Configurable/config.h" />
 		<Unit filename="src/Configurable/debugNerrors.h" />
-		<Unit filename="src/Engine/Behaviours/Animator.cpp" />
-		<Unit filename="src/Engine/Behaviours/Animator.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animator.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animator.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Animation.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Animation.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Frame.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Frame.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Shadow.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/Shadow.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/State.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Composing/State.h" />
 		<Unit filename="src/Engine/Behaviours/Behaviour.cpp" />
 		<Unit filename="src/Engine/Behaviours/Behaviour.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Animation.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Animation.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Frame.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Frame.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Shadow.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Shadow.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/State.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/State.h" />
+		<Unit filename="src/Engine/Behaviours/Collider/Collider.cpp" />
+		<Unit filename="src/Engine/Behaviours/Collider/Collider.h" />
+		<Unit filename="src/Engine/Behaviours/Collider/ColliderContainer.cpp" />
+		<Unit filename="src/Engine/Behaviours/Collider/ColliderContainer.h" />
 		<Unit filename="src/Engine/Camera.cpp" />
 		<Unit filename="src/Engine/Camera.h" />
 		<Unit filename="src/Engine/Drawable.cpp" />
@@ -92,6 +104,8 @@
 		<Unit filename="src/Engine/GameContainer.h" />
 		<Unit filename="src/Engine/GameObject.cpp" />
 		<Unit filename="src/Engine/GameObject.h" />
+		<Unit filename="src/Engine/GlobalObject.cpp" />
+		<Unit filename="src/Engine/GlobalObject.h" />
 		<Unit filename="src/Engine/Non_Classes/allegroImplem.cpp" />
 		<Unit filename="src/Engine/Non_Classes/allegroImplem.h" />
 		<Unit filename="src/Engine/SpritesContainer.cpp" />

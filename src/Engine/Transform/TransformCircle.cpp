@@ -1,5 +1,7 @@
 #include "TransformCircle.h"
 
+#include "Transform.h"
+
 #include "GameContainer.h"
 
 TransformCircle::TransformCircle(double _x, double _y, double _radius, bool _moving, double _speed, double _orientation)
@@ -21,11 +23,20 @@ TransformCircle::TransformCircle(TransformBase *_parent, double _x, double _y, d
 
 }
 
-TransformCircle::~TransformCircle()
+TransformCircle::TransformCircle(const TransformCircle& source, TransformBase* newParent)
+    :TransformBase(source, newParent), m_radius(source.radius())
 {
 
 }
 
+TransformCircle::~TransformCircle()
+{
+
+}
+Transform TransformCircle::getBox()
+{
+    return Transform(m_x, m_y, 2*m_radius, 2*m_radius);
+}
 
 void TransformCircle::blockBorder()
 {

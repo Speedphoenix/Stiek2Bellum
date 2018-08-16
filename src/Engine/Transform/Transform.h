@@ -26,6 +26,7 @@ class Transform : public TransformBase
         Transform(double _x = 0, double _y = 0, double _w = 0, double _h = 0, bool _moving = false, double _speed = 0, double _orientation = 0);
         Transform(double _x, double _y, double _w, double _h, double _dx, double _dy, bool _moving = false);
         Transform(TransformBase *_parent, double _x = 0, double _y = 0, double _w = 0, double _h = 0);
+        Transform(const Transform& source, TransformBase* newParent = nullptr);
 
         virtual ~Transform();
 
