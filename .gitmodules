@@ -1,0 +1,6 @@
+[submodule "src/Engine"]
+	path = src/Engine
+	url = https://github.com/Speedphoenix/Speedphoenix-Engine.git
+[submodule "src/SpxEngine"]
+	path = src/SpxEngine
+	url = https://github.com/Speedphoenix/Speedphoenix-Engine.git
