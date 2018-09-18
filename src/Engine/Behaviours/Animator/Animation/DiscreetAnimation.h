@@ -1,8 +1,13 @@
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef DISCREETANIMATION_H
+#define DISCREETANIMATION_H
+
+#include <Animation.h>
 
 #include <map>
 #include <vector>
+
+class Shadow;
+class Frame;
 
 //to scope the Directions (that have short names) without using an enum class
 namespace Direc {
@@ -22,14 +27,8 @@ namespace Direc {
     };
 }
 
-class Shadow;
-class Frame;
-struct ALLEGRO_BITMAP;
-
-class Animation
+class DiscreetAnimation : public Animation
 {
-    friend class Shadow;
-
     ///FOR TESTING PURPOSES
     public:
         void maketest(int type = 0);
@@ -38,57 +37,38 @@ class Animation
         //all the frames of all animations
         std::map<Direc::Direction, std::vector<Frame*>> m_frames;
 
-        //pointer to the shadow of this animation, if there is one
-        Shadow* m_shadow;
-
         //the corrent direction of the animations
         Direc::Direction m_currDirection;
-
-        //the lapse of time to wait between each frame
-        //might wanna make this unique to each direction...
-        double m_lapse;
 
         ///Returns the available direction closest to the input direction 'depending'
         Direc::Direction getBestDirection(Direc::Direction depending = Direc::E);
 
     public:
-        Animation();
-        virtual ~Animation();
+        DiscreetAnimation();
+        virtual ~DiscreetAnimation();
 
-        ///loads every frame of the anymation & others from the stream
-        void getFromStream(std::istream& theStream);
 
         ///the number of frames of the animation for the current direction
-        unsigned nbFrames();
+        virtual unsigned nbFrames();
 
-
-        //just draws at x, y on the current target bitmap
-        virtual void draw(double destx, double desty, unsigned frameNumber);
 
         ///the current sprite to render
-        Frame* getFrame(unsigned frameNumber);
+        virtual Frame* getFrame(unsigned frameNumber);
 
 
-        Direc::Direction currDirection() const { return m_currDirection; }
+        virtual Direc::Direction currDirection() const { return m_currDirection; }
 
         ///set the direction. Will chose the closest available if there are no frames for val direction
-        void setDirection(Direc::Direction val);
-        void setDirection(double orientation);
+        virtual void setDirection(Direc::Direction val);
+        virtual void setDirection(double orientation);
 
-        Shadow* shadow() { return m_shadow; }
-        void setShadow(Shadow* val) { m_shadow = val; }
+//        Shadow* shadow() { return m_shadow; }
+//        void setShadow(Shadow* val) { m_shadow = val; }
 
 
+        //could want to override the lapse() and setlapse() functions
         //make this return the lapse for the current direction if you separate them
         ///the lapse of time to wait between every frame
-        double lapse() const { return m_lapse; }
-        void setLapse(double val) { if (val>0) m_lapse = val;}
 };
 
-inline std::istream& operator>>(std::istream& theStream, Animation& recept)
-{
-    recept.getFromStream(theStream);
-    return theStream;
-}
-
-#endif // ANIMATION_H
+#endif // DISCREETANIMATION_H

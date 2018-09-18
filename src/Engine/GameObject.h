@@ -19,7 +19,7 @@ class GameObject
         Transform m_transform;
 
         GameObject *m_parent = nullptr;
-        std::vector<GameObject*> m_children;
+        std::vector<GameObject*> m_children; /// //////////list instead of vector please
 
     public:
         GameObject(const Transform& source);
@@ -33,7 +33,7 @@ class GameObject
         virtual void update();          //!< called during each game loop
         virtual void postUpdate() { }   //!< called after update in each loop, before drawing
 
-        virtual GameObject *parent() {return m_parent; }
+        virtual GameObject *parent() { return m_parent; }
         virtual void setParent(GameObject *val);
         virtual void removeParent() { setParent(nullptr); } ///if the object cannot live without the parent kill it inside here
 

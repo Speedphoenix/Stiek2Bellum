@@ -15,7 +15,6 @@ struct ALLEGRO_BITMAP;
 struct ALLEGRO_EVENT_QUEUE;
 struct ALLEGRO_TIMER;
 
-
 class Animator : public Behaviour
 {
     ///FOR TESTING PURPOSES

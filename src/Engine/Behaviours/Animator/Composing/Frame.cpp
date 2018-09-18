@@ -3,7 +3,8 @@
 #include "allegroImplem.h"
 
 Frame::Frame(ALLEGRO_BITMAP* img, int _takenX, int _takenY, int _width, int _height)
-    :m_parentImg(img), m_sprite(al_create_sub_bitmap(img, _takenX, _takenY, _width, _height)), m_takenX(_takenX), m_takenY(_takenY), m_width(_width), m_height(_height)
+    :m_parentImg(img), m_sprite(al_create_sub_bitmap(img, _takenX, _takenY, _width, _height)),
+    m_takenX(_takenX), m_takenY(_takenY), m_width(_width), m_height(_height)
 {
     if (!m_sprite)
     {

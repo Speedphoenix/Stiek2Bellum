@@ -1,4 +1,4 @@
-#include "Animation.h"
+#include "DiscreetAnimation.h"
 
 #include "SpritesContainer.h"
 
@@ -7,13 +7,14 @@
 #include "allegroImplem.h"
 #include "debugNerrors.h"
 
-#include <math.h>
+#include "basic_ops.h"
+
 #include "Frame.h"
 
 using namespace std;
 
 ///FOR TESTING PURPOSES
-void Animation::maketest(int type)
+void DiscreetAnimation::maketest(int type)
 {
     SpritesContainer* sprites = SpritesContainer::instance();
 
@@ -30,7 +31,6 @@ void Animation::maketest(int type)
 //            inDirec.push_back(new Frame(parent, 4*75, 0, 75, 75));
 //            inDirec.push_back(new Frame(parent, 0, 0, 75, 75));
             inDirec.push_back(new Frame(parent, 5*75, 75, 75, 75));
-
             m_lapse = defaultIdleLapse;
         }
     break;
@@ -41,19 +41,15 @@ void Animation::maketest(int type)
             {
                 inDirec.push_back(new Frame(parent, i*75, 0, 75, 75));
             }
-
             m_lapse = defaultActiveLapse;
         }
-
     break;
 
         case 2: //attack idle
         {
             inDirec.push_back(new Frame(parent, 75, 75, 5*75, 75));
-
             m_lapse = defaultIdleLapse;
         }
-
     break;
 
         case 3: //attack active
@@ -62,10 +58,8 @@ void Animation::maketest(int type)
             {
                 inDirec.push_back(new Frame(parent, i*75, 75, 75, 75));
             }
-
             m_lapse = defaultActiveLapse;
         }
-
     break;
 
         default:
@@ -87,23 +81,18 @@ void Animation::maketest(int type)
 
 
 //only default, will need to use a real one later
-Animation::Animation()
-    :m_shadow(nullptr), m_currDirection(Direc::E), m_lapse(defaultIdleLapse)
+DiscreetAnimation::DiscreetAnimation()
+    :Animation(), m_currDirection(Direc::E)
 {
     //ctor
 }
 
-Animation::~Animation()
+DiscreetAnimation::~DiscreetAnimation()
 {
     //dtor
 }
 
-void Animation::getFromStream(std::istream& theStream)
-{
-
-}
-
-unsigned Animation::nbFrames()
+unsigned DiscreetAnimation::nbFrames()
 {
     if (m_frames.count(m_currDirection))
         return m_frames.at(m_currDirection).size();
@@ -111,13 +100,7 @@ unsigned Animation::nbFrames()
         return 0;
 }
 
-//we can later make it so that instead of separate bitmaps, we take part of one bigger bitmap, for performance
-void Animation::draw(double destx, double desty, unsigned frameNumber)
-{
-    this->getFrame(frameNumber)->draw(destx, desty);
-}
-
-Frame* Animation::getFrame(unsigned frameNumber)
+Frame* DiscreetAnimation::getFrame(unsigned frameNumber)
 {
     vector<Frame*>& inter = m_frames.at(m_currDirection);
 
@@ -129,13 +112,15 @@ Frame* Animation::getFrame(unsigned frameNumber)
         return nullptr;
 }
 
-void Animation::setDirection(Direc::Direction val)
+void DiscreetAnimation::setDirection(Direc::Direction val)
 {
     m_currDirection = getBestDirection(val);
 }
 
-void Animation::setDirection(double orientation)
+void DiscreetAnimation::setDirection(double orientation)
 {
+    orientation = mod2PI(orientation);
+
     //M_2_PI is 2/PI, defined in math.h
     //offset the orientation by 1/2 to have good intervals
     int lookAt = (int) ((orientation * 2 * M_2_PI) + 1/2); // (orientation * 8 / (2*PI)) + 1/2
@@ -145,13 +130,13 @@ void Animation::setDirection(double orientation)
     if (lookAt >= 8 || lookAt < 0)
         lookAt = 0;
 
-
     setDirection((Direc::Direction) lookAt); // cast into the enum
 }
 
 
 //below this is to choose a direction depending on the available ones
 
+///TO BE RE-DONE
 
 using namespace Direc;
 
@@ -170,7 +155,7 @@ else CHECK(_7)                                  \
 else return none;
 
 //returns the best direction
-Direction Animation::getBestDirection(Direction depending)
+Direction DiscreetAnimation::getBestDirection(Direction depending)
 {
     if (m_frames.empty())
         return none;

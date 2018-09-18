@@ -61,18 +61,5 @@ const double defaultIdleLapse = 0.3; //seconds
 const double defaultActiveLapse = 0.1; //seconds
 
 
-
-
-/********************************************************************
-                            BASIC OPERATORS
-********************************************************************/
-
-#define XOR(a, b) ( (a) ? !(b) : (b) )
-#define ABS(a) ( ((a) < 0) ? -1 * (a) : (a) )
-#define MIN(a, b) ( ((a) < (b)) ? (a) : (b) )
-#define MAX(a, b) ( ((a) > (b)) ? (a) : (b) )
-
-
-
 #endif // CONFIG_H_INCLUDED
 

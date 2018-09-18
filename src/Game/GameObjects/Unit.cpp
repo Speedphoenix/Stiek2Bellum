@@ -12,14 +12,14 @@ void Unit::maketest()
 
 Unit::Unit(const Transform& source, int _owner)
     :GameObject(source), m_animator(this), m_collider(this, source), m_destination(source), m_speed(0), m_maxSpeed(defaultUnitSpeed),
-    m_owner(_owner), m_dead(false)
+    m_owner(_owner), m_dead(false), m_testBehave(this)
 {
     m_destination.setMoving(false);
 }
 
 Unit::Unit(double _x, double _y, int _owner, double _w, double _h)  //m_transform is set initialised in the parent constructor
     :GameObject(_x, _y, _w, _h), m_animator(this), m_collider(this, m_transform), m_destination(_x + _w/2, _y + _h/2, 0, 0, false),
-    m_speed(0), m_maxSpeed(defaultUnitSpeed), m_owner(_owner), m_dead(false)
+    m_speed(0), m_maxSpeed(defaultUnitSpeed), m_owner(_owner), m_dead(false), m_testBehave(this)
 {
     //ctor
 }

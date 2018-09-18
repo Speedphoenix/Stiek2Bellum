@@ -115,6 +115,8 @@ void GameObject::setToRemove()
     if (m_parent)
         m_parent->removeChild(this);
 
+    ///make remove all the childs
+
     GameContainer* instance = GameContainer::instance();
     if (instance)
     {

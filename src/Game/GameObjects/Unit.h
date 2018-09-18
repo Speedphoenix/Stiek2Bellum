@@ -6,6 +6,8 @@
 
 #include "Collider.h"
 
+#include "TestBehave.h"
+
 //even if it's already included in GameObject...
 #include "TransformBase.h"
 
@@ -27,6 +29,8 @@ class Unit : public GameObject, Drawable
         Collider m_collider;
 
         TransformBase m_destination;
+
+        TestBehave m_testBehave;
 
 
         double m_speed;

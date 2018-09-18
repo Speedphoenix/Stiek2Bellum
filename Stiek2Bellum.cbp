@@ -16,7 +16,6 @@
 					<Add directory="include" />
 					<Add directory="src/Game" />
 					<Add directory="src/Engine" />
-					<Add directory="src/Engine/Behaviours/Collider" />
 					<Add directory="./" />
 				</Compiler>
 			</Target>
@@ -47,7 +46,6 @@
 					<Add directory="include" />
 					<Add directory="src/Game" />
 					<Add directory="src/Engine" />
-					<Add directory="src/Engine/Behaviours/Collider" />
 					<Add directory="./" />
 				</Compiler>
 				<Linker>
@@ -68,6 +66,8 @@
 			<Add directory="src/Engine" />
 			<Add directory="src/Engine/Behaviours/Animator" />
 			<Add directory="src/Engine/Behaviours/Collider" />
+			<Add directory="src/Game/Behaviours" />
+			<Add directory="src/Engine/Behaviours/Animator/Animation" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
@@ -78,10 +78,14 @@
 		<Unit filename="src/Configurable/colors.h" />
 		<Unit filename="src/Configurable/config.h" />
 		<Unit filename="src/Configurable/debugNerrors.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/AimedAnimation.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/AimedAnimation.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/Animation.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/Animation.h" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/DiscreetAnimation.cpp" />
+		<Unit filename="src/Engine/Behaviours/Animator/Animation/DiscreetAnimation.h" />
 		<Unit filename="src/Engine/Behaviours/Animator/Animator.cpp" />
 		<Unit filename="src/Engine/Behaviours/Animator/Animator.h" />
-		<Unit filename="src/Engine/Behaviours/Animator/Composing/Animation.cpp" />
-		<Unit filename="src/Engine/Behaviours/Animator/Composing/Animation.h" />
 		<Unit filename="src/Engine/Behaviours/Animator/Composing/Frame.cpp" />
 		<Unit filename="src/Engine/Behaviours/Animator/Composing/Frame.h" />
 		<Unit filename="src/Engine/Behaviours/Animator/Composing/Shadow.cpp" />
@@ -108,6 +112,7 @@
 		<Unit filename="src/Engine/GlobalObject.h" />
 		<Unit filename="src/Engine/Non_Classes/allegroImplem.cpp" />
 		<Unit filename="src/Engine/Non_Classes/allegroImplem.h" />
+		<Unit filename="src/Engine/Non_Classes/basic_ops.h" />
 		<Unit filename="src/Engine/SpritesContainer.cpp" />
 		<Unit filename="src/Engine/SpritesContainer.h" />
 		<Unit filename="src/Engine/Transform/Transform.cpp" />
@@ -116,6 +121,8 @@
 		<Unit filename="src/Engine/Transform/TransformBase.h" />
 		<Unit filename="src/Engine/Transform/TransformCircle.cpp" />
 		<Unit filename="src/Engine/Transform/TransformCircle.h" />
+		<Unit filename="src/Game/Behaviours/TestBehave.cpp" />
+		<Unit filename="src/Game/Behaviours/TestBehave.h" />
 		<Unit filename="src/Game/GameMap.cpp" />
 		<Unit filename="src/Game/GameMap.h" />
 		<Unit filename="src/Game/GameObjects/Unit.cpp" />

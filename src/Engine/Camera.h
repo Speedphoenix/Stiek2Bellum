@@ -6,7 +6,7 @@
 
 union ALLEGRO_EVENT;
 
-///the camera with its poksition and dimensions
+///the camera with its position and dimensions
 class Camera
 {
     //statics

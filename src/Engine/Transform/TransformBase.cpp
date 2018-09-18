@@ -5,6 +5,7 @@
 #include "GameContainer.h"
 
 #include "config.h"
+#include "basic_ops.h"
 #include "debugNerrors.h"
 
 #include <cmath>

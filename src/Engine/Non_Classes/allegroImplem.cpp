@@ -1,6 +1,7 @@
 #include "allegroImplem.h"
 #include "colors.h"
 #include "debugNerrors.h"
+#include "basic_ops.h"
 
 ALLEGRO_DISPLAY *currentDisplay;
 

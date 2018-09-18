@@ -1,13 +1,14 @@
 #include "Animator.h"
 
 #include "Frame.h"
+#include "DiscreetAnimation.h"
 
 #include "TransformBase.h"
 #include "allegroImplem.h"
 #include "colors.h"
 #include "debugNerrors.h"
 
-#include <math.h>
+#include "basic_ops.h"
 
 
 using namespace std;
@@ -18,25 +19,25 @@ void Animator::maketest()
     //this method doesn't really care about optimization
     Transition newAnimKey;
 
-    Animation* newAnim;
+    DiscreetAnimation* newAnim;
 
     newAnimKey = Transition(Walking, Anim::Idle, false);
-    newAnim = new Animation();
+    newAnim = new DiscreetAnimation();
     newAnim->maketest(0); //idle
     m_animations[newAnimKey] = newAnim;
 
     newAnimKey = Transition(Walking, Anim::Active, false);
-    newAnim = new Animation();
+    newAnim = new DiscreetAnimation();
     newAnim->maketest(1); //active
     m_animations[newAnimKey] = newAnim;
 
     newAnimKey = Transition(Attacking, Anim::Idle, false);
-    newAnim = new Animation();
+    newAnim = new DiscreetAnimation();
     newAnim->maketest(2); //active
     m_animations[newAnimKey] = newAnim;
 
     newAnimKey = Transition(Attacking, Anim::Active, false);
-    newAnim = new Animation();
+    newAnim = new DiscreetAnimation();
     newAnim->maketest(3); //active
     m_animations[newAnimKey] = newAnim;
 

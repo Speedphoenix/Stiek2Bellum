@@ -1,14 +1,15 @@
 #include "Shadow.h"
 
-using namespace std;
+//using namespace std;
+//
+//Shadow::Shadow()
+//    :m_Original(nullptr), m_canEvolve(false)
+//{
+//    //ctor
+//}
+//
+//Shadow::~Shadow()
+//{
+//    //dtor
+//}
 
-Shadow::Shadow()
-    :m_Original(nullptr), m_canEvolve(false)
-{
-    //ctor
-}
-
-Shadow::~Shadow()
-{
-    //dtor
-}
