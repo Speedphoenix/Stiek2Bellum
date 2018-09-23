@@ -1,7 +1,7 @@
 #ifndef GAMEMAP_H
 #define GAMEMAP_H
 
-#include "config.h"
+#include "game_config.h"
 
 class GameMap
 {

@@ -11,8 +11,7 @@
 //even if it's already included in GameObject...
 #include "TransformBase.h"
 
-
-#include "Animator.h"
+#include "TestAnimator.h"
 
 extern const int tileSide;
 const int NEUTRAL = 0;
@@ -24,14 +23,11 @@ class Unit : public GameObject, Drawable
         void maketest();
 
     protected:
-        Animator m_animator;
+        TestAnimator m_animator;
 
         Collider m_collider;
 
         TransformBase m_destination;
-
-        TestBehave m_testBehave;
-
 
         double m_speed;
         double m_maxSpeed;
@@ -42,6 +38,8 @@ class Unit : public GameObject, Drawable
 
         //a Unit being dead does not mean it will be removed (bu cadavers usually don't do much)
         bool m_dead;
+
+        TestBehave m_testBehave;
 
     public:
         Unit(const Transform& source, int _owner = NEUTRAL);

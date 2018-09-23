@@ -1,6 +1,7 @@
 #include "GameObjects/Unit.h"
 
 #include "Camera.h"
+#include "game_config.h"
 #include "debugNerrors.h"
 #include "GameContainer.h"
 
