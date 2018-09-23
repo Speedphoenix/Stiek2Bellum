@@ -478,7 +478,7 @@
 	"debugNerrors.h"
 	"basic_ops.h"
 
-1534445008 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/GameObjects/Unit.cpp
+1537297418 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/GameObjects/Unit.cpp
 	"GameObjects/Unit.h"
 	"Camera.h"
 	"debugNerrors.h"
@@ -505,7 +505,7 @@
 	"GameMap.h"
 	"Camera.h"
 
-1529688284 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/S2BContainer.cpp
+1537297418 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/S2BContainer.cpp
 	"S2BContainer.h"
 	"Events.h"
 	"GameObjects/Unit.h"
@@ -687,7 +687,7 @@
 1537297418 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/Behaviours/TestBehave.h
 	<Behaviour.h>
 
-1534445197 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/Behaviours/TestBehave.cpp
+1537297418 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/Game/Behaviours/TestBehave.cpp
 	"TestBehave.h"
 	"GameObject.h"
 
@@ -729,62 +729,217 @@
 	<map>
 	<vector>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/config.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/config.h
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/SpritesContainer.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/SpritesContainer.h
 	<string>
 	<map>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Non_Classes/allegroImplem.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Non_Classes/allegroImplem.h
 	<allegro5/allegro5.h>
 	<allegro5/allegro_image.h>
 	<allegro5/allegro_primitives.h>
 	"config.h"
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/colors.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/colors.h
 	<allegro5/allegro_color.h>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/debugNerrors.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/debugNerrors.h
 	"config.h"
 	<exception>
 	<iostream>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameContainer.h
+1537702465 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameContainer.h
 	<list>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Camera.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Camera.h
 	"Transform.h"
 	"config.h"
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/Transform.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/Transform.h
 	<TransformBase.h>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/TransformBase.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/TransformBase.h
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameObject.h
+1537702785 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameObject.h
 	"Transform.h"
-	<vector>
 	<list>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Drawable.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Drawable.h
 	<list>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Collider/Collider.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Collider/Collider.h
 	<Behaviour.h>
 	"Transform.h"
 	<list>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Behaviour.h
+1537713555 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Behaviour.h
 	<list>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animator.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animator.h
 	<Behaviour.h>
 	"Animation.h"
 	"State.h"
 	<map>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/Animation.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/Animation.h
 	<istream>
 
-1537302817 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/State.h
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/State.h
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Events.h
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Configurable/colors.cpp
+	"colors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/AimedAnimation.cpp
+	"AimedAnimation.h"
+	"basic_ops.h"
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/AimedAnimation.h
+	<Animation.h>
+	<vector>
+
+1537709696 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Non_Classes/basic_ops.h
+	<math.h>
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/Animation.cpp
+	"Animation.h"
+	"SpritesContainer.h"
+	"config.h"
+	"colors.h"
+	"allegroImplem.h"
+	"debugNerrors.h"
+	"Frame.h"
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/Frame.h
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/DiscreetAnimation.cpp
+	"DiscreetAnimation.h"
+	"SpritesContainer.h"
+	"config.h"
+	"colors.h"
+	"allegroImplem.h"
+	"debugNerrors.h"
+	"basic_ops.h"
+	"Frame.h"
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animation/DiscreetAnimation.h
+	<Animation.h>
+	<map>
+	<vector>
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Animator.cpp
+	"Animator.h"
+	"Frame.h"
+	"DiscreetAnimation.h"
+	"TransformBase.h"
+	"allegroImplem.h"
+	"colors.h"
+	"debugNerrors.h"
+	"basic_ops.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/Frame.cpp
+	"Frame.h"
+	"allegroImplem.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/Shadow.cpp
+	"Shadow.h"
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/Shadow.h
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Animator/Composing/State.cpp
+	"State.h"
+	"debugNerrors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Behaviour.cpp
+	"Behaviour.h"
+	"GameContainer.h"
+	"GameObject.h"
+
+1537702440 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Collider/Collider.cpp
+	"Collider.h"
+	"ColliderContainer.h"
+	"GameContainer.h"
+	"GameObject.h"
+	"debugNerrors.h"
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Collider/ColliderContainer.h
+	<Behaviour.h>
+	<list>
+
+1537702653 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Behaviours/Collider/ColliderContainer.cpp
+	"ColliderContainer.h"
+	"GameContainer.h"
+	"GameObject.h"
+	"Collider.h"
+	"Transform.h"
+	"debugNerrors.h"
+	<algorithm>
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Camera.cpp
+	"Camera.h"
+	"GameContainer.h"
+	"allegroImplem.h"
+	"debugNerrors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Drawable.cpp
+	"Drawable.h"
+	"GameContainer.h"
+	"debugNerrors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Events.cpp
+	"Events.h"
+	"events.h"
+
+1537702687 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameContainer.cpp
+	"GameContainer.h"
+	"GameObject.h"
+	"Behaviour.h"
+	"Drawable.h"
+	"Events.h"
+	"Camera.h"
+	"allegroImplem.h"
+	"colors.h"
+	"debugNerrors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Non_Classes/allegroImplem.cpp
+	"allegroImplem.h"
+	"colors.h"
+	"debugNerrors.h"
+	"basic_ops.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/SpritesContainer.cpp
+	"SpritesContainer.h"
+	"allegroImplem.h"
+	"debugNerrors.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/Transform.cpp
+	"Transform.h"
+	"GameContainer.h"
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/TransformBase.cpp
+	"TransformBase.h"
+	"Transform.h"
+	"TransformCircle.h"
+	"GameContainer.h"
+	"config.h"
+	"basic_ops.h"
+	"debugNerrors.h"
+	<cmath>
+
+1537303759 /home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/TransformCircle.h
+	<TransformBase.h>
+
+1537303759 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/Transform/TransformCircle.cpp
+	"TransformCircle.h"
+	"Transform.h"
+	"GameContainer.h"
+
+1537702924 source:/home/speedphoenix/Documents/Programmes/C-C++/C++/Stiek2Bellum/src/SpxEngine/Engine/GameObject.cpp
+	"GameObject.h"
+	"GameContainer.h"
+	"Behaviour.h"
+	"debugNerrors.h"
+	<algorithm>
 
