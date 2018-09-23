@@ -16,7 +16,7 @@ S2BContainer::S2BContainer(long _width, long _height)
 
 S2BContainer::~S2BContainer()
 {
-    m_testUnit->setToRemove();
+
 }
 
 

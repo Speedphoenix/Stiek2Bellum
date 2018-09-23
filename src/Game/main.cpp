@@ -1,10 +1,10 @@
-#include "SpritesContainer.h"
 
 #include "allegroImplem.h"
 #include "colors.h"
 #include "debugNerrors.h"
 
 #include "S2BContainer.h"
+#include "TestSpritesContainer.h"
 
 #include "GameObjects/Unit.h"
 
@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         cerr << endl << e << endl;
     }
 
-    SpritesContainer sprites;
+    TestSpritesContainer sprites;
     S2BContainer theGame(60, 45);
 
     sprites.maketest();

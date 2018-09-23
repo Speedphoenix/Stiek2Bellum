@@ -4,10 +4,14 @@
 #include <GameObject.h>
 #include <Drawable.h>
 
+#include "Collider.h"
+
+#include "TestBehave.h"
+
 //even if it's already included in GameObject...
 #include "TransformBase.h"
 
-#include "Animator.h"
+#include "TestAnimator.h"
 
 extern const int tileSide;
 const int NEUTRAL = 0;
@@ -19,11 +23,14 @@ class Unit : public GameObject, Drawable
         void maketest();
 
     protected:
-        Animator m_animator;
+        TestAnimator m_animator;
+
+        Collider m_collider;
 
         TransformBase m_destination;
 
         double m_speed;
+        double m_maxSpeed;
 
         //will change the type to a proper enum or pointer in time
         //the player it is affiliated
@@ -31,6 +38,8 @@ class Unit : public GameObject, Drawable
 
         //a Unit being dead does not mean it will be removed (bu cadavers usually don't do much)
         bool m_dead;
+
+        TestBehave m_testBehave;
 
     public:
         Unit(const Transform& source, int _owner = NEUTRAL);
@@ -51,7 +60,7 @@ class Unit : public GameObject, Drawable
         void setOwner(int val) { m_owner = val; }
 
         //override this setter to set m_dead false at the same time
-        virtual void setToRemove() { setDead(true); m_toRemove = true; }
+        virtual void setToRemove() { setDead(true); GameObject::setToRemove(); }
 
         virtual void setDest(int _x, int _y) { m_destination.setAbsPos(_x, _y); }
 

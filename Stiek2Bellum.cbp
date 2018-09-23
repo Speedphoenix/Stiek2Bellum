@@ -13,8 +13,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="include" />
-					<Add directory="src/Game" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -41,8 +39,6 @@
 					<Add option="-Wmain" />
 					<Add option="-pedantic" />
 					<Add option="-Wextra" />
-					<Add directory="include" />
-					<Add directory="src/Game" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -53,55 +49,25 @@
 			<Add option="-Wall" />
 			<Add option="-std=c++14" />
 			<Add option="-fexceptions" />
+			<Add directory="src/SpxEngine/Engine" />
+			<Add directory="src/SpxEngine/Engine/Non_Classes" />
+			<Add directory="src/SpxEngine/Engine/Transform" />
+			<Add directory="src/SpxEngine/Engine/Behaviours" />
+			<Add directory="src/SpxEngine/Engine/Behaviours/Collider" />
+			<Add directory="src/SpxEngine/Engine/Behaviours/Animator" />
+			<Add directory="src/SpxEngine/Engine/Behaviours/Animator/Animation" />
+			<Add directory="src/SpxEngine/Engine/Behaviours/Animator/Composing" />
+			<Add directory="src/SpxEngine/Configurable" />
 			<Add directory="src/Game" />
-			<Add directory="src/Engine/Transform" />
-			<Add directory="src/Engine/Non_Classes" />
-			<Add directory="src/Engine/Behaviours" />
-			<Add directory="src/Engine/Behaviours/Composing" />
-			<Add directory="src/Configurable" />
-			<Add directory="src/Engine" />
+			<Add directory="src/Game/Behaviours" />
 		</Compiler>
 		<Linker>
 			<Add library="liballegro" />
 			<Add library="liballegro_image" />
 			<Add library="liballegro_primitives" />
 		</Linker>
-		<Unit filename="src/Configurable/colors.cpp" />
-		<Unit filename="src/Configurable/colors.h" />
-		<Unit filename="src/Configurable/config.h" />
-		<Unit filename="src/Configurable/debugNerrors.h" />
-		<Unit filename="src/Engine/Behaviours/Animator.cpp" />
-		<Unit filename="src/Engine/Behaviours/Animator.h" />
-		<Unit filename="src/Engine/Behaviours/Behaviour.cpp" />
-		<Unit filename="src/Engine/Behaviours/Behaviour.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Animation.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Animation.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Frame.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Frame.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/Shadow.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/Shadow.h" />
-		<Unit filename="src/Engine/Behaviours/Composing/State.cpp" />
-		<Unit filename="src/Engine/Behaviours/Composing/State.h" />
-		<Unit filename="src/Engine/Camera.cpp" />
-		<Unit filename="src/Engine/Camera.h" />
-		<Unit filename="src/Engine/Drawable.cpp" />
-		<Unit filename="src/Engine/Drawable.h" />
-		<Unit filename="src/Engine/Events.cpp" />
-		<Unit filename="src/Engine/Events.h" />
-		<Unit filename="src/Engine/GameContainer.cpp" />
-		<Unit filename="src/Engine/GameContainer.h" />
-		<Unit filename="src/Engine/GameObject.cpp" />
-		<Unit filename="src/Engine/GameObject.h" />
-		<Unit filename="src/Engine/Non_Classes/allegroImplem.cpp" />
-		<Unit filename="src/Engine/Non_Classes/allegroImplem.h" />
-		<Unit filename="src/Engine/SpritesContainer.cpp" />
-		<Unit filename="src/Engine/SpritesContainer.h" />
-		<Unit filename="src/Engine/Transform/Transform.cpp" />
-		<Unit filename="src/Engine/Transform/Transform.h" />
-		<Unit filename="src/Engine/Transform/TransformBase.cpp" />
-		<Unit filename="src/Engine/Transform/TransformBase.h" />
-		<Unit filename="src/Engine/Transform/TransformCircle.cpp" />
-		<Unit filename="src/Engine/Transform/TransformCircle.h" />
+		<Unit filename="src/Game/Behaviours/TestBehave.cpp" />
+		<Unit filename="src/Game/Behaviours/TestBehave.h" />
 		<Unit filename="src/Game/GameMap.cpp" />
 		<Unit filename="src/Game/GameMap.h" />
 		<Unit filename="src/Game/GameObjects/Unit.cpp" />
@@ -109,6 +75,51 @@
 		<Unit filename="src/Game/S2BContainer.cpp" />
 		<Unit filename="src/Game/S2BContainer.h" />
 		<Unit filename="src/Game/main.cpp" />
+		<Unit filename="src/SpxEngine/Configurable/colors.cpp" />
+		<Unit filename="src/SpxEngine/Configurable/colors.h" />
+		<Unit filename="src/SpxEngine/Configurable/config.h" />
+		<Unit filename="src/SpxEngine/Configurable/debugNerrors.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/AimedAnimation.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/AimedAnimation.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/Animation.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/Animation.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/DiscreetAnimation.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animation/DiscreetAnimation.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animator.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Animator.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/Frame.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/Frame.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/Shadow.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/Shadow.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/State.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Animator/Composing/State.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Behaviour.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Behaviour.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Collider/Collider.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Collider/Collider.h" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Collider/ColliderContainer.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Behaviours/Collider/ColliderContainer.h" />
+		<Unit filename="src/SpxEngine/Engine/Camera.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Camera.h" />
+		<Unit filename="src/SpxEngine/Engine/Drawable.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Drawable.h" />
+		<Unit filename="src/SpxEngine/Engine/Events.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Events.h" />
+		<Unit filename="src/SpxEngine/Engine/GameContainer.cpp" />
+		<Unit filename="src/SpxEngine/Engine/GameContainer.h" />
+		<Unit filename="src/SpxEngine/Engine/GameObject.cpp" />
+		<Unit filename="src/SpxEngine/Engine/GameObject.h" />
+		<Unit filename="src/SpxEngine/Engine/Non_Classes/allegroImplem.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Non_Classes/allegroImplem.h" />
+		<Unit filename="src/SpxEngine/Engine/Non_Classes/basic_ops.h" />
+		<Unit filename="src/SpxEngine/Engine/SpritesContainer.cpp" />
+		<Unit filename="src/SpxEngine/Engine/SpritesContainer.h" />
+		<Unit filename="src/SpxEngine/Engine/Transform/Transform.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Transform/Transform.h" />
+		<Unit filename="src/SpxEngine/Engine/Transform/TransformBase.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Transform/TransformBase.h" />
+		<Unit filename="src/SpxEngine/Engine/Transform/TransformCircle.cpp" />
+		<Unit filename="src/SpxEngine/Engine/Transform/TransformCircle.h" />
 		<Extensions>
 			<envvars />
 			<AutoVersioning>
