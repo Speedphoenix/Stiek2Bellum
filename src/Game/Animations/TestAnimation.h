@@ -6,13 +6,13 @@
 
 class TestAnimation : public DiscreetAnimation
 {
-    ///FOR TESTING PURPOSES
-    public:
-        void maketest(int type = 0);
+	///FOR TESTING PURPOSES
+	public:
+		void maketest(int type = 0);
 
-    public:
-        TestAnimation();
-        virtual ~TestAnimation();
+	public:
+		TestAnimation();
+		virtual ~TestAnimation();
 };
 
 #endif // TESTANIMATION_H

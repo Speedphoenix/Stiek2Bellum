@@ -4,7 +4,7 @@
 #include "config.h"
 
 /********************************************************************
-                            TESTING PURPOSES
+							TESTING PURPOSES
 ********************************************************************/
 
 #define TEST_SPRITESHEET RES_DIR "Test/monsterv2.png"
@@ -12,7 +12,7 @@
 
 
 /********************************************************************
-                                MAP
+								MAP
 ********************************************************************/
 
 ///the side of a (square) tile
@@ -21,12 +21,12 @@ const int tileSide = 75;
 ///converts coordinates in number of tiles
 inline int tileCoord(int pixels)
 {
-    return ((int) (pixels / tileSide));
+	return ((int) (pixels / tileSide));
 }
 
 
 /********************************************************************
-                                UNITS
+								UNITS
 ********************************************************************/
 
 const double defaultUnitSpeed = 50;

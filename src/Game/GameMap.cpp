@@ -2,14 +2,14 @@
 GameMap * GameMap::m_currentInstance = nullptr;
 
 GameMap::GameMap(long _width, long _height)
-    :m_width(_width), m_height(_height)
+	:m_width(_width), m_height(_height)
 {
-    if (!m_currentInstance)
-        m_currentInstance = this;
+	if (!m_currentInstance)
+		m_currentInstance = this;
 }
 
 GameMap::~GameMap()
 {
-    //dtor
+	//dtor
 }
 

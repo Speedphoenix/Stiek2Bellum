@@ -7,12 +7,12 @@
 
 class TestAnimator : public Animator
 {
-    public:
-        TestAnimator(GameObject* attachTo, double lapse = defaultIdleLapse, GeneralState startState = Walking, double startDirection = 0);
-        virtual ~TestAnimator();
+	public:
+		TestAnimator(GameObject* attachTo, double lapse = defaultIdleLapse, GeneralState startState = Walking, double startDirection = 0);
+		virtual ~TestAnimator();
 
-        ///FOR TESTING PURPOSES
-        void maketest();
+		///FOR TESTING PURPOSES
+		void maketest();
 };
 
 #endif // TESTANIMATOR_H

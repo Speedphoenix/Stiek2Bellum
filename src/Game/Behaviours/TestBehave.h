@@ -5,15 +5,15 @@
 
 class TestBehave : public Behaviour
 {
-    protected:
-        int a;
+	protected:
+		int a;
 
-    public:
-        TestBehave(GameObject *attachTo);
-        virtual ~TestBehave();
+	public:
+		TestBehave(GameObject *attachTo);
+		virtual ~TestBehave();
 
-        virtual void start();
-        virtual void update();
+		virtual void start();
+		virtual void update();
 };
 
 #endif // TESTBEHAVE_H

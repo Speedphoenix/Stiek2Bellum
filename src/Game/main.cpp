@@ -12,40 +12,40 @@ using namespace std;
 
 
 namespace test {
-    void maketestSprites();
-    void maketest();
+	void maketestSprites();
+	void maketest();
 }
 
 int main(int argc, char* argv[])
 {
-    try
-    {
-        initAlleg(ALLEGRO_WINDOWED, defaultDispWidth, defaultDispHeight); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
+	try
+	{
+		initAlleg(ALLEGRO_WINDOWED, defaultDispWidth, defaultDispHeight); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
 	}
-    catch (const char* e)
-    {
-        cerr << endl << e << endl;
-    }
+	catch (const char* e)
+	{
+		cerr << endl << e << endl;
+	}
 
-    SpritesContainer sprites;
-    S2BContainer theGame(60, 45);
+	SpritesContainer sprites;
+	S2BContainer theGame(60, 45);
 
-    test::maketestSprites();
-    test::maketest();
-    theGame.start();
+	test::maketestSprites();
+	test::maketest();
+	theGame.start();
 
-    double elapsed = 0.02;
+	double elapsed = 0.02;
 
-    while(!theGame.shouldStop())
-    {
+	while(!theGame.shouldStop())
+	{
 
-        theGame.update(elapsed*10);
+		theGame.update(elapsed*10);
 
-        al_rest(elapsed);
-    }
+		al_rest(elapsed);
+	}
 
-    closeAlleg();
-    return 0;
+	closeAlleg();
+	return 0;
 }
 
 
@@ -53,22 +53,22 @@ namespace test {
 
 void maketestSprites()
 {
-    //the default flags, just in case it was changed somewhere
-    al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
+	//the default flags, just in case it was changed somewhere
+	al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
 
-    SpritesContainer::instance()->addSprite(TEST_SHEETNAME, al_load_bitmap(TEST_SPRITESHEET));
+	SpritesContainer::instance()->addSprite(TEST_SHEETNAME, al_load_bitmap(TEST_SPRITESHEET));
 }
 
 ///FOR TESTING PURPOSES
 void maketest()
 {
-    //this will automatically add the unit to this GameContainer
-    Unit* newUnit = new Unit(10.0, 10.0);
+	//this will automatically add the unit to this GameContainer
+	Unit* newUnit = new Unit(10.0, 10.0);
 
-    newUnit->maketest();
+	newUnit->maketest();
 
-    //gameContainer's map is already a test from its constructor
-    //default camera should work just fine
+	//gameContainer's map is already a test from its constructor
+	//default camera should work just fine
 }
 
 }
