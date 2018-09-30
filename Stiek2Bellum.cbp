@@ -13,6 +13,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="src/Game/Animations" />
+					<Add directory="src/Game" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -39,6 +41,8 @@
 					<Add option="-Wmain" />
 					<Add option="-pedantic" />
 					<Add option="-Wextra" />
+					<Add directory="src/Game/Animations" />
+					<Add directory="src/Game" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -66,6 +70,10 @@
 			<Add library="liballegro_image" />
 			<Add library="liballegro_primitives" />
 		</Linker>
+		<Unit filename="src/Game/Animations/TestAnimation.cpp" />
+		<Unit filename="src/Game/Animations/TestAnimation.h" />
+		<Unit filename="src/Game/Animations/TestAnimator.cpp" />
+		<Unit filename="src/Game/Animations/TestAnimator.h" />
 		<Unit filename="src/Game/Behaviours/TestBehave.cpp" />
 		<Unit filename="src/Game/Behaviours/TestBehave.h" />
 		<Unit filename="src/Game/GameMap.cpp" />
@@ -74,6 +82,9 @@
 		<Unit filename="src/Game/GameObjects/Unit.h" />
 		<Unit filename="src/Game/S2BContainer.cpp" />
 		<Unit filename="src/Game/S2BContainer.h" />
+		<Unit filename="src/Game/TestSpritesContainer.cpp" />
+		<Unit filename="src/Game/TestSpritesContainer.h" />
+		<Unit filename="src/Game/game_config.h" />
 		<Unit filename="src/Game/main.cpp" />
 		<Unit filename="src/SpxEngine/Configurable/colors.cpp" />
 		<Unit filename="src/SpxEngine/Configurable/colors.h" />

@@ -4,11 +4,11 @@
 #include "config.h"
 
 /********************************************************************
-                                TEST
+                            TESTING PURPOSES
 ********************************************************************/
 
-#define TEST_SPRITESHEET RES_DIR "monsterv2.png"
-#define TEST_SHEETNAME "monsterv2"
+#define TEST_SPRITESHEET RES_DIR "Test/monsterv2.png"
+#define TEST_SHEETNAME "Test-monsterv2"
 
 
 /********************************************************************

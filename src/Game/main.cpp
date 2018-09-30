@@ -4,7 +4,7 @@
 #include "debugNerrors.h"
 
 #include "S2BContainer.h"
-#include "TestSpritesContainer.h"
+#include "SpritesContainer.h"
 
 #include "GameObjects/Unit.h"
 
@@ -12,6 +12,7 @@ using namespace std;
 
 
 namespace test {
+    void maketestSprites();
     void maketest();
 }
 
@@ -20,16 +21,16 @@ int main(int argc, char* argv[])
     try
     {
         initAlleg(ALLEGRO_WINDOWED, defaultDispWidth, defaultDispHeight); // or pass ALLEGRO_FULLSCREEN_WINDOW as a param
-    }
+	}
     catch (const char* e)
     {
         cerr << endl << e << endl;
     }
 
-    TestSpritesContainer sprites;
+    SpritesContainer sprites;
     S2BContainer theGame(60, 45);
 
-    sprites.maketest();
+    test::maketestSprites();
     test::maketest();
     theGame.start();
 
@@ -49,6 +50,14 @@ int main(int argc, char* argv[])
 
 
 namespace test {
+
+void maketestSprites()
+{
+    //the default flags, just in case it was changed somewhere
+    al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
+
+    SpritesContainer::instance()->addSprite(TEST_SHEETNAME, al_load_bitmap(TEST_SPRITESHEET));
+}
 
 ///FOR TESTING PURPOSES
 void maketest()

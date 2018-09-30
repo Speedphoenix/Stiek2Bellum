@@ -3,8 +3,8 @@
 #include "GameObjects/Unit.h"
 
 //from allegro5
-#include "keycodes.h"
-#include "events.h"
+#include "allegro5/keycodes.h"
+#include "allegro5/events.h"
 
 #include "debugNerrors.h"
 
