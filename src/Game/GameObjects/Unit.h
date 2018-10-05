@@ -6,12 +6,12 @@
 
 #include "Collider.h"
 
-#include "TestBehave.h"
+#include "Behaviours/TestBehave.h"
 
 //even if it's already included in GameObject...
 #include "TransformBase.h"
 
-#include "TestAnimator.h"
+#include "Animations/TestAnimator.h"
 
 extern const int tileSide;
 const int NEUTRAL = 0;

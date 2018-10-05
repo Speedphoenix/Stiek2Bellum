@@ -1,6 +1,6 @@
 #include "S2BContainer.h"
 #include "Events.h"
-#include "GameObjects/Unit.h"
+#include "Unit.h"
 
 //from allegro5
 #include "allegro5/keycodes.h"

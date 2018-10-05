@@ -6,7 +6,7 @@
 #include "S2BContainer.h"
 #include "SpritesContainer.h"
 
-#include "GameObjects/Unit.h"
+#include "Unit.h"
 
 using namespace std;
 
