@@ -1,4 +1,4 @@
-#include "GameObjects/Unit.h"
+#include "Unit.h"
 
 #include "Camera.h"
 #include "game_config.h"
@@ -72,15 +72,6 @@ void Unit::update()
 
 void Unit::draw()
 {
-	const Transform& camera = Camera::getCurrentView();
-
-	if (m_transform.touches(camera))
-	{
-		double relx = 0, rely = 0;
-		m_transform.getRelativeCoords(camera, relx, rely);
-
-		m_animator.draw(relx, rely);
-	}
-	//m_animator.getImg();
+	Drawable::draw(m_animator, m_transform);
 }
 

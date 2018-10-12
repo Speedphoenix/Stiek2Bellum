@@ -63,7 +63,7 @@ void maketestSprites()
 void maketest()
 {
 	//this will automatically add the unit to this GameContainer
-	Unit* newUnit = new Unit(10.0, 10.0);
+	Unit* newUnit = new Unit(0.0, 0.0);
 
 	newUnit->maketest();
 

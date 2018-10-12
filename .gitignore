@@ -40,3 +40,6 @@ obj/
 #*.cbp
 
 *.cscope_file_list
+
+#vim swap files
+*.swp
