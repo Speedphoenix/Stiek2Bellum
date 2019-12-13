@@ -20,6 +20,7 @@ S2BContainer::~S2BContainer()
 }
 
 
+// TODO: this changed to the init protected func
 void S2BContainer::start()
 {
 	m_testUnit->maketest();

@@ -36,6 +36,7 @@ class S2BContainer : public GameContainer
 		S2BContainer(const S2BContainer&) = delete;
 		S2BContainer& operator=(const S2BContainer&) = delete;
 
+		// TODO: this changed to the init protected func
 		virtual void start();
 
 		virtual double maximumX() { return mapWidth(); }
